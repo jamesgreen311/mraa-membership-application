@@ -1,3 +1,8 @@
+const projectName = "MRAA Membership Application";
+const publishMode = "test";
+const ownerName = "James Green";
+const supportEmail = "tech@metrorichmondart.org";
+
 /**
  * The init file is processed first by Google App script. 
  */
