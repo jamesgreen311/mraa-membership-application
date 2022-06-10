@@ -1,7 +1,7 @@
 const miSheet = getSheet("Membership Interest")
 const miSheetStruct = {
-    applicantId: 1,
-    content: 2
+    applicantId: 0,
+    content: 1
 }
 
 function getApplicantMembershipInterest(id) {

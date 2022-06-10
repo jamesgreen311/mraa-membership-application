@@ -17,8 +17,8 @@ const adSheetStruct = {
     status: 14,
     dateSubmitted: 15
 }
-const numOfHeaderRows = 2
-const startColumn = 1
+const adNumOfHeaderRows = 2
+const adStartColumn = 1
 
 /**
  * Get an applicants record by id.
@@ -30,9 +30,9 @@ function getApplicantById(id) {
     let applicant = {}
     let data = 
         adSheet.getRange(
-            numOfHeaderRows+1, 
-            startColumn, 
-            adSheet.getLastRow()-numOfHeaderRows, 
+            adNumOfHeaderRows+1, 
+            adStartColumn, 
+            adSheet.getLastRow()-adNumOfHeaderRows, 
             adSheet.getLastColumn()
             ).getDisplayValues()
 
