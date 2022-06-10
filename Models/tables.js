@@ -5,6 +5,5 @@ var tabs = [
     "Exhibitions",
     "Membership Interest",
     "Sites",
-    "Config",
-    "Legend"
+    "Config"
 ]
