@@ -1,32 +1,100 @@
 const adSheet = getSheet("Application Detail")
 const adSheetStruct = {
-    applicantId: 1,
-    firstName: 2,
-    lastName: 3,
-    email: 4,
-    streetAddress: 5,
-    streetAddress2: 6,
-    city: 7,
-    state: 8,
-    zip: 9,
-    mobile: 10,
-    home: 11,
-    membershipType: 12,
-    medium: 13,
-    artistSignature: 14,
-    status: 15,
-    dateSubmitted: 16
+    applicantId: 0,
+    firstName: 1,
+    lastName: 2,
+    email: 3,
+    streetAddress: 4,
+    streetAddress2: 5,
+    city: 6,
+    state: 7,
+    zip: 8,
+    mobile: 9,
+    home: 10,
+    membershipType: 11,
+    medium: 12,
+    artistSignature: 13,
+    status: 14,
+    dateSubmitted: 15
+}
+const numOfHeaderRows = 2
+const startColumn = 1
+
+/**
+ * Get an applicants record by id.
+ * 
+ * @param {string} id 
+ * @returns {object} applicant
+ */
+function getApplicantById(id) {
+    let applicant = {}
+    let data = 
+        adSheet.getRange(
+            numOfHeaderRows+1, 
+            startColumn, 
+            adSheet.getLastRow()-numOfHeaderRows, 
+            adSheet.getLastColumn()
+            ).getDisplayValues()
+
+    for (let d of data) {
+        if (d[adSheetStruct.applicantId].toUpperCase() === id.toUpperCase()) {
+            // found
+            applicant.id = d[adSheetStruct.applicantId]
+            applicant.firstName = d[adSheetStruct.firstName]
+            applicant.lastName = d[adSheetStruct.lastName]
+            applicant.email = d[adSheetStruct.email]
+            applicant.streetAddress = d[adSheetStruct.streetAddress]
+            applicant.streetAddress2 = d[adSheetStruct.streetAddress2]
+            applicant.city = d[adSheetStruct.city]
+            applicant.state = d[adSheetStruct.state]
+            applicant.zip = d[adSheetStruct.zip]
+            applicant.mobile = d[adSheetStruct.mobile]
+            applicant.home = d[adSheetStruct.home]
+            applicant.membershipType = d[adSheetStruct.membershipType]
+            applicant.medium = d[adSheetStruct.medium]
+            applicant.artistSignature = d[adSheetStruct.artistSignature]
+            applicant.status = d[adSheetStruct.status]
+            applicant.dateSubmitted = d[adSheetStruct.dateSubmitted]
+
+            break
+        }
+    }    
+    return applicant
 }
 
 /**
- * Get an applicants name
+ * Get an applicants name.
  * 
- * @param {string} id : unique identifier
- * @param {string} order : firstlast, lastfirst
- * @returns {string} : full name
+ * @param {string} id unique identifier
+ * @param {string} order ="firstlast" | "lastfirst"
+ * @returns {string} full name
  */
 function getApplicantName(id, order) {
-    return _name
+    let applicant = {}
+    let name = ""
+
+    try {
+        applicant = getApplicantById(id)
+        if(typeof applicant.id!=='undefined') {
+            switch (order) {
+                case "lastfirst": 
+                    name = 
+                    applicant.lastName
+                    + ", "
+                    + applicant.firstName
+                    break
+                default:
+                    name = 
+                    applicant.firstName
+                    + " "
+                    + applicant.lastName
+            }
+        }
+    } catch (error) {
+        // return empty string
+    }
+
+    return name
 }
 
 /**
