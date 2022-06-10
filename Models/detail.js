@@ -1,0 +1,1 @@
+const adSheet = getSheet("Application Detail")

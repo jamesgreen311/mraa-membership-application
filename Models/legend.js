@@ -1,0 +1,1 @@
+const ldSheet = getSheet("Legend")

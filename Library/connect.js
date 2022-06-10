@@ -6,10 +6,15 @@
  */
  function connect(id) {
     let conn;
-    if (id) {
-        conn = SpreadsheetApp.openById(id);
-    } else {
-        conn = SpreadsheetApp.getActiveSpreadsheet();
+    try {
+        if (id) {
+            conn = SpreadsheetApp.openById(id);
+        } else {
+            conn = SpreadsheetApp.getActiveSpreadsheet();
+        }        
+    } catch (error) {
+        return null
     }
+
     return conn;
   }
