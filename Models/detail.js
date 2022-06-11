@@ -19,7 +19,14 @@ const adSheetStruct = {
 }
 const adNumOfHeaderRows = 2
 const adStartColumn = 1
-
+const adData =         
+    adSheet.getRange(
+        adNumOfHeaderRows+1, 
+        adStartColumn, 
+        adSheet.getLastRow()-adNumOfHeaderRows, 
+        adSheet.getLastColumn()
+        ).getDisplayValues()
+        
 /**
  * Get an applicants record by id.
  * 
@@ -28,15 +35,15 @@ const adStartColumn = 1
  */
 function getApplicantById(id) {
     let applicant = {}
-    let data = 
+/*     let data = 
         adSheet.getRange(
             adNumOfHeaderRows+1, 
             adStartColumn, 
             adSheet.getLastRow()-adNumOfHeaderRows, 
             adSheet.getLastColumn()
-            ).getDisplayValues()
+            ).getDisplayValues() */
 
-    for (let d of data) {
+    for (let d of adData) {
         if (d[adSheetStruct.applicantId].toUpperCase() === id.toUpperCase()) {
             // found
             applicant.id = d[adSheetStruct.applicantId]
@@ -135,4 +142,9 @@ function getApplicantEmail(id) {
  */
 function getDateSubmitted(id) {
     return dateSubmitted
+}
+
+function isValidId(id) {
+    let id = adData.filter(d => d[0] === id.toUpperCase())
+    return id.length > 0
 }
