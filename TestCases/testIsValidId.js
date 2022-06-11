@@ -2,7 +2,7 @@
 // expected result: true = found
 function testIsValidId1() {
     let expected = true
-    n = isValidId('3dfd906')
+    let n = isValidId('3dfd906')
     return console.log((n!=="")===expected?"pass":"fail")
 }
 
@@ -10,6 +10,11 @@ function testIsValidId1() {
 // expected result: false = not found
 function testIsValidId2() {
     let expected = false
-    n = isValidId('3dfd900')
-    return console.log((n!=="")===expected?"pass":"fail")
+    let n = isValidId('3dfd900')
+    return console.log((n==="")===expected?"pass":"fail")
+}
+
+function testIsValidIdRunAll() {
+    testIsValidId1()
+    testIsValidId2()
 }
