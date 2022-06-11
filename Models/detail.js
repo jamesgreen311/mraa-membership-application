@@ -82,7 +82,7 @@ function getApplicantName(id, order) {
 
     try {
         applicant = getApplicantById(id)
-        if(typeof applicant.id!=='undefined') {
+        if(isValidId(id)) {
             switch (order) {
                 case "lastfirst": 
                     name = 
