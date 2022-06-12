@@ -35,7 +35,7 @@ let ebDataAll =
 /**
  * 
  * @param {string} id 
- * @returns {string} background
+ * @returns {string} text | empty
  */
 function getApplicantBackground(id) {
     let background = ""
