@@ -1,6 +1,9 @@
+/*
+    Application Detail is the primary table and contains one row for each applicant
+*/
 const adSheet = getSheet("Application Detail")
 const adSheetStruct = {
-    applicantId: 0,
+    applicantId: 0, // PK
     firstName: 1,
     lastName: 2,
     email: 3,
@@ -19,7 +22,7 @@ const adSheetStruct = {
 }
 const adNumOfHeaderRows = 2
 const adStartColumn = 1
-const adData =         
+const adDataAll =         
     adSheet.getRange(
         adNumOfHeaderRows+1, 
         adStartColumn, 
@@ -36,7 +39,7 @@ const adData =
 function getApplicantById(id) {
     let applicant = {}
 
-    for (let d of adData) {
+    for (let d of adDataAll) {
         if (d[adSheetStruct.applicantId].toUpperCase() === id.toUpperCase()) {
             // found
             applicant.id = d[adSheetStruct.applicantId]
@@ -146,6 +149,6 @@ function getDateSubmitted(id) {
 }
 
 function isValidId(id) {
-    let valid = adData.filter(d => d[0] === id.toUpperCase())
+    let valid = adDataAll.filter(d => d[0] === id.toUpperCase())
     return valid.length > 0
 }
