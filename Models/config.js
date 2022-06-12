@@ -1,9 +1,9 @@
 const cfgSheet = getSheet("Config")
 const cfgSheetStruct = {
-    membershipTypesList: 0,
-    membershipChairperson: 1,
-    chairpersonEmail: 2,
-    statusTypesList: 3,
+    listMembershipTypes: 1, // start and end column number
+    membershipChairperson: "B2",
+    chairpersonEmail: "C2",
+    listStatusTypes: 4, // start and end column number
     eolMarker: "E2" // end of list marker
 }
 const cfgNumOfHeaderRows = 1
@@ -16,14 +16,6 @@ let cfgDataAll =
         cfgSheet.getLastColumn()
         ).getDisplayValues()
 const eolMarker = getEolMarker()
-
-function getMembershipTypesList() {
-
-}   
-
-function getStatusTypesList() {
-
-}
 
 /**
  * Get the end of list marker. 
@@ -39,4 +31,42 @@ function getEolMarker() {
         console.log(error)
     }
     return eol
+}
+
+function getMembershipTypesList() {
+    let list = []
+    let m 
+
+    try {
+        m = 
+            cfgSheet.getRange(
+                cfgNumOfHeaderRows+1,  
+                cfgSheetStruct.listMembershipTypes,
+                cfgSheet.getLastRow()-cfgNumOfHeaderRows,
+                cfgSheetStruct.listMembershipTypes
+            ).getDisplayValues()
+    } catch (error) {
+        console.log(error)
+    }
+
+    // filter list, stop when eol marker is reached
+    for (let _m of m) {
+        if (_m[0] === eolMarker) {
+            break
+        }
+        list.push(_m)
+    }
+    return list
+}   
+
+function getStatusTypesList() {
+
+}
+
+function getMembershipChairpersonName() {
+
+}
+
+function getMembershipChairpersonEmail() {
+
 }
