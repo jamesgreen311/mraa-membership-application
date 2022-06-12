@@ -35,13 +35,6 @@ const adData =
  */
 function getApplicantById(id) {
     let applicant = {}
-/*     let data = 
-        adSheet.getRange(
-            adNumOfHeaderRows+1, 
-            adStartColumn, 
-            adSheet.getLastRow()-adNumOfHeaderRows, 
-            adSheet.getLastColumn()
-            ).getDisplayValues() */
 
     for (let d of adData) {
         if (d[adSheetStruct.applicantId].toUpperCase() === id.toUpperCase()) {
@@ -145,6 +138,6 @@ function getDateSubmitted(id) {
 }
 
 function isValidId(id) {
-    let id = adData.filter(d => d[0] === id.toUpperCase())
-    return id.length > 0
+    let valid = adData.filter(d => d[0] === id.toUpperCase())
+    return valid.length > 0
 }

@@ -1,5 +1,5 @@
 // test for default first then last return value
-// expected result: true = found 
+// expected result: true = found, 
 function testGetApplicantName1() {
     let n = getApplicantName('3DFD906')
     let expected = true

@@ -13,8 +13,3 @@ function testIsValidId2() {
     let n = isValidId('3dfd900')
     return console.log((n==="")===expected?"pass":"fail")
 }
-
-function testIsValidIdRunAll() {
-    testIsValidId1()
-    testIsValidId2()
-}
