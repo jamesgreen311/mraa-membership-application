@@ -104,7 +104,11 @@ function getApplicantName(id, order) {
  * @returns {string} : status
  */
 function getApplicantStatus(id) {
-    return _status 
+    let s = ""
+    if(isValidId(id)) {
+        s = getApplicantById(id).status
+    }
+    return s
 }
 
 /**
@@ -124,7 +128,11 @@ function getApplicantsByLastName(lname) {
  * @returns {string} email address | null
  */
 function getApplicantEmail(id) {
-    return email
+    let e = ""
+    if(isValidId(id)) {
+        e = getApplicantById(id).email
+    }
+    return e
 }
 
 /**

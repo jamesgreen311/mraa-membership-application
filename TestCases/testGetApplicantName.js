@@ -3,7 +3,7 @@
 function testGetApplicantName1() {
     let n = getApplicantName('3DFD906')
     let expected = true
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "1")
 }
 
 // test for last then first return value
@@ -12,7 +12,7 @@ function testGetApplicantName1() {
 function testGetApplicantName2() {
     let n = getApplicantName('3DFD906', 'lastfirst')
     let expected = true
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "2")
 }
 
 // test for bad order parameter
@@ -21,7 +21,7 @@ function testGetApplicantName2() {
 function testGetApplicantName3() {
     let n = getApplicantName('3DFD906', 'badrequest')
     let expected = true
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "3")
 }
 
 // test for bad applicant id
@@ -29,7 +29,7 @@ function testGetApplicantName3() {
 function testGetApplicantName4() {
     let n = getApplicantName('3DFD908')
     let expected = false
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "4")
 }
 
 // test for bad applicant id, valid order
@@ -37,7 +37,7 @@ function testGetApplicantName4() {
 function testGetApplicantName5() {
     let n = getApplicantName('3DFD908', 'lastfirst')
     let expected = false
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "5")
 }
 
 // test for case sensitivity of a known existing id
@@ -45,7 +45,7 @@ function testGetApplicantName5() {
 function testGetApplicantName6() {
     let n = getApplicantName('3dfD906')
     let expected = true
-    return console.log((n!=="")===expected?"pass":"fail")
+    return console.log((n!=="")===expected?"test %s pass":"test %s fail", "6")
 }
 
 function testGetApplicantNameRunAll() {
