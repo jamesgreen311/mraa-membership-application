@@ -145,7 +145,11 @@ function getApplicantEmail(id) {
  * @returns {string} : datetime format as (@todo)
  */
 function getDateSubmitted(id) {
-    return dateSubmitted
+    let d = ""
+    if(isValidId(id)) {
+        d = getApplicantById(id).dateSubmitted
+    }
+    return d
 }
 
 function isValidId(id) {
