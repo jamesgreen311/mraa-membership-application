@@ -1,5 +1,6 @@
 /**
- * Gets current year in four digit format (yyyy)
+ * Gets current year in four digit format (yyyy).
+ * 
  * @returns {number} year
  */
  function getCurrentYear() {

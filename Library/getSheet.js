@@ -1,3 +1,9 @@
+/**
+ * Retrieve a sheet by name.
+ * 
+ * @param {string} name 
+ * @returns {object} sheet
+ */
 function getSheet(name) {
     let sh = null
     if (name) {

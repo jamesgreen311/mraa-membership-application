@@ -1,5 +1,6 @@
 /**
  * Generate a unique identifier.
+ * 
  * @return {string} id 
  */
  function generateUniqueId() {
