@@ -1,5 +1,9 @@
 function doGet(e) {
-    let params = JSON.stringify(e)
-
-    return HtmlService.createHtmlOutput(params)
+    //const response = e
+    const response = [{
+        status: "success"
+    }]
+    return contService = ContentService
+        .createTextOutput(JSON.stringify(response.parameters))
+        .setMimeType(ContentService.MimeType.JSON)
 }

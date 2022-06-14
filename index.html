@@ -39,7 +39,19 @@
             take several seconds
         </li>
     </ul>
-<script src="https://script.google.com/macros/s/AKfycbxUOibrylxjIrU8R2DCT0FjST911GFnpJpAVGKQOpkG/dev?p=1&q=2">
+    <button id="btn">Run App</button>
+    <div id="app"></div>
+    <script>
+        function runApp() {
+            const url = "https://script.google.com/macros/s/AKfycbxUOibrylxjIrU8R2DCT0FjST911GFnpJpAVGKQOpkG/dev"
+            fetch(url)
+                .then(d => d.json())
+                .then(d => {
+                    document.getElementById("app").textContent = d[0].status
+                })
+        }
+
+        document.getElementById("btn").addEventListener("click").runApp)
 </script>
 </body>
 
