@@ -91,5 +91,6 @@ function getMembershipChairpersonName() {
 }
 
 function getMembershipChairpersonEmail() {
-
+    let email = cfgSheet.getRange(cfgSheetStruct.chairpersonEmail).getDisplayValue()
+    return email
 }
