@@ -4,6 +4,6 @@ function doGet(e) {
         status: "success"
     }]
     return contService = ContentService
-        .createTextOutput(JSON.stringify(response.parameters))
+        .createTextOutput(JSON.stringify(response))
         .setMimeType(ContentService.MimeType.JSON)
 }
