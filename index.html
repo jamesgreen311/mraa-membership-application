@@ -44,12 +44,12 @@
     <script>
         function runApp() {
             const url =
-            "https://script.google.com/macros/s/AKfycbxsHNQj2pbbPpoSVFjYCoMOGsROcZeIGd9pKegkSWfQpo_NYBdNRwnJiO3voUsNO1ov/exec"
+            "https://script.google.com/macros/s/AKfycbyhrfPXk3z0ezvaB64K14_zM8aHeQbVKNAahQZGn6rqBJ-tr4GPZc_d_1UWw0YjEROw2Q/exec"
             fetch(url)
                 .then(d => d.json())
                 .then(d => {
                     //console.log(d[0].status)
-                    document.getElementById("app").textContent = d[0].status
+                    document.getElementById("app").textContent = d.chairpersonEmail
                 })
         }
 
