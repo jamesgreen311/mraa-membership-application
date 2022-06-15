@@ -49,7 +49,12 @@
                 .then(d => d.json())
                 .then(d => {
                     //console.log(d[0].status)
-                    document.getElementById("app").textContent = d.chairpersonEmail
+                    document.getElementById("app").innerHTML =
+                    "Membership Chairperson: " +
+                    d.chairpersonName +
+                    "<br>" +
+                    "Membership Chairperson Email: " +
+                    d.chairpersonEmail
                 })
         }
 
