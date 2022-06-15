@@ -40,17 +40,16 @@
         </li>
     </ul>
     <button id="btn">Run App</button>
-    <div id="app"></div>
+    <div id="app">fetching...</div>
     <script>
         function runApp() {
             const url =
-            "https://script.google.com/macros/s/AKfycbxUOibrylxjIrU8R2DCT0FjST911GFnpJpAVGKQOpkG/dev"
-            //"https://script.google.com/macros/s/AKfycbyYCYtPDV9ojpMESP1mNYGkJFXxHegorB4JQxEzUT9eHtrLS5KDi1IpmotPW6cs5uN0Zw/exec"
+            "https://script.google.com/macros/s/AKfycbxsHNQj2pbbPpoSVFjYCoMOGsROcZeIGd9pKegkSWfQpo_NYBdNRwnJiO3voUsNO1ov/exec"
             fetch(url)
                 .then(d => d.json())
                 .then(d => {
-                    console.log(d[0].status)
-                    //document.getElementById("app").textContent = d
+                    //console.log(d[0].status)
+                    document.getElementById("app").textContent = d[0].status
                 })
         }
 

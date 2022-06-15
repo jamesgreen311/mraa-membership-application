@@ -1,7 +1,11 @@
 function doGet(e) {
     //const response = e
+    //const membershipTypesList = 
     const response = [{
-        status: "success"
+        membershipTypesList: getMembershipTypesList(),
+            statusTypesList: getStatusTypesList(),
+            chairpersonName: getMembershipChairpersonName(),
+            chairpersonEmail: getMembershipChairpersonEmail()
     }]
     return contService = ContentService
         .createTextOutput(JSON.stringify(response))

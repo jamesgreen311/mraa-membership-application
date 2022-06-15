@@ -43,7 +43,7 @@ function getMembershipTypesList() {
                 cfgNumOfHeaderRows+1,  
                 cfgSheetStruct.listMembershipTypes,
                 cfgSheet.getLastRow()-cfgNumOfHeaderRows,
-                cfgSheetStruct.listMembershipTypes
+                1
             ).getDisplayValues()
     } catch (error) {
         console.log(error)
@@ -54,17 +54,40 @@ function getMembershipTypesList() {
         if (_m[0] === eolMarker) {
             break
         }
-        list.push(_m)
+        list.push(_m[0])
     }
     return list
 }   
 
 function getStatusTypesList() {
+    let list = []
+    let s
 
+    try {
+        s =
+            cfgSheet.getRange(
+                cfgNumOfHeaderRows + 1,
+                cfgSheetStruct.listStatusTypes,
+                cfgSheet.getLastRow() - cfgNumOfHeaderRows,
+                1
+            ).getDisplayValues()
+    } catch (error) {
+        console.log(error)
+    }
+
+    // filter list, stop when eol marker is reached
+    for (let _s of s) {
+        if (_s[0] === eolMarker) {
+            break
+        }
+        list.push(_s[0])
+    }
+    return list
 }
 
 function getMembershipChairpersonName() {
-
+    let name = cfgSheet.getRange(cfgSheetStruct.membershipChairperson).getDisplayValue()
+    return name
 }
 
 function getMembershipChairpersonEmail() {
