@@ -48,7 +48,8 @@
             fetch(url)
                 .then(d => d.json())
                 .then(d => {
-                    document.getElementById("app").textContent = d
+                    console.log(d)
+                    //document.getElementById("app").textContent = d
                 })
         }
 

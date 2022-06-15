@@ -5,5 +5,5 @@ function doGet(e) {
     }]
     return contService = ContentService
         .createTextOutput(JSON.stringify(response.parameters))
-        .setMimeType(ContentService.MimeType.JAVASCRIPT)
+        .setMimeType(ContentService.MimeType.JSON)
 }
