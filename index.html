@@ -40,6 +40,7 @@
         </li>
     </ul>
     <button id="btn">Get Info</button>
+    <button id="add">Add Row</button>
     <div id="app">fetching...</div>
     <script>
         function runApp() {
@@ -58,7 +59,25 @@
                 })
         }
 
+        function addRow() {
+            const url = 
+            "https://script.google.com/macros/s/AKfycbzUPxx5RVr45b_4qmF5e0bqySXxndf7MqZ358DUKSKybpMicJLxyIrErJ4mQSviKZkSNw/exec"
+
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                //credentials: 'omit',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                //referrerPolicy: 'no-referrer',
+                body: JSON.stringify({name: "Olivia"})
+            })
+        }
         document.getElementById("btn").addEventListener("click", runApp)
+        document.getElementById("add").addEventListener("click", addRow)
 </script>
 </body>
 
