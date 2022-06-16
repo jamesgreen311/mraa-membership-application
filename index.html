@@ -42,17 +42,17 @@
     <button id="btn">Get Info</button>
     <button id="add">Add Row</button>
     <div id="app"></div>
+    <script src="scripts/endpoint.js?v=19"></script>
     <script>
         function getInfo() {
             const url =
-            "https://script.google.com/macros/s/AKfycbxI8Vug0xNskRYeYC-SI8O_kdVKwwYWIxo-yTkJ_lX2Fn_a7KVYvZH63lX7Oo-vD7w8/exec" +
+            endPoint +
             "?getChairpersonEmail"
 
             document.getElementById("app").innerHTML = "Fetching Info, please wait..."
             fetch(url)
                 .then(resp => resp.json())
                 .then(resp => {
-                    //console.log(d[0].status)
                     document.getElementById("app").innerHTML =
                     "Membership Chairperson Email: " +
                     resp.chairpersonEmail 
