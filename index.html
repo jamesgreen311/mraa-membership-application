@@ -45,24 +45,23 @@
     <script>
         function getInfo() {
             const url =
-            "https://script.google.com/macros/s/AKfycbyhrfPXk3z0ezvaB64K14_zM8aHeQbVKNAahQZGn6rqBJ-tr4GPZc_d_1UWw0YjEROw2Q/exec"
+            "https://script.google.com/macros/s/AKfycbxI8Vug0xNskRYeYC-SI8O_kdVKwwYWIxo-yTkJ_lX2Fn_a7KVYvZH63lX7Oo-vD7w8/exec" +
+            "?getChairpersonEmail"
+
             document.getElementById("app").innerHTML = "Fetching Info, please wait..."
             fetch(url)
-                .then(d => d.json())
-                .then(d => {
+                .then(resp => resp.json())
+                .then(resp => {
                     //console.log(d[0].status)
                     document.getElementById("app").innerHTML =
-                    "Membership Chairperson: " +
-                    d.chairpersonName +
-                    "<br>" +
                     "Membership Chairperson Email: " +
-                    d.chairpersonEmail
+                    resp.chairpersonEmail 
                 })
         }
 
         function addRow() {
             const url = 
-            "https://script.google.com/macros/s/AKfycbzUPxx5RVr45b_4qmF5e0bqySXxndf7MqZ358DUKSKybpMicJLxyIrErJ4mQSviKZkSNw/exec"
+            "https://script.google.com/macros/s/AKfycbwKxbzPxLwWUyjIwBXoD1VY0C7dBQAG1_78jlqtOrRXSj-x-fYho4qNj6hyi0LC3Xtw/exec"
 
             fetch(url, {
                 method: 'POST',

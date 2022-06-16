@@ -152,6 +152,11 @@ function getDateSubmitted(id) {
     return d
 }
 
+function getAllInfo(id) {
+    let all = {}
+    
+}
+
 function isValidId(id) {
     let valid = adDataAll.filter(d => d[0] === id.toUpperCase())
     return valid.length > 0
