@@ -41,11 +41,12 @@
     </ul>
     <button id="btn">Get Info</button>
     <button id="add">Add Row</button>
-    <div id="app">fetching...</div>
+    <div id="app"></div>
     <script>
-        function runApp() {
+        function getInfo() {
             const url =
             "https://script.google.com/macros/s/AKfycbyhrfPXk3z0ezvaB64K14_zM8aHeQbVKNAahQZGn6rqBJ-tr4GPZc_d_1UWw0YjEROw2Q/exec"
+            document.getElementById("app").innerHTML = "Fetching Info, please wait..."
             fetch(url)
                 .then(d => d.json())
                 .then(d => {
@@ -76,7 +77,7 @@
                 body: JSON.stringify({name: "Olivia"})
             })
         }
-        document.getElementById("btn").addEventListener("click", runApp)
+        document.getElementById("btn").addEventListener("click", getInfo)
         document.getElementById("add").addEventListener("click", addRow)
 </script>
 </body>
