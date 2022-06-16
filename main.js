@@ -19,7 +19,7 @@ function doGet(e) {
 function doPost(e) {
     const body = e.postData.contents
     const bodyJSON = JSON.parse(body)
-    const ws = connect(sourceId)
-    const ss = ws.getSheetByName("temp")
-    ss.appendRow([bodyJSON.name])
+    const ss = connect(sourceId)
+    const ws = ss.getSheetByName("temp")
+    ws.appendRow([bodyJSON.name])
 }
