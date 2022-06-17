@@ -39,24 +39,58 @@
             take several seconds
         </li>
     </ul>
-    <button id="btn">Get Info</button>
+    <button id="getemail">Get Email</button>
+    <button id="getname">Get Name</button>
     <button id="add">Add Row</button>
     <div id="app"></div>
-    <script src="scripts/endpoint.js?v=19"></script>
+    <div id="messages"></div>
+    <script src="scripts/endpoint.js?v=20"></script>
     <script>
-        function getInfo() {
+        var chairpersonEmail = ""
+        var chairpersonName = ""
+        var msgArea = document.getElementById("messages")
+
+
+        function getChairpersonEmail() {
             const url =
             endPoint +
             "?getChairpersonEmail"
 
-            document.getElementById("app").innerHTML = "Fetching Info, please wait..."
+            msgArea.innerHTML += "<br>Fetching Chairperson Email, please wait..."
+
             fetch(url)
                 .then(resp => resp.json())
                 .then(resp => {
-                    document.getElementById("app").innerHTML =
-                    "Membership Chairperson Email: " +
-                    resp.chairpersonEmail 
+                    chairpersonEmail = Object.values(resp)
+                    showChairpersonEmail()
                 })
+                .catch(err => msgArea.innerHTML += 
+                    "<br>There was a problem fetching the Chairperson's email address. Please contact support.")
+        }
+
+        function getChairpersonName() {
+            const url =
+            endPoint +
+            "?getChairpersonName"
+
+            msgArea.innerHTML += "<br>Fetching Chairperson Name, please wait..."
+
+            fetch(url)
+                .then(resp => resp.json())
+                .then(resp => {
+                    chairpersonName = Object.values(resp)
+                    showChairpersonName()
+                })
+                .catch(err => msgArea.innerHTML += 
+                    "<br>There was a problem fetching the Chairperson's name. Please contact support.")
+        }
+
+        function showChairpersonEmail() {
+            msgArea.innerHTML += "<br>" + chairpersonEmail
+        }
+
+        function showChairpersonName() {
+            msgArea.innerHTML += "<br>" +  chairpersonName
         }
 
         function addRow() {
@@ -76,7 +110,8 @@
                 body: JSON.stringify({name: "Olivia"})
             })
         }
-        document.getElementById("btn").addEventListener("click", getInfo)
+        document.getElementById("getemail").addEventListener("click", getChairpersonEmail)
+        document.getElementById("getname").addEventListener("click", getChairpersonName)
         document.getElementById("add").addEventListener("click", addRow)
 </script>
 </body>
