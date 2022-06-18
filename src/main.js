@@ -35,18 +35,21 @@ function doPost(req) {
     const body = req.postData.contents
     const route = req.queryString?req.queryString:""
     const content = JSON.parse(body)
-    let response = ""
+    let response = content
 
     switch (route) {
         case "addNewApplicant" :
-            addNewApplicant(content)
-            response = "New applicant added"
+            //let a = addNewApplicant(content)
+            //response.id = a[0]
+            response["m"] = "success"
+
             break
-        default:
-            response = "Route invalid"
+        default: 
+            response = {
+                "m":"Route invalid"
+            }
             // TODO 
     }
-
     return ContentService
         .createTextOutput(JSON.stringify(response))
         .setMimeType(ContentService.MimeType.JSON)

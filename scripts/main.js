@@ -74,7 +74,7 @@ function addNewApplicant() {
     fetch(url, options)
         .then(resp => resp.json())
         .then(resp => msgArea.innerHTML = resp)
-        .catch(err => msgArea.innerHTML = "There was a problem saving the new applicant.")
+        .catch(err => msgArea.innerHTML = "There was a problem saving the new applicant. " + err.name)
 }
 
 /** 
@@ -85,21 +85,21 @@ function addNewApplicant() {
 function serializeNewApplicant() {
     const id = generateUniqueId()
     const applicant = {
-        applicantId: id,
-        firstName: "Sheila",
-        lastName: "Jones",
-        email: "sheila.jones@gmail.com",
-        streetAddress: "123 Main St",
-        streetAddressAdditional: "Apt 3B",
-        city: "Richmond",
-        state: "VA",
-        zip: "23100",
-        mobilePhoneNumber: "804.111.2222",
-        homePhoneNumber: "",
-        membershipType: "Associate",
-        medium: "Wood",
-        artistSignature: "Sheila Jones",
-        status: "Applicant"
+        "applicantId": id,
+        "firstName": "Sheila",
+        "lastName": "Jones",
+        "email": "sheila.jones@gmail.com",
+        "streetAddress": "123 Main St",
+        "streetAddressAdditional": "Apt 3B",
+        "city": "Richmond",
+        "state": "VA",
+        "zip": "23100",
+        "mobilePhoneNumber": "804.111.2222",
+        "homePhoneNumber": "",
+        "membershipType": "Associate",
+        "medium": "Wood",
+        "artistSignature": "Sheila Jones",
+        "status": "Applicant"
     }
 
     return applicant
