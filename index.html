@@ -113,8 +113,9 @@
         }
 
         function serializeNewApplicant() {
+            const id = generateUniqueId()
             const applicant = {
-                applicantId: generateUniqueId(),
+                applicantId: id,
                 firstName: "Sheila",
                 lastName: "Jones",
                 email: "sheila.jones@gmail.com",
