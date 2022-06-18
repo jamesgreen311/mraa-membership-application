@@ -31,10 +31,23 @@ function doGet(req) {
  * 
  * @param {*} e 
  */
-function doPost(e) {
-    const body = e.postData.contents
-    const bodyJSON = JSON.parse(body)
-    const ss = connect(sourceId)
-    const ws = ss.getSheetByName("temp")
-    ws.appendRow([bodyJSON.name])
+function doPost(req) {
+    const body = req.postData.contents
+    const route = req.queryString?req.queryString:""
+    const content = JSON.parse(body)
+    let response = ""
+
+    switch (route) {
+        case "addNewApplicant" :
+            addNewApplicant(content)
+            response = "New applicant added"
+            break
+        default:
+            response = "Route invalid"
+            // TODO 
+    }
+
+    return ContentService
+        .createTextOutput(JSON.stringify(response))
+        .setMimeType(ContentService.MimeType.JSON)
 }

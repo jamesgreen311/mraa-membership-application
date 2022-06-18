@@ -45,6 +45,7 @@
     <div id="app"></div>
     <div id="messages"></div>
     <script src="scripts/endpoint.js?v=20"></script>
+    <script src="scripts/generateUniqueId.js"></script>
     <script>
         var chairpersonEmail = ""
         var chairpersonName = ""
@@ -93,26 +94,48 @@
             msgArea.innerHTML += "<br>" +  chairpersonName
         }
 
-        function addRow() {
-            const url = 
-            "https://script.google.com/macros/s/AKfycbwKxbzPxLwWUyjIwBXoD1VY0C7dBQAG1_78jlqtOrRXSj-x-fYho4qNj6hyi0LC3Xtw/exec"
-
-            fetch(url, {
+        function addNewApplicant() {
+            const url = endPoint + "?addNewApplicant"
+            const options = {
                 method: 'POST',
                 mode: 'no-cors',
                 cache: 'no-cache',
-                //credentials: 'omit',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 redirect: 'follow',
-                //referrerPolicy: 'no-referrer',
-                body: JSON.stringify({name: "Olivia"})
-            })
+                body: JSON.stringify(serializeNewApplicant())                
+            }
+            fetch(url, options)
+                .then(resp => resp.json())
+                .then(resp => msgArea.innerHTML = resp)
+                .catch(err => msgArea.innerHTML = "There was a problem saving the new applicant.")
         }
+
+        function serializeNewApplicant() {
+            const applicant = {
+                applicantId: generateUniqueId(),
+                firstName: "Sheila",
+                lastName: "Jones",
+                email: "sheila.jones@gmail.com",
+                streetAddress: "123 Main St",
+                streetAddressAdditional: "Apt 3B",
+                city: "Richmond",
+                state: "VA",
+                zip: "23100",
+                mobilePhoneNumber: "804.111.2222",
+                homePhoneNumber: "",
+                membershipType: "Associate",
+                medium: "Wood",
+                artistSignature: "Sheila Jones",
+                status: "Applicant",
+                dateSubmitted: Date.now()
+            }
+        }
+
         document.getElementById("getemail").addEventListener("click", getChairpersonEmail)
         document.getElementById("getname").addEventListener("click", getChairpersonName)
-        document.getElementById("add").addEventListener("click", addRow)
+        document.getElementById("add").addEventListener("click", addNewApplicant)
 </script>
 </body>
 
