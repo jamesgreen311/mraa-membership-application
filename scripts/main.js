@@ -65,6 +65,7 @@ function addNewApplicant() {
         method: 'POST',
         mode: 'no-cors',
         cache: 'no-cache',
+        credentials: 'omit',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -73,7 +74,10 @@ function addNewApplicant() {
     }
     fetch(url, options)
         .then(resp => resp.json())
-        .then(resp => msgArea.innerHTML = resp)
+        .then(resp => {
+            msgArea.innerHTML = "Success"
+            msgArea.innerHTML = resp
+        })
         .catch(err => msgArea.innerHTML = "There was a problem saving the new applicant. " + err.name)
 }
 
@@ -83,12 +87,11 @@ function addNewApplicant() {
  * @return {object} applicant
  */
 function serializeNewApplicant() {
-    const id = generateUniqueId()
-    const applicant = {
-        "applicantId": id,
-        "firstName": "Sheila",
+    //const id = generateUniqueId()
+    let applicant = {
+/*         "applicantId": id,
+        "firstName": "Margaret",
         "lastName": "Jones",
-        "email": "sheila.jones@gmail.com",
         "streetAddress": "123 Main St",
         "streetAddressAdditional": "Apt 3B",
         "city": "Richmond",
@@ -98,9 +101,24 @@ function serializeNewApplicant() {
         "homePhoneNumber": "",
         "membershipType": "Associate",
         "medium": "Wood",
-        "artistSignature": "Sheila Jones",
-        "status": "Applicant"
+        "status": "Applicant" */
     }
+    // Test data
+    applicant.applicantId = generateUniqueId()
+    applicant.firstName = "Margaret"
+    applicant.lastName = "Jones"
+    applicant.email = applicant.firstName + "." + applicant.lastName + "@gmail.com"
+    applicant.streetAddress = "123 Main St"
+    applicant.streetAddressAdditional = "Apt 3B"
+    applicant.city = "Richmond"
+    applicant.state = "VA"
+    applicant.zip = "23100"
+    applicant.mobilePhoneNumber = "804.111.2222"
+    applicant.homePhoneNumber = ""
+    applicant.membershipType = "Associate"
+    applicant.medium = "Glass"
+    applicant.artistSignature = applicant.firstName + " " + applicant.lastName
+    applicant.status = "Applicant"
 
     return applicant
 }

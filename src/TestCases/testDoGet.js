@@ -1,27 +1,33 @@
-function testDoGet() {
-    console.log(JSON.parse(doGet().getContent()))
-}
-
-function testDoGetWithEmail() {
-    console.log(JSON.parse(doGet().getContent()).chairpersonEmail)
-}
-
-function testDoGetWithName() {
-    console.log(JSON.parse(doGet().getContent()).chairpersonName)
-}
-
-function testDoGetWithMembershipTypeList() {
-    console.log(JSON.parse(doGet().getContent()).membershipTypesList)
-}
-
-function testDoGetWithStatusTypeList() {
-    console.log(JSON.parse(doGet().getContent()).statusTypesList)
-}
-
 function testDoGetRunAll() {
-    testDoGet() // get all info
-    testDoGetWithEmail()
-    testDoGetWithName()
+/*     testDoGet({'queryString':''}) // get all info
+    testDoGetWithEmail({'queryString':'chairpersonEmail'})
+    testDoGetWithName({'queryString':'chairpersonName'})
     testDoGetWithMembershipTypeList()
-    testDoGetWithStatusTypeList()
+    testDoGetWithStatusTypeList() */
+    testRoute1('chairpersonName')
+}
+
+function testDoGet(req) {
+    console.log(JSON.parse(doGet(req).getContent()))
+}
+
+function testDoGetWithEmail(req) {
+    console.log(JSON.parse(doGet(req).getContent()).chairpersonEmail)
+}
+
+function testDoGetWithName(req) {
+    console.log(JSON.parse(doGet(req).getContent()).chairpersonName)
+}
+
+function testDoGetWithMembershipTypeList(req) {
+    console.log(JSON.parse(doGet(req).getContent()).membershipTypesList)
+}
+
+function testDoGetWithStatusTypeList(req) {
+    console.log(JSON.parse(doGet(req).getContent()).statusTypesList)
+}
+
+function testRoute1(p) {
+    let r = Routes[p]
+    console.log(Routes[p]())
 }

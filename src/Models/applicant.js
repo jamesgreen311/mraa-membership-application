@@ -15,6 +15,6 @@ function addNewApplicant(data) {
     }
     row.push(datetime)
     ws.appendRow(row)
-
+    Logger.log(row)
     return row
 }
