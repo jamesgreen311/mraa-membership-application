@@ -4,5 +4,5 @@ var Routes = {
     }
 }
 
-Routes.path('chairpersonEmail', getMembershipChairpersonEmail)
-Routes.path('chairpersonName', getMembershipChairpersonName)
+/* Routes.path('chairpersonEmail', getMembershipChairpersonEmail)
+Routes.path('chairpersonName', getMembershipChairpersonName) */
