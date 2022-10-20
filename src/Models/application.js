@@ -7,19 +7,19 @@ function getApplicationTables () {
             "schema" : {
                 "timestamp" : "a",
                 "email" : "b",
-                "firstname" : "c",
-                "lastname" : "d",
-                "streetaddress" : "e",
-                "streetaddressextended" : "f",
+                "firstName" : "c",
+                "lastName" : "d",
+                "streetAddress" : "e",
+                "streetAddressExtended" : "f",
                 "city" : "g",
                 "state" : "h",
                 "zipcode" : "i",
-                "contactnumber" : "j",
+                "contactNumber" : "j",
                 "membership" : "k",
                 "medium" : "l",
-                "socialmedialinks" : "m", 
+                "socialMediaLinks" : "m", 
                 "websites" : "n",
-                "artistsignature" : "o"
+                "artistSignature" : "o"
             }
         }
     }
@@ -41,5 +41,6 @@ function addNewApplicant(a) {
         newRow[ndx] = a[key]
     })
 
+    t.appendRow(newRow)
     return newRow
 }
