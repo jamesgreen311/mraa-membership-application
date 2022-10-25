@@ -6,20 +6,19 @@ function getApplicationTables () {
             "headers" : 1,
             "schema" : {
                 "timestamp" : "a",
-                "email" : "b",
+                "emailAddress" : "b",
                 "firstName" : "c",
                 "lastName" : "d",
-                "streetAddress" : "e",
-                "streetAddressExtended" : "f",
+                "streetAddress1" : "e",
+                "streetAddress2" : "f",
                 "city" : "g",
                 "state" : "h",
-                "zipcode" : "i",
+                "zipCode" : "i",
                 "contactNumber" : "j",
-                "membership" : "k",
+                "membershipType" : "k",
                 "medium" : "l",
                 "socialMediaLinks" : "m", 
-                "websites" : "n",
-                "artistSignature" : "o"
+                "websites" : "n"
             }
         }
     }
