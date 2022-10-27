@@ -73,14 +73,15 @@
       <div id="uploadWaiting" class="uploading d-none">
         <div class="animation line-up">Saving Application, Please Wait ...</div>
       </div>
-      <div id="application">
-        <div class="header">
-          <span class="material-symbols-outlined icon"> person </span>
-          <span class="text">About You</span>
-        </div>
-      </div>
-      <div id="aboutApplicantForm">
+
+      <div id="step1">
         <form action="#" class="needs-validation" id="formApplicant" required>
+          <div id="application">
+            <div class="header">
+              <span class="material-symbols-outlined icon"> person </span>
+              <span class="text">About You</span>
+            </div>
+          </div>
           <div class="row mb-3 mt-2">
             <span class="fw-bold">Membership Type Requested</span>
           </div>
@@ -243,64 +244,287 @@
             </div>
           </div>
           <div class="row mb-3 mt-2">
-            <div class="col-md-4">
-              <label for="mediums" class="col-form-label">Mediums</label>
-              <select class="form-select" size="3" aria-label="mediums used" id="mediums" name="mediums">
-                <option value="Acrylics">Acrylics</option>
-                <option value="Chalk Pastel">Chalk Pastel</option>
-                <option value="Collage">Collage</option>
-                <option value="Colored Pencil">Colored Pencil</option>
-                <option value="Encaustic">Encaustic</option>
-                <option value="Generative">Generative</option>
-                <option value="Jewelry">Jewelry</option>
-                <option value="Mixed Media">Mixed Media</option>
-                <option value="Mosaic">Mosiac</option>
-                <option value="Oil">Oils</option>
-                <option value="Oil & Cold Wax">Oil & Cold Wax</option>
-                <option value="Pastel">Pastel</option>
-                <option value="Pen & Ink">Pen & Ink</option>
-                <option value="Photography">Photography</option>
-                <option value="Print Making">Print Making</option>
-                <option value="Screen Print">Screen Print</option>
-                <option value="Sculpture">Sculpture</option>
-                <option value="Soft Pastel">Soft Pastel</option>
-                <option value="Steel">Steel</option>
-                <option value="Watercolor">Watercolor</option>
-                <option value="Other">Other</option>
-              </select>
-              <span class="helper-text"
-                >Ctrl/Cmd Click to make multiple selections</span
-              >
+            <div class="col-md-12">
+              <div>Mediums</div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB1"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB1">Acrylics</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB2"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB2"
+                  >Chalk Pastel</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB3"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB3">Collage</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB4"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB4"
+                  >Colored Pencil</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB5"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB5">Encaustic</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB6"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB6">Generative</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB7"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB7">Jewelry</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB8"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB8"
+                  >Mixed Media</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB9"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB9">Mosiac</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB10"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB10">Oils</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB11"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB11"
+                  >Oil & Cold Wax</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB12"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB12">Pastel</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB13"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB13">Pen & Ink</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB14"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB14"
+                  >Photography</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB15"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB15"
+                  >Print Making</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB16"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB16"
+                  >Screen Print</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB17"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB17"
+                  >Soft Pastel</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB18"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB18">Steel</label>
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB19"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB19"
+                  >Watercolor</label
+                >
+              </div>
+              <div class="form-check form-check-inline col-md-3 col-lg-2">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="mediumCB20"
+                  name="mediums"
+                />
+                <label class="form-check-label" for="mediumCB20">Other</label>
+              </div>
             </div>
 
-            <div class="col-md-4">
-              <label for="socialMediaLinks" class="col-form-label"
-              >Social Media Links (optional)</label>
-              <textarea
-                id="socialMediaLinks"
-                name="socialMediaLinks"
-                rows="3"
-                cols="30">
+          </div>
 
-              </textarea>
+          <div id="detailPersonInfo">
+            <div class="header">
+              <span class="material-symbols-outlined icon"> info </span>
+              <span class="text">Optional But Helpful</span>
             </div>
+            <div class="row mb-3 mt-2">
+              <div class="col-md-6">
+                <label for="socialMediaLinks" class="col-form-label"
+                  >Social Media Links</label
+                >
+                <textarea
+                  id="socialMediaLinks"
+                  name="socialMediaLinks"
+                ></textarea>
+              </div>
 
-            <div class="col-md-4">
-              <label for="websites" class="col-form-label"
-              >Personal Websites (optional)</label>
-              <textarea
-                id="websites"
-                name="websites"
-                rows="3"
-                cols="30">
-
-              </textarea>
+              <div class="col-md-6">
+                <label for="websites" class="col-form-label"
+                  >Personal Websites</label
+                >
+                <textarea id="websites" name="websites"></textarea>
+              </div>
             </div>
+            <div class="row mb-3 mt-2">
+              <div class="col-md-6">
+                <label for="artEducationBackground" class="col-form-label"
+                  >Art Education and Background</label
+                >
+                <textarea
+                  id="artEducationBackground"
+                  name="artEducationBackground"
+                ></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="artAssociatedMemberships" class="col-form-label"
+                  >Art Associated Memberships</label
+                >
+                <textarea
+                  id="artAssociatedMemberships"
+                  name="artAssociatedMemberships"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row mb-3 mt-2">
+              <div class="col-md-6">
+                <label for="exhibitions" class="col-form-label"
+                  >Exhibitions</label
+                >
+                <textarea id="exhibitions" name="exhibitions"></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="reasonsForInterest" class="col-form-label"
+                  >Reasons for Interest in Membership</label
+                >
+                <textarea
+                  id="reasonsForInterest"
+                  name="reasonsForInterest"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-auto">
+            <button
+              type="submit"
+              class="btn btn-primary mb-3"
+              id="saveButton"
+            >
+              Save
+            </button>
           </div>
         </form>
       </div>
-      <div id="artWorkForm">
 
+      <div id="step2" class="d-none">
         <form
           action="#"
           id="formUploadImages"
@@ -322,8 +546,8 @@
                 <h4>Art Work Submissions</h4>
                 <ul>
                   <li>
-                    Include 5 artworks with presentation (framing or pedestal/support)
-                    displayed
+                    Include 5 artworks with presentation (framing or
+                    pedestal/support) displayed
                   </li>
                   <li>2 images showing the back of the 2D work</li>
                   <li>In the case of 3D work show the pedestal and mounting</li>
@@ -334,11 +558,13 @@
                 <ul>
                   <li>Limit JPG file size to under 3MB each, 72dpi</li>
                   <li>
-                    Keep quality as high as possible to stay under the file size limit
+                    Keep quality as high as possible to stay under the file size
+                    limit
                   </li>
                   <li>
-                    Please be patient while image uploads. The larger the file size the
-                    longer it may take to upload. It may take several seconds
+                    Please be patient while image uploads. The larger the file
+                    size the longer it may take to upload. It may take several
+                    seconds
                   </li>
                 </ul>
               </div>
@@ -360,11 +586,10 @@
               <div id="imageDetails">
                 <span id="artWorkMessages"></span>
                 <div class="row mb-3 mt-2">
-
                   <div class="col-md-8">
                     <label for="imageDescription" class="col-form-label"
-                    >Image Description/Title</label
-                  >
+                      >Image Description/Title</label
+                    >
                     <input
                       type="text"
                       name="imageDescription"
@@ -375,11 +600,8 @@
                     />
                   </div>
 
-
                   <div class="col-md-4">
-                    <label for="medium" class="col-form-label">
-                      Medium
-                    </label>
+                    <label for="medium" class="col-form-label"> Medium </label>
                     <input
                       type="text"
                       name="medium"
@@ -403,21 +625,15 @@
             </div>
           </div>
         </form>
-        <div class="col-auto col-form-label mt-2 banner d-none member-access">
-          <p>
-            <span class="label">Total Fee Due for This Event: </span>
-            <span id="totalFee" class="text-warning">Calculating ...</span>
-            <br />
-            This is the total for all submissions to date.
-          </p>
-        </div>
-        <div id="payment" class="d-none member-access">
-          <div class="header">
-            <span class="material-symbols-outlined icon"> local_atm </span>
-            <span class="text">Payment</span>
-          </div>
+      </div>
+
+      <div id="step3" class="d-none member-access">
+        <div class="header">
+          <span class="material-symbols-outlined icon"> local_atm </span>
+          <span class="text">Payment</span>
         </div>
       </div>
+
       <footer class="footer">
         <div id="footer" class="footer mt-3">
           Metropolitan Richmond Artists Association |

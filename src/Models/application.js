@@ -18,7 +18,12 @@ function getApplicationTables () {
                 "membershipType" : "k",
                 "medium" : "l",
                 "socialMediaLinks" : "m", 
-                "websites" : "n"
+                "websites" : "n",
+                "signature" : "o",
+                "artEducationBackground" : "p",
+                "artAssociatedMemberships" : "q",
+                "exhibitions" : "r",
+                "reasonsForInterest" : "s"
             }
         }
     }

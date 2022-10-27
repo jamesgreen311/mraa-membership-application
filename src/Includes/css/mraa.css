@@ -136,6 +136,15 @@ img.crop {
   border: 2px solid rgb(61, 61, 61);
 }
 
+textarea {
+  width: 100%;
+  min-height: 75px;
+  resize: none;
+  border: 1px solid lightgray;
+  outline: none;
+  border-radius: 3px;
+}
+
 .fetching,
 .uploading {
   position: relative;
