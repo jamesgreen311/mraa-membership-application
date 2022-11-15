@@ -3,6 +3,6 @@ var Routes = {
         Routes[r] = callback;
     }
 }
-
-/* Routes.path('chairpersonEmail', getMembershipChairpersonEmail)
-Routes.path('chairpersonName', getMembershipChairpersonName) */
+Routes.path("", "index.html")
+Routes.path("step2", "pay-dues.html")
+Routes.path("step3", "upload-images.html")

@@ -4,7 +4,12 @@
  * @returns 
  */
 function doGet(e) {
-    return loadIndex()
+    //const searchParams = new URLSearchParams(e)
+    const p = e.parameter.p
+
+    const page = p?Routes[p]:"index"
+
+    return render("Pages/" + page)
 }
 
 /**
