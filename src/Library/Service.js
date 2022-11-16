@@ -36,3 +36,6 @@ function getCurrentYear() {
   return y;
 }
 
+function getScriptUrl() {
+  return ScriptApp.getService().getUrl()
+}

@@ -1,3 +1,6 @@
+// Not needed, routing done by the Controller
+// 11/16/2022
+
 var Routes = {
     path : function (r, callback) {
         Routes[r] = callback;

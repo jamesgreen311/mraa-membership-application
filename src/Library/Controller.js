@@ -4,20 +4,31 @@
  * @returns 
  */
 function doGet(e) {
-    //const searchParams = new URLSearchParams(e)
-    const p = e.parameter.p
+    const pages = {
+        ROOT: "index",
+        STEP2: "pay-dues",
+        STEP3: "upload-images"
+    }
+    let p = e.parameter.p
+    p = p?p.toUpperCase():"ROOT" // default to index page
+    const page = Object.keys(pages).includes(p)?pages[p]:"error" // catch any bad page requests
 
-    const page = p?Routes[p]:"index"
+    if (page==="error") {
+        return loadError()
+    } else {
+        return loadPage(page)
+    }
+    //const page = pages[p]?pages[p]:"index"
 
-    return render("Pages/" + page)
+    //return render("Pages/" + page)
 }
 
 /**
  * Load application page
  * @returns {HTMLTemplate} 
  */
-function loadIndex() {
-    return render("Pages/index");
+function loadPage(page) {
+    return render("Pages/" + page);
 }
 
 /**
