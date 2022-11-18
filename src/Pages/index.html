@@ -28,7 +28,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous" />
 
-      <?!= include("Includes/css/mraa.inc"); ?>
+    <?!= include("Includes/css/mraa.inc"); ?>
 
     <title>MRAA New Applicants</title>
   </head>
@@ -39,7 +39,8 @@
         <div id="banner" class="banner">
           <div id="logo fs-2">
             <a href="https://www.metrorichmondart.org">MRAA</a>
-            <span class="text-right" id="supportContact"></span>
+            | 
+            <a href="mailto:<?= membershipchairemail ?>" id="membershipChairEmail">Questions</a>
           </div>
           <div id="title">
             <span class="fs-3">MRAA New Applicants</span>
@@ -632,201 +633,7 @@
       </footer>
     </div>
 
-    <script>
-      const appsettings = {
-      membershipChairpersonName: "",
-      membershipChairpersonEmail: "",
-      techContact: "",
-      imageFolderId: "",
-      maxImageSize: "",
-    };
-
-    const messagesrepo = {
-
-    };
-
-    function fetchingApplicant(toggle) {
-      const fetchingBlock = document.getElementById("fetching-applicant");
-      if (toggle) {
-        fetchingBlock.classList.remove("d-none");
-      } else {
-        fetchingBlock.classList.add("d-none");
-      }
-    }
-
-    function applicantDetailBlock(toggle) {
-      // toggle true is on/show, false is off/hide
-      const applicantDetailBlock = document.getElementById("applicant-detail");
-      if (toggle) {
-        applicantDetailBlock.classList.remove("d-none");
-      } else {
-        applicantDetailBlock.classList.add("d-none");
-      }
-    }
-
-    function uploadWaiting(toggle) {
-      const uploadWaiting = document.getElementById("uploadWaiting");
-      if (toggle) {
-        uploadWaiting.classList.remove("d-none");
-      } else {
-        uploadWaiting.classList.add("d-none");
-      }
-    }
-
-    function resetErrorMessages() {}
-
-    function resetDisplay() {}
-
-    function setCopyrightYear() {
-      const year = document.getElementById("year");
-      year.innerText = moment().format("YYYY");
-    }
-
-    function displaySupportContact(contact) {
-      const supportcontact = document.getElementById("supportcontact");
-      supportcontact.innerHTML = ` > <a href='mailto:${contact}'>Support Contact</a>`;
-    }
-
-    // I/O Methods
-    function fetchAppSettings() {
-      google.script.run.withSuccessHandler(processAppSettings).getAppSettings();
-    }
-
-    function processAppSettings(resp) {
-      const r = JSON.parse(resp);
-      appsettings.membershipChairpersonEmail = r.membershipChairpersonEmail;
-      appsettings.membershipChairpersonName = r.membershipChairpersonName;
-      appsettings.maxImageSize = r.maxImageSize;
-      appsettings.techContact = r.techContact;
-      appsettings.imageFolderId = r.imageFolderId;
-    }
-
-    function fetchApplicant(id) {
-      resetErrorMessages();
-      google.script.run
-        .withSuccessHandler(processApplicant)
-        .getApplicantByEmail(id);
-    }
-
-    function processApplicant(resp) {
-      const validApplicant = resp.length > 0;
-      if (validApplicant) {
-        applicant.email = resp[0];
-        applicant.firstname = resp[1];
-        applicant.lastname = resp[2];
-        applicant.phone = resp[10];
-        applicant.status = resp[4];
-        applicant.type = resp[12];
-
-        applicantDetailBlock(true);
-        fetchingApplicant(false);
-
-        // attempt to fetch any uploads for this applicant
-        /*       fetchingUploads(true) 
-          fetchUploads(cfe, applicant)  */
-      } else {
-        applicant.email = id;
-        applicant.firstname = "n/a";
-        applicant.lastname = "n/a";
-        applicant.phone = "n/a";
-        applicant.status = "notvalid";
-        applicant.type = "n/a";
-      }
-      displayApplicant(applicant);
-      displaySupportContact(appsettings.techContact);
-    }
-
-    function addApplicantImages(e) {
-      e.preventDefault();
-      uploadWaiting(true);
-      const formfile = document.querySelector("#form-file");
-      const formdata = new FormData(this);
-      const fr = new FileReader();
-      file = formfile.files[0];
-
-      const payload = [
-        ["eventid", cfe.id],
-        ["eventtitle", cfe.name],
-        ["firstname", applicant.firstname],
-        ["lastname", applicant.lastname],
-        ["email", applicant.email],
-        ["phone", applicant.phone],
-        ["imagefolder", cfe.imagefolderid],
-        ...formdata,
-      ];
-      let _data = {};
-      for (const [key, value] of payload) {
-        _data[key] = value;
-      }
-      _data.filename = `${_data.lastname}-${_data.firstname}-${_data.worktitle}-${_data.medium}-${_data.width}x${_data.height}-${_data.price}`;
-      _data.fileid = "";
-      _data.applicant = "YES";
-      _data.availability = "";
-      _data.hidden = "";
-      _data.fullname = applicant.firstname + " " + applicant.lastname;
-      _data.timestamp = moment().format("MMMM Do YYYY, h:mm:ss a");
-
-      fr.onload = function (e) {
-        const img = {
-          filename: _data.filename,
-          mimetype: file.type,
-          bytes: [...new Int8Array(e.target.result)],
-        };
-        _data.bytes = img.bytes;
-        _data.mimetype = file.type;
-        //upload.push(img)
-
-        google.script.run
-          .withSuccessHandler(showComplete)
-          .withUserObject(this)
-          .addApplicantImages(_data);
-      };
-      fr.readAsArrayBuffer(file);
-
-      return _data;
-    }
-
-    /*   function isApplicant(applicant, status, type) {
-        return applicant.status === status && type.includes(applicant.type) 
-      } */
-
-    function emailValidate() {
-      const emailAddress = document.getElementById("applicant-email").value;
-      const form = document.getElementById("form-applicant-info");
-
-      if (form.checkValidity()) {
-        // fetch applicant
-        fetchingApplicant(true);
-        fetchApplicant(emailAddress);
-      } else {
-        // error handling by Bootstrap
-      }
-    }
-
-    // Start up
-    function loadPageElements() {
-      fetchAppSettings();
-      setCopyrightYear();
-    }
-
-    function setMembershipTypeMsg(e) {
-      const type = this.value
-      const associateMsg = document.getElementById("associateMembership")
-      const exhibitingMsg = document.getElementById("exhibitingMembership")
-
-      if (type==="associate") {
-        associateMsg.classList.remove("d-none")
-        exhibitingMsg.classList.add("d-none")
-      } else {
-        associateMsg.classList.add("d-none")
-        exhibitingMsg.classList.remove("d-none")
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", loadPageElements);
-    document.getElementById("membershipType1").addEventListener("click", setMembershipTypeMsg)
-    document.getElementById("membershipType2").addEventListener("click", setMembershipTypeMsg)
-    </script>
+    <?!= include("Includes/scripts/step1.inc"); ?>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"

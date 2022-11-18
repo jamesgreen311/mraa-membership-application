@@ -14,13 +14,10 @@ function doGet(e) {
     const page = Object.keys(pages).includes(p)?pages[p]:"error" // catch any bad page requests
 
     if (page==="error") {
-        return loadError()
+        return loadError("Page Not Found")
     } else {
         return loadPage(page)
     }
-    //const page = pages[p]?pages[p]:"index"
-
-    //return render("Pages/" + page)
 }
 
 /**
@@ -28,7 +25,9 @@ function doGet(e) {
  * @returns {HTMLTemplate} 
  */
 function loadPage(page) {
-    return render("Pages/" + page);
+    const settings = JSON.parse(getAppSettings())
+    const opt = {membershipchairemail:settings.membershipchairemail}
+    return render("Pages/" + page, opt);
 }
 
 /**
@@ -37,7 +36,7 @@ function loadPage(page) {
  */
 function loadError(msg) {
     const appSettings = JSON.parse(getAppSettings())
-    const opt = {text:"msg", support:"tech@metrorichmondart.org"}
+    const opt = {text:msg, support:"tech@metrorichmondart.org"}
     
     return render("Pages/error", opt);
 }

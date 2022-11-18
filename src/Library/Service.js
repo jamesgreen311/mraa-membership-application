@@ -15,7 +15,7 @@ function render(f, opt) {
       })
   
     }
-    return templ.evaluate().setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+    return templ.evaluate().setXFrameOptionsMode(HtmlService.XFrameOptionsMode.DEFAULT);
 }
 
 /**
@@ -38,4 +38,9 @@ function getCurrentYear() {
 
 function getScriptUrl() {
   return ScriptApp.getService().getUrl()
+}
+
+function generateUniqueId() {
+  const id = Math.floor(Math.random() * Math.floor(100000000)).toString(16).toUpperCase()
+  return JSON.stringify({"applicantid" : id})
 }

@@ -1,0 +1,17 @@
+<script>
+function fetchingApplicant(toggle) {
+    const fetchingBlock = document.getElementById("fetching-applicant");
+    if (toggle) {
+        fetchingBlock.classList.remove("d-none");
+    } else {
+        fetchingBlock.classList.add("d-none");
+    }
+}
+
+function fetchApplicant(id) {
+  resetErrorMessages();
+  google.script.run
+    .withSuccessHandler(processApplicant)
+    .getApplicantByEmail(id);
+}
+</script>
