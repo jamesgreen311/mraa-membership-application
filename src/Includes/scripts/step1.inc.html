@@ -5,7 +5,7 @@ const messagesrepo = {
 const session = {
 }
 
-// Page level 
+// Page level begin
 function getNewApplicantId() {
   google.script.run
     .withSuccessHandler(setApplicantId)
@@ -38,7 +38,10 @@ function uploadWaiting(toggle) {
 
 function resetErrorMessages() {}
 
-function resetDisplay() {}
+function resetDisplay() {
+  saveButtonFieldset.disabled = false
+  formApplicant.reset()
+}
 
 function setCopyrightYear() {
   const year = document.getElementById("year");
@@ -63,28 +66,17 @@ function setMembershipTypeMsg(e) {
     exhibitingMsg.classList.remove("d-none")
   }
 }
-// PAGE LEVEL
+// PAGE LEVEL END
 
 // I/O Methods
-// App settings
-/* function fetchAppSettings() {
-  google.script.run.withSuccessHandler(processAppSettings).getAppSettings();
-} */
 
-function processAppSettings(resp) {
-/*   const r = JSON.parse(resp);
-  appsettings.membershipChairpersonEmail = r.membershipChairpersonEmail;
-  appsettings.membershipChairpersonName = r.membershipChairpersonName;
-  appsettings.maxImageSize = r.maxImageSize;
-  appsettings.techContact = r.techContact;
-  appsettings.imageFolderId = r.imageFolderId; */
-}
 // APP SETTINGS
 
 // APPLICATION PROCESS
 function saveApplication(e) {
   e.preventDefault();
   uploadWaiting(true);
+  saveButtonFieldset.disabled = true
   const formdata = new FormData(this);
   formdata.append("applicantId", session.applicantid)
   formdata.append("status", "Applicant")
@@ -110,6 +102,7 @@ function showError(e) {
 
 function saveComplete() {
   uploadWaiting(false)
+  resetDisplay()
 }
 
 // Start up
@@ -136,8 +129,8 @@ function setTestValues() {
   reasonsForInterest.value = "I'm a sucker with lots of money"
 }
 
-document.getElementById("formApplicant").addEventListener("submit", saveApplication)
 document.addEventListener("DOMContentLoaded", loadPageElements);
+document.getElementById("formApplicant").addEventListener("submit", saveApplication)
 document.getElementById("membershipType1").addEventListener("click", setMembershipTypeMsg)
 document.getElementById("membershipType2").addEventListener("click", setMembershipTypeMsg)
 </script>
