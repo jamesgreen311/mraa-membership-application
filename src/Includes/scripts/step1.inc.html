@@ -72,102 +72,44 @@ function setMembershipTypeMsg(e) {
 } */
 
 function processAppSettings(resp) {
-  const r = JSON.parse(resp);
+/*   const r = JSON.parse(resp);
   appsettings.membershipChairpersonEmail = r.membershipChairpersonEmail;
   appsettings.membershipChairpersonName = r.membershipChairpersonName;
   appsettings.maxImageSize = r.maxImageSize;
   appsettings.techContact = r.techContact;
-  appsettings.imageFolderId = r.imageFolderId;
+  appsettings.imageFolderId = r.imageFolderId; */
 }
 // APP SETTINGS
 
-
-function processApplication(resp) {
-/* const validApplicant = resp.length > 0;
-   if (validApplicant) {
-    applicant.email = resp[0];
-    applicant.firstname = resp[1];
-    applicant.lastname = resp[2];
-    applicant.phone = resp[10];
-    applicant.status = resp[4];
-    applicant.type = resp[12];
-
-    applicantDetailBlock(true);
-    fetchingApplicant(false);
-
-  } else {
-    applicant.email = id;
-    applicant.firstname = "n/a";
-    applicant.lastname = "n/a";
-    applicant.phone = "n/a";
-    applicant.status = "notvalid";
-    applicant.type = "n/a";
-  }
-  displayApplicant(applicant);
-  displaySupportContact(appsettings.techContact); */
-}
-
+// APPLICATION PROCESS
 function saveApplication(e) {
   e.preventDefault();
   uploadWaiting(true);
-  const formfile = document.querySelector("#form-file");
   const formdata = new FormData(this);
-  const fr = new FileReader();
-  file = formfile.files[0];
+  formdata.append("applicantId", session.applicantid)
+  formdata.append("status", "Applicant")
+  formdata.append("artistSignature", `${formdata.get("firstName")} ${formdata.get("lastName")}`)
+  formdata.append("dateSubmitted", moment().format("MM/DD/YYYY h:mm:ss a"))
+  const data = {}
 
-  const payload = [
-    ["eventid", cfe.id],
-    ["eventtitle", cfe.name],
-    ["firstname", applicant.firstname],
-    ["lastname", applicant.lastname],
-    ["email", applicant.email],
-    ["phone", applicant.phone],
-    ["imagefolder", cfe.imagefolderid],
-    ...formdata,
-  ];
-  let _data = {};
-  for (const [key, value] of payload) {
-    _data[key] = value;
+  //console.log(formdata)
+  for (const pair of formdata.entries()) {
+    data[pair[0]] = formdata.getAll(pair[0]).toString()
   }
-  _data.filename = `${_data.lastname}-${_data.firstname}-${_data.worktitle}-${_data.medium}-${_data.width}x${_data.height}-${_data.price}`;
-  _data.fileid = "";
-  _data.applicant = "YES";
-  _data.availability = "";
-  _data.hidden = "";
-  _data.fullname = applicant.firstname + " " + applicant.lastname;
-  _data.timestamp = moment().format("MMMM Do YYYY, h:mm:ss a");
 
-  fr.onload = function (e) {
-    const img = {
-      filename: _data.filename,
-      mimetype: file.type,
-      bytes: [...new Int8Array(e.target.result)],
-    };
-    _data.bytes = img.bytes;
-    _data.mimetype = file.type;
-    //upload.push(img)
-
-    google.script.run
-      .withSuccessHandler(showComplete)
-      .withUserObject(this)
-      .addApplicantImages(_data);
-  };
-  fr.readAsArrayBuffer(file);
-
-  return _data;
+  //console.log(data)
+  google.script.run
+    .withSuccessHandler(saveComplete)
+    .withFailureHandler(showError)
+    .saveApplication(data)
 }
 
-function emailValidate() {
-  const emailAddress = document.getElementById("applicant-email").value;
-  const form = document.getElementById("form-applicant-info");
+function showError(e) {
+  console.log(e)
+}
 
-  if (form.checkValidity()) {
-    // fetch applicant
-    fetchingApplicant(true);
-    fetchApplicant(emailAddress);
-  } else {
-    // error handling by Bootstrap
-  }
+function saveComplete() {
+  uploadWaiting(false)
 }
 
 // Start up
@@ -178,8 +120,23 @@ function loadPageElements() {
   }
 
   setCopyrightYear();
+  setTestValues();
 }
 
+// Testing
+function setTestValues() {
+  emailAddress.value = "jon.tester@test.com"
+  contactNumber.value = "555-111-2233"
+  firstName.value = "Jon"
+  lastName.value = "Tester"
+  streetAddress1.value = "123 W Main St"
+  city.value = "Anytown"
+  state.value = "VA"
+  zipCode.value = "55555"
+  reasonsForInterest.value = "I'm a sucker with lots of money"
+}
+
+document.getElementById("formApplicant").addEventListener("submit", saveApplication)
 document.addEventListener("DOMContentLoaded", loadPageElements);
 document.getElementById("membershipType1").addEventListener("click", setMembershipTypeMsg)
 document.getElementById("membershipType2").addEventListener("click", setMembershipTypeMsg)

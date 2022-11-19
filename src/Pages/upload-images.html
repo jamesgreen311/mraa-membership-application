@@ -51,6 +51,104 @@
         </div>
       </header>
       <h1>Upload Images for Jury</h1>
+      <div id="step2" class="d-none">
+        <form
+          action="#"
+          id="formUploadImages"
+          class="needs-validation"
+          required>
+          <input id="imagedata-hidden" type="hidden" name="image" value="" />
+          <input id="mimetype-hidden" type="hidden" name="mimetype" value="" />
+          <input id="filename-hidden" type="hidden" name="filename" value="" />
+          <!-- <div id="upload-images" class="d-none member-access"> -->
+          <div id="upload-images">
+            <div class="header">
+              <span class="material-symbols-outlined icon"> file_upload </span>
+              <span class="text">Upload Art Work</span>
+            </div>
+            <div class="row mb-3 mt-2">
+              <h3>Art Work Requirements</h3>
+              <div class="col-md-6">
+                <h4>Art Work Submissions</h4>
+                <ul>
+                  <li>
+                    Include 5 artworks with presentation (framing or
+                    pedestal/support) displayed
+                  </li>
+                  <li>2 images showing the back of the 2D work</li>
+                  <li>In the case of 3D work show the pedestal and mounting</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h4>Image Files</h4>
+                <ul>
+                  <li>Limit JPG file size to under 3MB each, 72dpi</li>
+                  <li>
+                    Keep quality as high as possible to stay under the file size
+                    limit
+                  </li>
+                  <li>
+                    Please be patient while image uploads. The larger the file
+                    size the longer it may take to upload. It may take several
+                    seconds
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div id="entryInfo" class="mb-3">
+              <div class="banner">
+                <label for="form-file" class="form-label"
+                  >Image size must not exceed
+                  <span class="text-warning" id="maxImageSize"> </span
+                  >MB.</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  required />
+              </div>
+              <div id="imageDetails">
+                <span id="artWorkMessages"></span>
+                <div class="row mb-3 mt-2">
+                  <div class="col-md-8">
+                    <label for="imageDescription" class="col-form-label"
+                      >Image Description/Title</label
+                    >
+                    <input
+                      type="text"
+                      name="imageDescription"
+                      id="imageDescription"
+                      class="form-control"
+                      placeholder="Required"
+                      required />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="medium" class="col-form-label"> Medium </label>
+                    <input
+                      type="text"
+                      name="medium"
+                      id="medium"
+                      class="form-control"
+                      placeholder="Required"
+                      required />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="upload-gallery" class="d-none">
+              <h3 class="fs-6">Upload Gallery</h3>
+              <ul id="gallery" class="gallery">
+                <li class="d-none">
+                  <span class="saved d-none">Saved</span>
+                  <span class="empty">Image Placeholder</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <?!= include("Includes/scripts/upload-images.inc") ?>

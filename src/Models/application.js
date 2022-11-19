@@ -6,7 +6,7 @@ function getApplicationTables () {
             "headers" : 2,
             "schema" : {
                 "applicantId": "a",
-                "dateSubmitted" : "q",
+                "dateSubmitted" : "u",
                 "emailAddress" : "d",
                 "firstName" : "b",
                 "lastName" : "c",
@@ -17,71 +17,36 @@ function getApplicationTables () {
                 "zipCode" : "i",
                 "contactNumber" : "j",
                 "membershipType" : "k",
-                "medium" : "l",
+                "mediums" : "l",
                 "reasonsForInterest" : "n",
-                "status": "o",
-                "artistSignature": "m"
+                "status": "t",
+                "artistSignature": "m",
+                "artEducationBackground": "o",
+                "artAssociatedMemberships": "p",
+                "exhibitions": "q",
+                "socialMediaLinks": "s",
+                "websites": "r"
             }
         },
-        "memberships": {
-            "name": "Art Memberships",
-            "type" : "standard",
-            "headers" : 1,
-            "schema" : {
-                "applicantid": "a",
-                "firstname": "b",
-                "lastname": "c",
-                "content": "d"
-            }
-        },
-        "background": {
-            "name": "Education Background",
-            "type" : "standard",
-            "headers" : 1,
-            "schema" : {
-                "applicantid": "a",
-                "firstname": "b",
-                "lastname": "c",
-                "content": "d"
-            }
-        },
-        "exhibitions": {
-            "name": "Exhibitions",
-            "type" : "standard",
-            "headers" : 1,
-            "schema" : {
-                "applicantid": "a",
-                "firstname": "b",
-                "lastname": "c",
-                "content": "d"
-            }
-        },
-        "socialmedia": {
-            "name": "Social Media",
-            "type" : "standard",
-            "headers" : 1,
-            "schema" : {
-                "applicantid": "a",
-                "firstname": "b",
-                "lastname": "c",
-                "content": "d"
-            }
-        }
     }
 }
 
-function addNewApplicant(a) {
+function saveApplication(a) {
     const at = getApplicationTables()
     const t = connect(APPLICANTS_ID).getSheetByName(at.application.name)
     const schema = at.application.schema
 
     const newRow = []
-    let ndx = 0
-    newRow[ndx] = new Date()
-
+    /* let ndx = 0
+    newRow[ndx] = new Date() */
+    //console.log(a)
     // loop through application object
     const keys = Object.keys(a)
+    Logger.log(a)
+    Logger.log(schema)
     keys.forEach(key => {
+        Logger.log(key)
+ 
         ndx = schema[key].colToIndex()
         newRow[ndx] = a[key]
     })
