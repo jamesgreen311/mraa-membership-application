@@ -56,7 +56,12 @@ function createDocument(applicant) {
   const doc = tmp.makeCopy(docName, folder)
   const docId = doc.getId()
   const body = DocumentApp.openById(docId).getBody()
+  const appsettings = JSON.parse(getAppSettings())
+  const chairpersonemail = appsettings.membershipchairemail
 
+  console.log(chairpersonemail)
+  console.log(appsettings)
+  body.replaceText("{chairperson_email}", chairpersonemail)
   body.replaceText("{applicant_name}", `${applicant.firstName} ${applicant.lastName}`)
   body.replaceText("{email_address}", applicant.emailAddress)
   body.replaceText("{contact_number}", applicant.contactNumber)

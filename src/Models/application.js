@@ -1,4 +1,4 @@
-const NEWAPPLICANT = {}
+
 function getApplicationTables () {
     return {
         "application" : {
@@ -33,24 +33,23 @@ function getApplicationTables () {
 }
 
 function saveApplication(a) {
+    const newApplicant = {}
     const at = getApplicationTables()
     const t = connect(APPLICANTS_ID).getSheetByName(at.application.name)
     const schema = at.application.schema
 
     const newRow = []
     const keys = Object.keys(a)
-/*     Logger.log(a)
-    Logger.log(schema) */
+
     keys.forEach(key => {
-        //Logger.log(key)
         ndx = schema[key].colToIndex()
         newRow[ndx] = a[key]
 
         // store a copy of application data in memory for notification email
-        NEWAPPLICANT[key] = a[key]
+        newApplicant[key] = a[key]
     })
 
     t.appendRow(newRow)
-    sendNotification(NEWAPPLICANT)
+    sendNotification(newApplicant)
     return newRow
 }
