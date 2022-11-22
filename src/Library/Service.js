@@ -44,3 +44,35 @@ function generateUniqueId() {
   const id = Math.floor(Math.random() * Math.floor(100000000)).toString(16).toUpperCase()
   return JSON.stringify({"applicantid" : id})
 }
+
+function sendNotification(applicant) {
+  const attachment = createDocument(applicant)
+}
+
+function createDocument(applicant) {
+  const docName = `${applicant.firstName} ${applicant.lastName} Application`
+  const tmp = DriveApp.getFileById(DOCUMENT_ID)
+  const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID)
+  const doc = tmp.makeCopy(docName, folder)
+  const docId = doc.getId()
+  const body = DocumentApp.openById(docId).getBody()
+
+  body.replaceText("{applicant_name}", `${applicant.firstName} ${applicant.lastName}`)
+  body.replaceText("{email_address}", applicant.emailAddress)
+  body.replaceText("{contact_number}", applicant.contactNumber)
+  body.replaceText("{first_name}", applicant.firstName)
+  body.replaceText("{last_name}", applicant.lastName)
+  body.replaceText("{address1}", applicant.streetAddress1)
+  body.replaceText("{address2}", applicant.streetAddress2)
+  body.replaceText("{city}", applicant.city)
+  body.replaceText("{state}", applicant.state)
+  body.replaceText("{zip}", applicant.zipCode)
+  body.replaceText("{medium}", applicant.mediums)
+  body.replaceText("{reasons}", applicant.reasonsForInterest)
+  body.replaceText("{website}", applicant.websites)
+  body.replaceText("{background}", applicant.artEducationBackground)
+  body.replaceText("{memberships}", applicant.artAssociatedMemberships)
+  body.replaceText("{exhibitions}", applicant.exhibitions)
+  body.replaceText("{social_media}", applicant.socialMediaLinks)
+  return doc
+}
