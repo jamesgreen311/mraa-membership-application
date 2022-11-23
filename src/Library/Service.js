@@ -1,3 +1,8 @@
+const appSettings = JSON.parse(getAppSettings())
+const CONFIRMATION_DOCUMENT_ID = appSettings.confirmationdocid 
+const NOTIFICATION_DOCUMENT_ID = appSettings.notificationdocid
+const DESTINATION_FOLDER_ID = appSettings.destinationfolderid
+
 /**
  * Sends html to the browser
  * @param {File} f File object 
@@ -45,23 +50,32 @@ function generateUniqueId() {
   return JSON.stringify({"applicantid" : id})
 }
 
-function sendNotification(applicant) {
-  const attachment = createDocument(applicant)
+function sendConfirmation(applicant) {
+  const sendTo = applicant.emailAddress
+  const attachment = createConfirmationDoc(applicant)
 }
 
-function createDocument(applicant) {
-  const docName = `${applicant.firstName} ${applicant.lastName} Application`
-  const tmp = DriveApp.getFileById(DOCUMENT_ID)
+function sendNotification(applicant) {
+  const sendTo = JSON.parse(getAppSettings()).distributionlist
+  const attachment = createNotificationDoc(applicant)
+}
+
+function createConfirmationDoc(applicant) {
+  const appsettings = JSON.parse(getAppSettings())
+  const chairpersonemail = appsettings.membershipchairemail
+  const emailLink = `mailto:${chairpersonemail}`
+  const emailText = "Membership Chairperson"
+  const docName = `${applicant.firstName} ${applicant.lastName} Application Confirmation`
+  const tmp = DriveApp.getFileById(CONFIRMATION_DOCUMENT_ID)
   const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID)
   const doc = tmp.makeCopy(docName, folder)
   const docId = doc.getId()
-  const body = DocumentApp.openById(docId).getBody()
-  const appsettings = JSON.parse(getAppSettings())
-  const chairpersonemail = appsettings.membershipchairemail
+  const body = DocumentApp.openById(docId).getBody()    
 
-  console.log(chairpersonemail)
-  console.log(appsettings)
-  body.replaceText("{chairperson_email}", chairpersonemail)
+  body.findText(emailText)
+    .getElement()
+    .editAsText()
+    .setLinkUrl(emailLink)
   body.replaceText("{applicant_name}", `${applicant.firstName} ${applicant.lastName}`)
   body.replaceText("{email_address}", applicant.emailAddress)
   body.replaceText("{contact_number}", applicant.contactNumber)
@@ -72,7 +86,36 @@ function createDocument(applicant) {
   body.replaceText("{city}", applicant.city)
   body.replaceText("{state}", applicant.state)
   body.replaceText("{zip}", applicant.zipCode)
-  body.replaceText("{medium}", applicant.mediums)
+  body.replaceText("{medium}", applicant.mediums?applicant.mediums:"N/A")
+  body.replaceText("{reasons}", applicant.reasonsForInterest)
+  body.replaceText("{website}", applicant.websites)
+  body.replaceText("{background}", applicant.artEducationBackground)
+  body.replaceText("{memberships}", applicant.artAssociatedMemberships)
+  body.replaceText("{exhibitions}", applicant.exhibitions)
+  body.replaceText("{social_media}", applicant.socialMediaLinks)
+  return doc
+}
+
+function createNotificationDoc(applicant) {
+  const appsettings = JSON.parse(getAppSettings())
+  const docName = `${applicant.firstName} ${applicant.lastName} Application Notification`
+  const tmp = DriveApp.getFileById(NOTIFICATION_DOCUMENT_ID)
+  const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID)
+  const doc = tmp.makeCopy(docName, folder)
+  const docId = doc.getId()
+  const body = DocumentApp.openById(docId).getBody()    
+
+  body.replaceText("{applicant_name}", `${applicant.firstName} ${applicant.lastName}`)
+  body.replaceText("{email_address}", applicant.emailAddress)
+  body.replaceText("{contact_number}", applicant.contactNumber)
+  body.replaceText("{first_name}", applicant.firstName)
+  body.replaceText("{last_name}", applicant.lastName)
+  body.replaceText("{address1}", applicant.streetAddress1)
+  body.replaceText("{address2}", applicant.streetAddress2)
+  body.replaceText("{city}", applicant.city)
+  body.replaceText("{state}", applicant.state)
+  body.replaceText("{zip}", applicant.zipCode)
+  body.replaceText("{medium}", applicant.mediums?applicant.mediums:"N/A")
   body.replaceText("{reasons}", applicant.reasonsForInterest)
   body.replaceText("{website}", applicant.websites)
   body.replaceText("{background}", applicant.artEducationBackground)

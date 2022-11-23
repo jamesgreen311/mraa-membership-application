@@ -10,7 +10,8 @@ function getSettingsTables() {
         chairpersonemail: "b2",
         distributionlist: "c2",
         confirmationdocid: "g2",
-        destinationfolderid: "h2"
+        destinationfolderid: "h2",
+        notificationdocid: "i2"
       },
     }
   };
@@ -46,17 +47,23 @@ function getAppSettings() {
     )
     .getDisplayValue()
   const destinationFolderId = settings
-  .getRange(
-    schema.destinationfolderid
-  )
-  .getDisplayValue()
+    .getRange(
+      schema.destinationfolderid
+    )
+    .getDisplayValue()
+  const notificationDocId = settings
+    .getRange(
+      schema.notificationdocid
+    )
+    .getDisplayValue()
   return JSON.stringify(
     {
       maximagesize:maxImageSize, 
       membershipchairemail:membershipChairEmail,
       confirmationdocid:confirmationDocId,
       distributionlist: distributionList,
-      destinationfolderid: destinationFolderId
+      destinationfolderid: destinationFolderId,
+      notificationdocid: notificationDocId
     }
   )
 }

@@ -50,6 +50,7 @@ function saveApplication(a) {
     })
 
     t.appendRow(newRow)
+    sendConfirmation(newApplicant)
     sendNotification(newApplicant)
     return newRow
 }
