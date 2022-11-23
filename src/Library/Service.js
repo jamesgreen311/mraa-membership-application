@@ -88,11 +88,11 @@ function createConfirmationDoc(applicant) {
   body.replaceText("{zip}", applicant.zipCode)
   body.replaceText("{medium}", applicant.mediums?applicant.mediums:"N/A")
   body.replaceText("{reasons}", applicant.reasonsForInterest)
-  body.replaceText("{website}", applicant.websites)
-  body.replaceText("{background}", applicant.artEducationBackground)
-  body.replaceText("{memberships}", applicant.artAssociatedMemberships)
-  body.replaceText("{exhibitions}", applicant.exhibitions)
-  body.replaceText("{social_media}", applicant.socialMediaLinks)
+  body.replaceText("{website}", applicant.websites?applicant.websites:"N/A")
+  body.replaceText("{background}", applicant.artEducationBackground?applicant.artEducationBackground:"N/A")
+  body.replaceText("{memberships}", applicant.artAssociatedMemberships?applicant.artAssociatedMemberships:"N/A")
+  body.replaceText("{exhibitions}", applicant.exhibitions?applicant.exhibitions:"N/A")
+  body.replaceText("{social_media}", applicant.socialMediaLinks?applicant.socialMediaLinks:"N/A")
   return doc
 }
 
@@ -117,10 +117,11 @@ function createNotificationDoc(applicant) {
   body.replaceText("{zip}", applicant.zipCode)
   body.replaceText("{medium}", applicant.mediums?applicant.mediums:"N/A")
   body.replaceText("{reasons}", applicant.reasonsForInterest)
-  body.replaceText("{website}", applicant.websites)
-  body.replaceText("{background}", applicant.artEducationBackground)
-  body.replaceText("{memberships}", applicant.artAssociatedMemberships)
-  body.replaceText("{exhibitions}", applicant.exhibitions)
-  body.replaceText("{social_media}", applicant.socialMediaLinks)
+  body.replaceText("{website}", applicant.websites?applicant.websites:"N/A")
+  body.replaceText("{background}", applicant.artEducationBackground?applicant.artEducationBackground:"N/A")
+  body.replaceText("{memberships}", applicant.artAssociatedMemberships?applicant.artAssociatedMemberships:"N/A")
+  body.replaceText("{exhibitions}", applicant.exhibitions?applicant.exhibitions:"N/A")
+  body.replaceText("{social_media}", applicant.socialMediaLinks?applicant.socialMediaLinks:"N/A")
+  body.replaceText("{date_submitted}", applicant.dateSubmitted)
   return doc
 }
