@@ -63,7 +63,10 @@ function sendConfirmation(applicant) {
 function sendNotification(applicant) {
   const sendTo = JSON.parse(getAppSettings()).distributionlist
   const subject = "New Member Application Notification"
-  const attachment = createNotificationDoc(applicant)
+  const fileId = createNotificationDoc(applicant)
+  const attachment = DriveApp.getFileById(fileId)
+  const body = "A new member application has been submitted. A copy of the application is attached."
+  GmailApp.sendEmail(sendTo, subject, body, {attachments:[attachment]})
 }
 
 function createConfirmationDoc(applicant) {
