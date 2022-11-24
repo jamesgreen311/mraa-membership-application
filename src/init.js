@@ -15,5 +15,6 @@ const APPLICANTS_ID = "1t7KG2DUdTyT8e7tVYLYvsY0Zy1bBShTcJvIg9QoqJGs"
     // DriveApp.createFile(blob);
     // SpreadsheetApp.getUi();
     // DocumentApp.openById()
+    // GmailApp.sendEmail("tech@metrorichmondart.org", "Test", "Test")
 
   }

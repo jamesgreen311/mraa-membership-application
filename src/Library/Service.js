@@ -51,12 +51,18 @@ function generateUniqueId() {
 }
 
 function sendConfirmation(applicant) {
-  const sendTo = applicant.emailAddress
-  const attachment = createConfirmationDoc(applicant)
+  //const sendTo = applicant.emailAddress
+  const sendTo = "jamesgreen.311@gmail.com" // Testing only
+  const subject = "MRAA Member Application Confirmation"
+  const fileId = createConfirmationDoc(applicant)
+  const attachment = DriveApp.getFileById(fileId)
+  const body = "We have received your application for membership in MRAA. Please review the attached document for any errors."
+  GmailApp.sendEmail(sendTo, subject, body, {attachments:[attachment]})
 }
 
 function sendNotification(applicant) {
   const sendTo = JSON.parse(getAppSettings()).distributionlist
+  const subject = "New Member Application Notification"
   const attachment = createNotificationDoc(applicant)
 }
 
@@ -68,9 +74,10 @@ function createConfirmationDoc(applicant) {
   const docName = `${applicant.firstName} ${applicant.lastName} Application Confirmation`
   const tmp = DriveApp.getFileById(CONFIRMATION_DOCUMENT_ID)
   const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID)
-  const doc = tmp.makeCopy(docName, folder)
-  const docId = doc.getId()
-  const body = DocumentApp.openById(docId).getBody()    
+  const file = tmp.makeCopy(docName, folder)
+  const fileId = file.getId()
+  const doc = DocumentApp.openById(fileId)
+  const body = doc.getBody()    
 
   body.findText(emailText)
     .getElement()
@@ -93,7 +100,9 @@ function createConfirmationDoc(applicant) {
   body.replaceText("{memberships}", applicant.artAssociatedMemberships?applicant.artAssociatedMemberships:"N/A")
   body.replaceText("{exhibitions}", applicant.exhibitions?applicant.exhibitions:"N/A")
   body.replaceText("{social_media}", applicant.socialMediaLinks?applicant.socialMediaLinks:"N/A")
-  return doc
+  doc.saveAndClose()
+
+  return fileId
 }
 
 function createNotificationDoc(applicant) {
@@ -101,9 +110,10 @@ function createNotificationDoc(applicant) {
   const docName = `${applicant.firstName} ${applicant.lastName} Application Notification`
   const tmp = DriveApp.getFileById(NOTIFICATION_DOCUMENT_ID)
   const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID)
-  const doc = tmp.makeCopy(docName, folder)
-  const docId = doc.getId()
-  const body = DocumentApp.openById(docId).getBody()    
+  const file = tmp.makeCopy(docName, folder)
+  const fileId = file.getId()
+  const doc = DocumentApp.openById(fileId)
+  const body = doc.getBody()    
 
   body.replaceText("{applicant_name}", `${applicant.firstName} ${applicant.lastName}`)
   body.replaceText("{email_address}", applicant.emailAddress)
@@ -123,5 +133,7 @@ function createNotificationDoc(applicant) {
   body.replaceText("{exhibitions}", applicant.exhibitions?applicant.exhibitions:"N/A")
   body.replaceText("{social_media}", applicant.socialMediaLinks?applicant.socialMediaLinks:"N/A")
   body.replaceText("{date_submitted}", applicant.dateSubmitted)
-  return doc
+  doc.saveAndClose()
+
+  return fileId
 }
