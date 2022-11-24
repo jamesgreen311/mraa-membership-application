@@ -1,6 +1,9 @@
 <script>
 const messagesrepo = {
-
+  step1Complete: 
+    "<h3>Thank you for applying for membership in MRAA</h3>" +
+    "You should hear from our Membership Chairperson shortly.<br>" +
+    "Please go to Step 2 when you are ready to pay your dues.<br>"
 }
 const session = {
 }
@@ -103,6 +106,10 @@ function showError(e) {
 function saveComplete() {
   uploadWaiting(false)
   resetDisplay()
+  // hide step 1 elements
+  step1.classList.add("d-none")
+  returning.classList.add("d-none")
+  intro.innerHTML = messagesrepo.step1Complete
 }
 
 // Start up
