@@ -51,8 +51,7 @@ function generateUniqueId() {
 }
 
 function sendConfirmation(applicant) {
-  //const sendTo = applicant.emailAddress
-  const sendTo = "jamesgreen.311@gmail.com" // Testing only
+  const sendTo = applicant.emailAddress
   const subject = "MRAA Member Application Confirmation"
   const fileId = createConfirmationDoc(applicant)
   const attachment = DriveApp.getFileById(fileId)
