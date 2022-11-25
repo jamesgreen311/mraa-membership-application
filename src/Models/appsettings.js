@@ -14,7 +14,7 @@ function getSettingsTables() {
         notificationdocid: "i2"
       },
     }
-  };
+  }
 }
 
 /**
