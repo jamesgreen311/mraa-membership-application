@@ -37,3 +37,13 @@ function getMemberByPosition(position) {
     }
     return member
 }
+
+function getBoardPresident() {
+    return getMemberByPosition("President")
+}
+function getBoardTreasurer() {
+    return getMemberByPosition("Treasurer")
+}
+function getBoardMembershipChair() {
+    return getMemberByPosition("Membership Chairperson")
+}

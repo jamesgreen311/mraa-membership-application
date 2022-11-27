@@ -37,8 +37,8 @@
       <header>
         <div id="banner" class="banner">
           <div id="logo fs-2">
-            <a href="https://www.metrorichmondart.org">MRAA</a>
-            <span class="text-right" id="supportContact"></span>
+            <a href="https://www.metrorichmondart.org">MRAA</a>            | 
+            <a href="mailto:<?= membershipchairemail ?>" id="membershipChairEmail">Questions?</a>
           </div>
           <div id="title">
             <span class="fs-3">MRAA Applicants | Pay Dues</span>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <h3>Annual Dues</h3>
-      <p>Your payment of <string>$45</string> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the MRAA Treasurer for instructions.</p>
+      <p>Your payment of <span class="badge bg-primary">$45</span> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the <a href="mailto:<?= treasureremail ?>" id="treasurerEmail">MRAA Treasurer</a> for instructions.</p>
       <?!= include("Includes/scripts/paypalsmartbutton.inc"); ?>
       <footer class="footer">
         <div id="footer" class="footer mt-3">

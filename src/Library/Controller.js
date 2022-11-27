@@ -26,7 +26,11 @@ function doGet(e) {
  */
 function loadPage(page) {
     const settings = JSON.parse(getAppSettings())
-    const opt = {membershipchairemail:settings.membershipchairemail}
+    const treasurer = getBoardTreasurer()
+    const opt = {
+        membershipchairemail:settings.membershipchairemail,
+        treasureremail:treasurer.email
+    }
     return render("Pages/" + page, opt);
 }
 
