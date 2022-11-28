@@ -52,9 +52,23 @@
           <span class="text">Payment</span>
         </div>
       </div>
-      <h3>Annual Dues</h3>
-      <p>Your payment of <span class="badge bg-primary">$45</span> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the <a href="mailto:<?= treasureremail ?>" id="treasurerEmail">MRAA Treasurer</a> for instructions.</p>
+      <div id="step2Text">
+        <h3>Annual Dues</h3>
+        <p>Your payment of <span class="badge bg-primary">$45</span> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the <a href="mailto:<?= treasureremail ?>" id="treasurerEmail">MRAA Treasurer</a> for instructions.</p>
+      </div>
       <?!= include("Includes/scripts/paypalsmartbutton.inc"); ?>
+      <div id="step3" class="d-none">
+        <div class="p-2">
+          <p>If you have your images ready for the jury please continue to Step 3.</p>
+          <? var url = getScriptUrl()?>
+          <a id="step3Button" href="<?=url?>?p=step3">
+            <div class="step-label">
+              <span class="material-symbols-outlined icon"> file_upload </span>
+              <span>Step 3 - Exhibitors Upload Images </span>
+            </div>
+          </a>
+        </div>
+      </div>
       <footer class="footer">
         <div id="footer" class="footer mt-3">
           Metropolitan Richmond Artists Association |
