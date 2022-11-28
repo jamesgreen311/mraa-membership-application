@@ -115,7 +115,7 @@
       }
 
       setCopyrightYear();
-      //setTestValues();
+      setTestValues();
       google.script.run
          .withSuccessHandler(saveBoardMembershipChair)
          .getBoardMembershipChair();
@@ -127,7 +127,7 @@
 
    // Testing
    function setTestValues() {
-      emailAddress.value = "jamesgreen.311@gmail.com";
+      emailAddress.value = "walkingontheedgestudio@gmail.com";
       contactNumber.value = "555-111-2233";
       firstName.value = "Jon";
       lastName.value = "Tester";

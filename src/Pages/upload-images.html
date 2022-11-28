@@ -50,104 +50,88 @@
           </div>
         </div>
       </header>
-      <h1>Upload Images for Jury</h1>
-      <div id="step2" class="d-none">
-        <form
-          action="#"
-          id="formUploadImages"
-          class="needs-validation"
-          required>
-          <input id="imagedata-hidden" type="hidden" name="image" value="" />
-          <input id="mimetype-hidden" type="hidden" name="mimetype" value="" />
-          <input id="filename-hidden" type="hidden" name="filename" value="" />
-          <!-- <div id="upload-images" class="d-none member-access"> -->
-          <div id="upload-images">
-            <div class="header">
-              <span class="material-symbols-outlined icon"> file_upload </span>
-              <span class="text">Upload Art Work</span>
+      <h2>Upload Images for Jury</h2>
+      <div id="step3">
+        <div class="row g-3 mt-2">
+          <div class="col-auto col-form-label">
+            <label for="artist-email">Email Address</label>
+          </div>
+          <div class="col-sm-6 col-md-8">
+            <input
+              type="email"
+              class="form-control"
+              id="artist-email"
+              placeholder="email@example.com"
+              required
+            />
+            <div id="emailMsg" class="invalid-feedback fs-6">
+              Must enter a valid email address
             </div>
-            <div class="row mb-3 mt-2">
-              <h3>Art Work Requirements</h3>
-              <div class="col-md-6">
-                <h4>Art Work Submissions</h4>
-                <ul>
-                  <li>
-                    Include 5 artworks with presentation (framing or
-                    pedestal/support) displayed
-                  </li>
-                  <li>2 images showing the back of the 2D work</li>
-                  <li>In the case of 3D work show the pedestal and mounting</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h4>Image Files</h4>
-                <ul>
-                  <li>Limit JPG file size to under 3MB each, 72dpi</li>
-                  <li>
-                    Keep quality as high as possible to stay under the file size
-                    limit
-                  </li>
-                  <li>
-                    Please be patient while image uploads. The larger the file
-                    size the longer it may take to upload. It may take several
-                    seconds
-                  </li>
-                </ul>
-              </div>
+          </div>
+          <div class="col-auto">
+            <button
+              type="submit"
+              class="btn btn-primary mb-3"
+              id="login-button"
+            >
+              Login
+            </button>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div id="fetching-artist" class="fetching d-none">
+            <div class="animation line-up">
+              Fetching data, Please Wait ...
             </div>
-            <div id="entryInfo" class="mb-3">
-              <div class="banner">
-                <label for="form-file" class="form-label"
-                  >Image size must not exceed
-                  <span class="text-warning" id="maxImageSize"> </span
-                  >MB.</label
-                >
-                <input
-                  class="form-control"
-                  type="file"
-                  id="formFile"
-                  required />
-              </div>
-              <div id="imageDetails">
-                <span id="artWorkMessages"></span>
-                <div class="row mb-3 mt-2">
-                  <div class="col-md-8">
-                    <label for="imageDescription" class="col-form-label"
-                      >Image Description/Title</label
-                    >
-                    <input
-                      type="text"
-                      name="imageDescription"
-                      id="imageDescription"
-                      class="form-control"
-                      placeholder="Required"
-                      required />
-                  </div>
 
-                  <div class="col-md-4">
-                    <label for="medium" class="col-form-label"> Medium </label>
-                    <input
-                      type="text"
-                      name="medium"
-                      id="medium"
-                      class="form-control"
-                      placeholder="Required"
-                      required />
-                  </div>
+          </div>
+          <div id="artist-detail" class="d-none container">
+            <div class="row border-bottom">
+              <div class="col-3 col-sm-2 label">Member</div>
+              <div class="col-12 col-sm-3" id="artist-name"></div>
+              <div class="col-12 col-sm-2" id="artist-phone"></div>
+            </div>
+            <div class="row">
+              <div class="col-4 col-sm-2 label">Status</div>
+              <div class="col-8 col-sm-10">
+                <div id="valid-member" class="d-none">
+                  <span class="valid-member">Exhibiting Member</span>
+                  <span
+                    class="material-symbols-outlined valid-member small-icon"
+                  >
+                    done
+                  </span>
+                </div>
+                <div id="not-exhibiting-member" class="d-none">
+                  <span class="invalid-member">Not an Exhibiting Member</span>
+                  <span
+                    class="material-symbols-outlined invalid-member small-icon"
+                  >
+                    close
+                  </span>
+                </div>
+                <div id="not-active-member" class="d-none">
+                  <span class="invalid-member">Not an Active Member</span>
+                  <span
+                    class="material-symbols-outlined invalid-member small-icon"
+                  >
+                    close
+                  </span>
+                </div>
+                <div id="invalid-member" class="d-none">
+                  <span class="invalid-member"
+                    >Not an MRAA member email address</span
+                  >
+                  <span
+                    class="material-symbols-outlined invalid-member small-icon"
+                  >
+                    close
+                  </span>
                 </div>
               </div>
             </div>
-            <div id="upload-gallery" class="d-none">
-              <h3 class="fs-6">Upload Gallery</h3>
-              <ul id="gallery" class="gallery">
-                <li class="d-none">
-                  <span class="saved d-none">Saved</span>
-                  <span class="empty">Image Placeholder</span>
-                </li>
-              </ul>
-            </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
 
