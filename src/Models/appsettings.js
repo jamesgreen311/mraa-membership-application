@@ -12,10 +12,17 @@ function getSettingsTables() {
 			schema: {
 				maximagesize: "b2",
 				distributionlist: "a2:a",
+				membershiptypelist: "c2:c",
+				statuslist: "d2:d",
 				confirmationdocid: "e2",
 				destinationfolderid: "f2",
 				notificationdocid: "g2",
 				jurysubmissionfolderid: "h2",
+				imagerequirements: {
+					side: "i2:2",
+					images: "j2:2"
+				}
+
 			},
 		},
 	};

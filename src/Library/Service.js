@@ -63,12 +63,12 @@ function sendConfirmation(applicant) {
 		"We have received your application for membership in MRAA. Please review the attached document for any errors.";
 	const htmlBody = 
 		`<p>We have received your application for membership in MRAA. Please review the attached document for any errors.</p>
-		<p>Use this link to <a href='${getScriptUrl()}?p=step2'>pay your member dues</a></p>`;
+		<p>Use this link to <a href='${getScriptUrl()}?p=pay'>pay your member dues</a></p>`;
 	GmailApp.sendEmail(sendTo, subject, body, { attachments: [attachment], htmlBody: htmlBody });
 }
 
 function sendNotification(applicant) {
-	const sendTo = JSON.parse(getAppSettings()).distributionlist;
+	const sendTo = testEmail || JSON.parse(getAppSettings()).distributionlist;
 	const subject = "New Member Application Notification";
 	const fileId = createNotificationDoc(applicant);
 	const attachment = DriveApp.getFileById(fileId);
@@ -103,6 +103,7 @@ function createConfirmationDoc(applicant) {
 	body.replaceText("{city}", applicant.city);
 	body.replaceText("{state}", applicant.state);
 	body.replaceText("{zip}", applicant.zipCode);
+	body.replaceText("{membership_type}", applicant.membershipType);
 	body.replaceText("{medium}", applicant.mediums ? applicant.mediums : "N/A");
 	body.replaceText("{reasons}", applicant.reasonsForInterest);
 	body.replaceText(
@@ -157,6 +158,7 @@ function createNotificationDoc(applicant) {
 	body.replaceText("{city}", applicant.city);
 	body.replaceText("{state}", applicant.state);
 	body.replaceText("{zip}", applicant.zipCode);
+	body.replaceText("{membership_type}", applicant.membershipType);
 	body.replaceText("{medium}", applicant.mediums ? applicant.mediums : "N/A");
 	body.replaceText("{reasons}", applicant.reasonsForInterest);
 	body.replaceText(

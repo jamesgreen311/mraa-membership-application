@@ -6,8 +6,8 @@
 function doGet(e) {
     const pages = {
         ROOT: "index",
-        STEP2: "pay-dues",
-        STEP3: "upload-images"
+        PAY: "pay-dues",
+        UPLOAD: "upload-images"
     }
     let p = e.parameter.p
     p = p?p.toUpperCase():"ROOT" // default to index page

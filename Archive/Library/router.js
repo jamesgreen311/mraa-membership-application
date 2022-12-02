@@ -7,5 +7,5 @@ var Routes = {
     }
 }
 Routes.path("", "index.html")
-Routes.path("step2", "pay-dues.html")
-Routes.path("step3", "upload-images.html")
+Routes.path("pay", "pay-dues.html")
+Routes.path("upload", "upload-images.html")
