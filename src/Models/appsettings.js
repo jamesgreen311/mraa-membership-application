@@ -18,10 +18,8 @@ function getSettingsTables() {
 				destinationfolderid: "f2",
 				notificationdocid: "g2",
 				jurysubmissionfolderid: "h2",
-				imagerequirements: {
-					side: "i2:2",
-					images: "j2:2"
-				}
+				imagerequirements: "j2:k3",
+				dues: "i2"
 
 			},
 		},
@@ -55,6 +53,9 @@ function getAppSettings() {
 	const jurySubmissionFolderId = settings
 		.getRange(schema.jurysubmissionfolderid)
 		.getDisplayValue();
+	const dues = settings
+	.getRange(schema.dues)
+	.getDisplayValue();
    // 1 - spread array to flatten form 2D array to 1
    // 2 - filter out empty arrays
    const distributionList = [].concat(..._distributionList).filter(
@@ -68,5 +69,6 @@ function getAppSettings() {
 		destinationfolderid: destinationFolderId,
 		notificationdocid: notificationDocId,
 		jurysubmissionfolderid: jurySubmissionFolderId,
+		dues: dues, 
 	});
 }

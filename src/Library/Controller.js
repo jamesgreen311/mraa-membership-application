@@ -27,10 +27,16 @@ function doGet(e) {
 function loadPage(page) {
     const settings = JSON.parse(getAppSettings())
     const treasurer = getBoardTreasurer()
-    const opt = {
-        membershipchairemail:settings.membershipchairemail,
+    const membershipchair = getBoardMembershipChair()
+
+    let opt = {
+        membershipchairemail:membershipchair.email,
         treasureremail:treasurer.email
     }
+    if (page!=="upload-images") {
+        opt.dues = settings.dues
+    }
+
     return render("Pages/" + page, opt);
 }
 

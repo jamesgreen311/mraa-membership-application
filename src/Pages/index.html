@@ -138,7 +138,7 @@
 									id="membershipType1"
 									value="Associate" />
 								<label class="form-check-label" for="membershipType1">
-									Associate Membership - $45/year
+									Associate Membership - $<?=dues?>/year
 								</label>
 							</div>
 							<div class="form-check">
@@ -150,7 +150,7 @@
 									value="Exhibiting"
 									checked />
 								<label class="form-check-label" for="membershipType2">
-									Exhibiting Membership - $45/year
+									Exhibiting Membership - $<?=dues?>/year
 								</label>
 							</div>
 						</div>
@@ -317,7 +317,7 @@
                 id="businessName"
                 name="businessName"
                 class="form-control"></input>
-                <div id="businessNameHelp" class="form-text">If your PayPal account is under a business name, letting us know will help us know who's dues are being paid.</div>
+                <div id="businessNameHelp" class="form-text">If your PayPal account is under a business name, letting us know will help us match you to your payment.</div>
             </div>
           </div>
 
@@ -416,7 +416,7 @@
 			</footer>
 		</div>
 
-		<?!= include("Includes/scripts/step1.inc"); ?>
+		<?!= include("Includes/scripts/index.inc"); ?>
 		<?!= include("Includes/scripts/global.inc"); ?>
 
 		<script

@@ -30,18 +30,23 @@
 
     <?!= include("Includes/css/mraa.inc"); ?>
 
-    <title>MRAA Applicants - Pay Dues</title>
+    <title>MRAA Members Pay Dues</title>
   </head>
   <body>
     <div class="container">
       <header>
         <div id="banner" class="banner">
-          <div id="logo fs-2">
-            <a href="https://www.metrorichmondart.org">MRAA</a>            | 
-            <a href="mailto:<?= membershipchairemail ?>" id="membershipChairEmail">Questions?</a>
-          </div>
+					<div id="logo fs-2">
+						<a href="https://www.metrorichmondart.org">MRAA</a>
+						|
+						<a
+							href="mailto:<?= membershipchairemail ?>"
+							id="membershipChairEmail"
+							>Questions?</a
+						>
+					</div>
           <div id="title">
-            <span class="fs-3">MRAA Applicants | Pay Dues</span>
+            <span class="fs-3">MRAA Members | Pay Dues</span>
           </div>
         </div>
       </header>
@@ -54,17 +59,17 @@
       </div>
       <div id="step2Text">
         <h3>Annual Dues</h3>
-        <p>Your payment of <span class="badge bg-primary">$45</span> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the <a href="mailto:<?= treasureremail ?>" id="treasurerEmail">MRAA Treasurer</a> for instructions.</p>
+        <p>Your payment of <span class="badge bg-primary">$<?= dues ?></span> can be made here with PayPal. If you would prefer to pay with a check or cash, please contact the <a href="mailto:<?= treasureremail ?>" id="treasurerEmail">MRAA Treasurer</a> for instructions.</p>
       </div>
       <?!= include("Includes/scripts/paypalsmartbutton.inc"); ?>
       <div id="step3" class="d-none">
         <div class="p-2">
-          <p>If you have your images ready for the jury please continue to Step 3.</p>
+          <p>If you have your images ready for the jury please continue to Exhibitors Upload Images.</p>
           <? var url = getScriptUrl()?>
-          <a id="step3Button" href="<?=url?>?p=step3">
+          <a id="step3Button" href="<?=url?>?p=upload">
             <div class="step-label">
               <span class="material-symbols-outlined icon"> file_upload </span>
-              <span>Step 3 - Exhibitors Upload Images </span>
+              <span>Exhibitors Upload Images </span>
             </div>
           </a>
         </div>

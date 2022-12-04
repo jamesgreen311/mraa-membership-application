@@ -35,16 +35,21 @@
 
     <?!= include("Includes/css/mraa.inc"); ?>
 
-    <title>MRAA Applicants - Upload Images</title>
+    <title>MRAA Exhibiting Jury Applicants</title>
   </head>
   <body>
     <div class="container">
       <header>
         <div id="banner" class="banner">
-          <div id="logo fs-2">
-            <a href="https://www.metrorichmondart.org">MRAA</a>
-            <span class="text-right" id="supportContact"></span>
-          </div>
+					<div id="logo fs-2">
+						<a href="https://www.metrorichmondart.org">MRAA</a>
+						|
+						<a
+							href="mailto:<?= membershipchairemail ?>"
+							id="membershipChairEmail"
+							>Questions?</a
+						>
+					</div>
           <div id="title">
             <span class="fs-3">MRAA Exhibiting Jury Applicants</span>
           </div>
@@ -57,13 +62,14 @@
       <div id="step3">
         <div class="row g-3 mt-2">
           <div class="col-auto col-form-label">
-            <label for="artist-email">Email Address</label>
+            <label for="artistEmail">Email Address</label>
           </div>
           <div class="col-sm-6 col-md-8">
             <input
               type="email"
               class="form-control"
-              id="artist-email"
+              id="artistEmail"
+              name="artistEmail"
               placeholder="email@example.com"
               required
             />
