@@ -1,8 +1,8 @@
-const appSettings = JSON.parse(getAppSettings());
-const CONFIRMATION_DOCUMENT_ID = appSettings.confirmationdocid;
+
+/* const CONFIRMATION_DOCUMENT_ID = appSettings.confirmationdocid;
 const NOTIFICATION_DOCUMENT_ID = appSettings.notificationdocid;
 const DESTINATION_FOLDER_ID = appSettings.destinationfolderid;
-const JURYSUBMISSION_FOLDER_ID = appSettings.jurysubmissionfolderid;
+const JURYSUBMISSION_FOLDER_ID = appSettings.jurysubmissionfolderid; */
 
 /**
  * Sends html to the browser
@@ -55,7 +55,7 @@ function generateUniqueId() {
 }
 
 function sendConfirmation(applicant) {
-	const sendTo = applicant.emailAddress;
+	const sendTo = testMode?testEmail:applicant.emailAddress;
 	const subject = "MRAA Member Application Confirmation";
 	const fileId = createConfirmationDoc(applicant);
 	const attachment = DriveApp.getFileById(fileId);
@@ -68,7 +68,7 @@ function sendConfirmation(applicant) {
 }
 
 function sendNotification(applicant) {
-	const sendTo = testEmail || JSON.parse(getAppSettings()).distributionlist;
+	const sendTo = testMode ? testEmail : appSettings.distributionlist;
 	const subject = "New Member Application Notification";
 	const fileId = createNotificationDoc(applicant);
 	const attachment = DriveApp.getFileById(fileId);
@@ -82,8 +82,8 @@ function createConfirmationDoc(applicant) {
 	const emailLink = `mailto:${chairpersonemail}`;
 	const emailText = "Membership Chairperson";
 	const docName = `${applicant.firstName} ${applicant.lastName} Application Confirmation`;
-	const tmp = DriveApp.getFileById(CONFIRMATION_DOCUMENT_ID);
-	const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID);
+	const tmp = DriveApp.getFileById(appSettings.confirmationdocid);
+	const folder = DriveApp.getFolderById(appSettings.destinationfolderid);
 	const file = tmp.makeCopy(docName, folder);
 	const fileId = file.getId();
 	const doc = DocumentApp.openById(fileId);
@@ -136,10 +136,10 @@ function createConfirmationDoc(applicant) {
 }
 
 function createNotificationDoc(applicant) {
-	const appsettings = JSON.parse(getAppSettings());
+	//const appsettings = JSON.parse(getAppSettings());
 	const docName = `${applicant.firstName} ${applicant.lastName} Application Notification`;
-	const tmp = DriveApp.getFileById(NOTIFICATION_DOCUMENT_ID);
-	const folder = DriveApp.getFolderById(DESTINATION_FOLDER_ID);
+	const tmp = DriveApp.getFileById(appSettings.notificationdocid);
+	const folder = DriveApp.getFolderById(appSettings.destinationfolderid);
 	const file = tmp.makeCopy(docName, folder);
 	const fileId = file.getId();
 	const doc = DocumentApp.openById(fileId);
