@@ -106,6 +106,8 @@ function createConfirmationDoc(applicant) {
 	body.replaceText("{membership_type}", applicant.membershipType);
 	body.replaceText("{medium}", applicant.mediums ? applicant.mediums : "N/A");
 	body.replaceText("{reasons}", applicant.reasonsForInterest);
+	body.replaceText("{artist_signature}", applicant.artistSignature);
+	body.replaceText("{business_name}", applicant.businessName);
 	body.replaceText(
 		"{website}",
 		applicant.websites ? applicant.websites : "N/A"
@@ -160,6 +162,8 @@ function createNotificationDoc(applicant) {
 	body.replaceText("{zip}", applicant.zipCode);
 	body.replaceText("{membership_type}", applicant.membershipType);
 	body.replaceText("{medium}", applicant.mediums ? applicant.mediums : "N/A");
+	body.replaceText("{artist_signature}", applicant.artistSignature);
+	body.replaceText("{business_name}", applicant.businessName);
 	body.replaceText("{reasons}", applicant.reasonsForInterest);
 	body.replaceText(
 		"{website}",
