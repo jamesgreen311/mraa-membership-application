@@ -94,6 +94,7 @@ function createConfirmationDoc(applicant) {
 		"{applicant_name}",
 		`${applicant.firstName} ${applicant.lastName}`
 	);
+	body.replaceText("{token}", applicant.applicantId);
 	body.replaceText("{email_address}", applicant.emailAddress);
 	body.replaceText("{contact_number}", applicant.contactNumber);
 	body.replaceText("{first_name}", applicant.firstName);
