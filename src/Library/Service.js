@@ -1,9 +1,3 @@
-
-/* const CONFIRMATION_DOCUMENT_ID = appSettings.confirmationdocid;
-const NOTIFICATION_DOCUMENT_ID = appSettings.notificationdocid;
-const DESTINATION_FOLDER_ID = appSettings.destinationfolderid;
-const JURYSUBMISSION_FOLDER_ID = appSettings.jurysubmissionfolderid; */
-
 /**
  * Sends html to the browser
  * @param {File} f File object
@@ -139,7 +133,6 @@ function createConfirmationDoc(applicant) {
 }
 
 function createNotificationDoc(applicant) {
-	//const appsettings = JSON.parse(getAppSettings());
 	const docName = `${applicant.firstName} ${applicant.lastName} Application Notification`;
 	const tmp = DriveApp.getFileById(appSettings.notificationdocid);
 	const folder = DriveApp.getFolderById(appSettings.destinationfolderid);
