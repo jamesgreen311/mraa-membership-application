@@ -3,7 +3,7 @@
 		step1Complete:
 			"<h3>Thank you for applying for membership in MRAA</h3>" +
 			"You should hear from our Membership Chairperson shortly.<br>" +
-			"Please go to Step 2 when you are ready to pay your dues.<br>",
+			"Please continue to pay your dues when you are ready.<br>",
 	};
 	const session = {};
 
@@ -107,6 +107,7 @@
 		step1.classList.add("d-none");
 		returning.classList.add("d-none");
 		intro.innerHTML = messagesrepo.step1Complete;
+		intro.classList.add("mb-3")
 	}
 
 	// Start up
