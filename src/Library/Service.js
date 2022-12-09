@@ -49,7 +49,7 @@ function generateUniqueId() {
 }
 
 function sendConfirmation(applicant) {
-	const sendTo = testMode?testEmail:applicant.emailAddress;
+	const sendTo = releaseMode==="alpha"?testEmail:applicant.emailAddress;
 	const subject = "MRAA Member Application Confirmation";
 	const fileId = createConfirmationDoc(applicant);
 	const attachment = DriveApp.getFileById(fileId);
@@ -62,7 +62,7 @@ function sendConfirmation(applicant) {
 }
 
 function sendNotification(applicant) {
-	const sendTo = testMode ? testEmail : appSettings.distributionlist;
+	const sendTo = releaseMode==="alpha" ? testEmail : appSettings.distributionlist;
 	const subject = "New Member Application Notification";
 	const fileId = createNotificationDoc(applicant);
 	const attachment = DriveApp.getFileById(fileId);

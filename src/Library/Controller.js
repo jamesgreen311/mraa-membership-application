@@ -31,7 +31,8 @@ function loadPage(page) {
 
     let opt = {
         membershipchairemail:membershipchair.email,
-        treasureremail:treasurer.email
+        treasureremail:treasurer.email,
+        releaseMode: releaseMode,
     }
     if (page!=="upload-images") {
         opt.dues = settings.dues

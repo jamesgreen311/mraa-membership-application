@@ -47,7 +47,7 @@
 						>
 					</div>
 					<div id="title">
-						<span class="fs-3">MRAA New Applicants</span>
+						<span class="fs-3">MRAA New Applicants</span><span class="fs-5" id="releaseModeText"> - Release Mode: <?=releaseMode?></span>
 					</div>
 				</div>
 			</header>
@@ -417,6 +417,11 @@
 			</footer>
 		</div>
 
+		<script>
+			let releaseMode = "<?= releaseMode ?>";
+			const rmt = document.getElementById("releaseModeText")
+			rmt.innerHtml = releaseMode.toLowerCase()==="live"?"":releaseMode
+		</script>
 		<?!= include("Includes/scripts/global.inc"); ?>
 		<?!= include("Includes/scripts/index.inc"); ?>
 

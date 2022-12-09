@@ -82,12 +82,10 @@
 			);
 			const data = {};
 
-			//console.log(formdata)
 			for (const pair of formdata.entries()) {
 				data[pair[0]] = formdata.getAll(pair[0]).toString();
 			}
 
-			//console.log(data)
 			google.script.run
 				.withSuccessHandler(saveComplete)
 				.withFailureHandler(showError)
@@ -112,13 +110,12 @@
 
 	// Start up
 	function loadPageElements() {
-		//fetchAppSettings();
 		if (!session.applicantid) {
 			getNewApplicantId();
 		}
 
 		setCopyrightYear();
-		if (testMode) {
+		if (releaseMode==="alpha") {
 			setTestValues();
 		}
 
