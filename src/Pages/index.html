@@ -177,7 +177,7 @@
 								class="form-control"
 								placeholder="Required"
 								required />
-								<div class="invalid-feedback">Enter a valid email address ex. name@domain.com</div>
+								<div class="invalid-feedback">Enter a valid email address, ex. name@domain.com</div>
 						</div>
 						
 						<div class="col-md-6">
@@ -189,8 +189,10 @@
 								name="contactNumber"
 								id="contactNumber"
 								class="form-control"
-								placeholder="Required"
+								placeholder="Required, format 999-999-9999"
+								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 								required />
+								<div class="invalid-feedback">Enter a 10 digit contact number, ex. 555-111-2233</div>
 						</div>
 					</div>
 
@@ -277,7 +279,9 @@
 								id="zipCode"
 								class="form-control"
 								placeholder="Required"
+								pattern="[0-9]{5}"
 								required />
+								<div class="invalid-feedback">Enter a valid zip code, ex 23050</div>
 						</div>
 					</div>
           <div class="row mb-3 mt-2">
