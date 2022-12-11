@@ -61,6 +61,9 @@ function saveApplication(a) {
 	const newRow = [];
 	const keys = Object.keys(a);
 
+	// capitalize state
+	a.state = a.state.toUpperCase()
+	
 	keys.forEach((key) => {
 		ndx = schema[key].colToIndex();
 		newRow[ndx] = a[key];

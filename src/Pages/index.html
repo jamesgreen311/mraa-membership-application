@@ -47,7 +47,11 @@
 						>
 					</div>
 					<div id="title">
-						<span class="fs-3">MRAA New Applicants</span><span class="fs-5" id="releaseModeText"> - Release Mode: <?=releaseMode?></span>
+						<span class="fs-3">MRAA New Applicants</span
+						><span class="fs-5" id="releaseModeText">
+							- Release Mode:
+							<?=releaseMode?></span
+						>
 					</div>
 				</div>
 			</header>
@@ -78,7 +82,12 @@
 			</div>
 			<div id="returning">
 				<h3>Returning Applicants</h3>
-				<p>Have you already submitted an application? If so, and you have returned to pay your dues or you have been instructed by the Membership Chairperson to upload images for the jury, click one of the following.</p>
+				<p>
+					Have you already submitted an application? If so, and you have
+					returned to pay your dues or you have been instructed by the
+					Membership Chairperson to upload images for the jury, click one
+					of the following.
+				</p>
 			</div>
 			<div class="d-sm-flex justify-content-start">
 				<div class="p-2">
@@ -177,9 +186,11 @@
 								class="form-control"
 								placeholder="Required"
 								required />
-								<div class="invalid-feedback">Enter a valid email address, ex. name@domain.com</div>
+							<div class="invalid-feedback">
+								Enter a valid email address, ex. name@domain.com
+							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<label for="contactNumber" class="col-form-label"
 								>Contact Number</label
@@ -192,7 +203,9 @@
 								placeholder="Required, format 999-999-9999"
 								pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 								required />
-								<div class="invalid-feedback">Enter a 10 digit contact number, ex. 555-111-2233</div>
+							<div class="invalid-feedback">
+								Enter a 10 digit contact number, ex. 555-111-2233
+							</div>
 						</div>
 					</div>
 
@@ -267,7 +280,11 @@
 								id="state"
 								class="form-control"
 								placeholder="Required"
+								pattern="[a-zA-Z]{2}"
 								required />
+							<div class="invalid-feedback">
+								Enter state 2 letter abbreviation
+							</div>
 						</div>
 						<label for="zipCode" class="col-md-1 col-form-label"
 							>Zip</label
@@ -281,50 +298,55 @@
 								placeholder="Required"
 								pattern="[0-9]{5}"
 								required />
-								<div class="invalid-feedback">Enter a valid zip code, ex 23050</div>
+							<div class="invalid-feedback">
+								Enter a valid zip code, ex 23050
+							</div>
 						</div>
 					</div>
-          <div class="row mb-3 mt-2">
-            <div class="col-md-12">
-              <label for="mediums" class="col-form-label"
-							>Medium(s)</label>
-              <input
-                type="text"
-                name="mediums"
-                id="mediums"
-                class="form-control"
-                placeholder="Required"
-                required />
+					<div class="row mb-3 mt-2">
+						<div class="col-md-12">
+							<label for="mediums" class="col-form-label"
+								>Medium(s)</label
+							>
+							<input
+								type="text"
+								name="mediums"
+								id="mediums"
+								class="form-control"
+								placeholder="Required"
+								required />
+						</div>
+					</div>
+					<div class="row mb-3 mt-2">
+						<div class="col-md-6">
+							<label for="artistSignature" class="col-form-label"
+								>Artist Signature</label
+							>
+							<input
+								type="text"
+								id="artistSignature"
+								name="artistSignature"
+								class="form-control" />
+							<div id="signatureHelp" class="form-text">
+								How do you sign your work?
+							</div>
+						</div>
 
-            </div>
-          </div>
-          <div class="row mb-3 mt-2">
-            <div class="col-md-6">
-              <label
-                for="artistSignature"
-                class="col-form-label"
-                >Artist Signature</label
-              >
-              <input
-                type="text"
-                id="artistSignature"
-                name="artistSignature"
-                class="form-control"></input>
-              <div id="signatureHelp" class="form-text">How do you sign your work?</div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="businessName" class="col-form-label"
-                >Business Name</label
-              >
-              <input
-                type="text"
-                id="businessName"
-                name="businessName"
-                class="form-control"></input>
-                <div id="businessNameHelp" class="form-text">If your PayPal account is under a business name, letting us know will help us match you to your payment.</div>
-            </div>
-          </div>
+						<div class="col-md-6">
+							<label for="businessName" class="col-form-label"
+								>Business Name</label
+							>
+							<input
+								type="text"
+								id="businessName"
+								name="businessName"
+								class="form-control" />
+							<div id="businessNameHelp" class="form-text">
+								If your PayPal account is under a business name, letting
+								us know will help us match you to your payment.
+							</div>
+						</div>
+					</div>
 
 					<div id="detailPersonInfo">
 						<div class="header">
@@ -424,8 +446,9 @@
 
 		<script>
 			let releaseMode = "<?= releaseMode ?>";
-			const rmt = document.getElementById("releaseModeText")
-			rmt.innerHtml = releaseMode.toLowerCase()==="live"?"":releaseMode
+			const rmt = document.getElementById("releaseModeText");
+			rmt.innerHtml =
+				releaseMode.toLowerCase() === "live" ? "" : releaseMode;
 		</script>
 		<?!= include("Includes/scripts/global.inc"); ?>
 		<?!= include("Includes/scripts/index.inc"); ?>
