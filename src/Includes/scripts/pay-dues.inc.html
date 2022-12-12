@@ -1,0 +1,26 @@
+<script>
+   const session = {};
+
+   // Start up
+   function loadPageElements() {
+      setCopyrightYear();
+      google.script.run
+         .withSuccessHandler(saveBoardMembershipChair)
+         .getBoardMembershipChair();
+      google.script.run
+         .withSuccessHandler(saveBoardTreasurer)
+         .getBoardTreasurer();
+
+      console.log(session);
+   }
+
+   function saveBoardMembershipChair(m) {
+      session.membershipchair = m;
+   }
+
+   function saveBoardTreasurer(m) {
+      session.treasurer = m;
+   }
+
+   document.addEventListener("DOMContentLoaded", loadPageElements);
+</script>

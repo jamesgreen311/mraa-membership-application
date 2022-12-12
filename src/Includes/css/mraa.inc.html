@@ -1,203 +1,399 @@
-<!-- Bootstrap overrides if necessary and MRAA specific styles -->
-
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Raleway:wght@900&display=swap');
+  .icon {
+    font-size: 36px;
+    vertical-align: middle;
+  }
 
-    :root {
-        --mraa-letter-m: hsl(170, 100%, 33%);
-        --mraa-letter-r: #792592;
-        --mraa-letter-a1: hsl(193, 97%, 35%);
-        --mraa-letter-a2: #c68614;
-        --mraa-button-primary: var(--mraa-letter-a1);
-        --mraa-button-primary-border: hsl(193, 62%, 16%);
-        --mraa-button-secondary: var(--mraa-letter-m);
-        --mraa-button-secondary-border: hsl(170, 62%, 16%);
+  .small-icon {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+
+  .icon.clickable:hover {
+    color: rgba(254, 218, 36, 0.915);
+  }
+
+  .gallery {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .gallery li {
+    display: inline-block;
+    background-color: silver;
+    width: 24%;
+    position: relative;
+  }
+
+  li .saved {
+    display: block;
+    text-align: center;
+    background-color: green;
+    color: white;
+    position: absolute;
+    width: 100%;
+  }
+
+  .header {
+    background-color: #61b4d3;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #242020;
+    padding: 5px;
+    margin: 5px 0;
+    color: white;
+  }
+
+  .footer {
+    background-color: #242020;
+    color: silver;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .banner {
+    background-color: lightslategray;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .banner .bold {
+    font-family: "Comfortaa", cursive;
+    font-weight: 600;
+    margin-right: 5px;
+  }
+
+  .banner .bold:first-child {
+    border-right-style: solid;
+  }
+
+  .banner .bright {
+    color: rgba(254, 218, 36, 0.915);
+  }
+
+  .banner a {
+    color: #80ddff;
+    text-decoration: none;
+  }
+  .banner a:hover {
+    color: #c0ff80;
+  }
+
+  .banner.bg-warning a {
+    color: #0004ff;
+  }
+  .banner.bg-warning a:hover {
+    color: #a42600;
+  }
+  .razzle {
+    font-family: "Lobster", cursive;
+    font-weight: 600;
+    border-radius: 10px;
+    border-color: darkmagenta;
+    border-width: 5px;
+    border-style: solid;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px 0;
+  }
+  .razzle .normal {
+    font-family: "Comfortaa", cursive;
+    font-size: 2vw;
+  }
+
+  .label {
+    font-weight: 600;
+  }
+
+  .valid-member {
+    color: green;
+  }
+
+  .invalid-member {
+    color: rgb(183, 0, 0);
+  }
+
+  .help-message {
+    background-color: #61b4d354;
+    border-radius: 3px;
+    padding: 8px;
+  }
+
+  .helper-text {
+    font-size: .8rem;
+    font-weight: bold;
+  }
+  img.crop {
+    width: 100%;
+    height: 12vh;
+    object-fit: cover;
+    border: 2px solid rgb(61, 61, 61);
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 75px;
+    resize: none;
+    border: 1px solid lightgray;
+    outline: none;
+    border-radius: 3px;
+  }
+
+  .indent-1 {
+    margin-left: 1em;
+  }
+  .indent-2 {
+    margin-left: 1.5em;
+  }
+  .indent-3 {
+    margin-left: 2em;
+  }
+  .indent-4 {
+    margin-left: 2.5em;
+  }
+
+  .step-label {
+    border: #0a762b 3px solid;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #1c9312;
+    color: white;
+    margin-right: 4px;
+    display: inline-block;
+  }
+
+  .step-button a,
+  .step-button a:hover {
+    border:  #0d6efd 3px solid;
+    padding: 12px;
+    /* border-radius: 8px 0 0; */
+    border-radius: 0 8px 8px 0;
+    background-color: #0d6efd;
+    color: white;
+    margin-right: 12px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .fetching,
+  .uploading {
+    position: relative;
+  }
+  .fetching > .animation,
+  .uploading > .animation {
+    position: absolute;
+    background-color: rgba(254, 218, 36, 0.915);
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    font-family: "Comfortaa";
+    font-weight: bold;
+  }
+
+  .line-up {
+    animation: 2s anim-lineUp ease-out infinite;
+  }
+  @keyframes anim-lineUp {
+    0% {
+      opacity: 0;
+      transform: translateY(80%);
     }
-
-    html,
-    body {
-        height: 100%;
+    20% {
+      opacity: 0;
     }
-
-    body {
-        /* override bootstrap */
-        /* Font from main website */
-        font-family: Roboto, sans-serif;
-        font-size: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        /* background: url(https://metrorichmondart.org/wp-content/themes/ares/inc/images/crossword.png); */
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
     }
-
-    label, 
-    p {
-        font-size: 1.25rem;
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
     }
+  }
 
-    .badge-primary {
-        color: #c68614;
-        background-color: white;
+  /* Loading animation, author: https://codepen.io/dissimulate */
+  #load {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    left: 50%;
+    top: 40%;
+    margin-left: -300px;
+    overflow: visible;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+  }
+
+  #load div {
+    position: absolute;
+    width: 20px;
+    height: 36px;
+    opacity: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    animation: move 2s linear infinite;
+    -o-animation: move 2s linear infinite;
+    -moz-animation: move 2s linear infinite;
+    -webkit-animation: move 2s linear infinite;
+    transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    color: #35c4f0;
+  }
+
+  #load div:nth-child(2) {
+    animation-delay: 0.2s;
+    -o-animation-delay: 0.2s;
+    -moz-animation-delay: 0.2s;
+    -webkit-animation-delay: 0.2s;
+  }
+  #load div:nth-child(3) {
+    animation-delay: 0.4s;
+    -o-animation-delay: 0.4s;
+    -webkit-animation-delay: 0.4s;
+    -webkit-animation-delay: 0.4s;
+  }
+  #load div:nth-child(4) {
+    animation-delay: 0.6s;
+    -o-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+  }
+  #load div:nth-child(5) {
+    animation-delay: 0.8s;
+    -o-animation-delay: 0.8s;
+    -moz-animation-delay: 0.8s;
+    -webkit-animation-delay: 0.8s;
+  }
+  #load div:nth-child(6) {
+    animation-delay: 1s;
+    -o-animation-delay: 1s;
+    -moz-animation-delay: 1s;
+    -webkit-animation-delay: 1s;
+  }
+  #load div:nth-child(7) {
+    animation-delay: 1.2s;
+    -o-animation-delay: 1.2s;
+    -moz-animation-delay: 1.2s;
+    -webkit-animation-delay: 1.2s;
+  }
+
+  @keyframes move {
+    0% {
+      left: 0;
+      opacity: 0;
     }
-
-    h1.mraa-header,
-    h3 {
-        /* override bootstrap */
-        font-family: 'Patua One', cursive;
+    35% {
+      left: 41%;
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
     }
-
-    .mraa-header {
-        /* override bootstrap */
-        font-size: 2rem;
+    65% {
+      left: 59%;
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
     }
-
-    .mraa-sub-header {
-        background-color: #c68614;
-        color: antiquewhite;
-        padding: 4px 8px 0 8px;
-        border-radius: 4px;
-        margin-bottom: 8px;
-
-        /* override bootstrap */
-        font-size: 85%;
+    100% {
+      left: 100%;
+      -moz-transform: rotate(-180deg);
+      -webkit-transform: rotate(-180deg);
+      -o-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+      opacity: 0;
     }
+  }
 
-    .mraa-callout {
-        padding: 1.25rem;
-        margin-top: 1.25rem;
-        margin-bottom: 1.25rem;
-        border: 1px solid #eee;
-        border-left-width: .25rem;
-        border-radius: .25rem;
-        font-size: 1rem;
+  @-moz-keyframes move {
+    0% {
+      left: 0;
+      opacity: 0;
     }
+    35% {
+      left: 41%;
+      -moz-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    65% {
+      left: 59%;
+      -moz-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      -moz-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+      opacity: 0;
+    }
+  }
 
-    .mraa-callout-info {
-        border-left-color: #25c149;
+  @-webkit-keyframes move {
+    0% {
+      left: 0;
+      opacity: 0;
     }
+    35% {
+      left: 41%;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    65% {
+      left: 59%;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      -webkit-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+      opacity: 0;
+    }
+  }
 
-    .mraa-callout-primary {
-        border-left-color: #007bff;
+  @-o-keyframes move {
+    0% {
+      left: 0;
+      opacity: 0;
     }
+    35% {
+      left: 41%;
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    65% {
+      left: 59%;
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      -o-transform: rotate(-180deg);
+      transform: rotate(-180deg);
+      opacity: 0;
+    }
+  }
 
-    .content {
-        flex: 1 0 auto;
-    }
-
-    .badge-success {
-        /* override bootstrap */
-        background-color: var(--mraa-letter-m);
-        color: #fafafa;
-        font-weight: 400;
-    }
-
-    .badge-danger {
-        /* override bootstrap */
-        background-color: #b51f1f;
-        color: #fafafa;
-        font-weight: 400;
-    }
-
-    .footer {
-        flex-shrink: 0;
-        margin-top: 25px;
-        width: 100%;
-        padding: .5rem .5rem .5rem 25px;
-        background-color: #afe2ee;
-        color: #0387ad;
-    }
-
-    .banner {
-        background-color: #fafafa;
-        border: solid 2px #d5d5d5;
-    }
-
-    .btn-primary.disabled,
-    .btn-primary:disabled {
-        background-color: var(--mraa-button-primary);
-        border: 2px solid var(--mraa-button-primary-border);
-        opacity: .65;
-    }
-
-    .mraa-button-primary,
-    .mraa-button-primary:hover,
-    .mraa-button-primary:focus,
-    .mraa-button-primary:active,
-    .mraa-button-primary:not(:disabled):active {
-        background-color: var(--mraa-button-primary);
-        border: 2px solid var(--mraa-button-primary-border);
-        color: white;
-    }
-
-    .mraa-button-secondary,
-    .mraa-button-secondary:hover,
-    .mraa-button-secondary:focus,
-    .mraa-button-secondary:active,
-    .mraa-button-secondary:not(:disabled):active {
-        background-color: var(--mraa-button-secondary);
-        border: 2px solid var(--mraa-button-secondary-border);
-        color: white;
-    }
-
-    .mraa-highlight {
-        background-color: #fcf8e3;
-        height: 100%;
-    }
-
-    .mraa-important {
-        color: crimson;
-    }
-
-    .smaller {
-        font-size: 60%;
-    }
-
-    .bigger {
-        font-size: 115%;
-    }
-
-    .badge-bigger {
-        font-size: 100%;
-    }
-
-    .mraa-thumbnail-container {
-        width: 100%;
-        height: 400px;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .mraa-thumbnail {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        position: absolute;
-    }
-
-    .mraa-container {
-        background-color: white;
-        height: 100%;
-    }
-
-    .loading {
-        background-color: lightsteelblue;
-        width: 100vw;
-        height: 100vw;
-        z-index: 1000;
-        position: fixed;
-        top: 0;
-        left: 0;
-        opacity: .9;
-    }
-
-    .w-100 {
-        width: 100%;
-    }
-
-    .mraa-info {
-        color: #9e9e9e;
-    }
-
-    .show-name {
-        color: #792592;
-    }
 </style>
