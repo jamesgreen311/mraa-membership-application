@@ -1,17 +1,45 @@
 <script>
-function fetchingApplicant(toggle) {
-    const fetchingBlock = document.getElementById("fetching-applicant");
-    if (toggle) {
-        fetchingBlock.classList.remove("d-none");
-    } else {
-        fetchingBlock.classList.add("d-none");
-    }
-}
+	// View Methods
+	function showApplicant(a) {
+		const applicant = JSON.parse(a);
+		loginForm.classList.add("d-none");
+		if (a) {
+			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`;
+			applicantEmail.innerText = applicant.emailAddress;
+			applicantDetail.classList.remove("d-none");
+		} else {
 
-function fetchApplicant(id) {
-  resetErrorMessages();
-  google.script.run
-    .withSuccessHandler(processApplicant)
-    .getApplicantByEmail(id);
-}
+		}
+	}
+
+	// IO Methods
+	function fetchingApplicant(toggle) {
+		const fetchingBlock = document.getElementById("fetching-applicant");
+		if (toggle) {
+			fetchingBlock.classList.remove("d-none");
+		} else {
+			fetchingBlock.classList.add("d-none");
+		}
+	}
+
+	function fetchApplicant(id) {
+		//resetErrorMessages();
+		google.script.run
+			.withSuccessHandler(showApplicant)
+			.getApplicantByEmail(id);
+	}
+
+	function findApplicant(e) {
+		e.preventDefault();
+		const fd = new FormData(this);
+
+		if (this.checkValidity()) {
+			google.script.run
+				.withSuccessHandler(showApplicant)
+				.getApplicant(fd.get("securityToken"));
+		}
+		this.classList.add("was-validated");
+	}
+
+	login.addEventListener("submit", findApplicant);
 </script>

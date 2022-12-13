@@ -1,3 +1,11 @@
+function testFindApplicant() {
+	console.log(findApplicant("4CC843A"))
+}
+
+function testGetApplicant() {
+	console.log(getApplicant("4CC843A"))
+}
+
 function getApplicationTables() {
 	return {
 		application: {
@@ -77,4 +85,39 @@ function saveApplication(a) {
 	sendNotification(newApplicant);
 
 	return newRow;
+}
+
+function getApplicant(id) {
+	const t = getApplicationTables();
+	const schema = t.application.schema;
+	const applicantSheet = connect(APPLICANTS_ID).getSheetByName(t.application.name);
+	const dataStartRow = t.application.headers + 1
+	const a = applicantSheet
+		.getDataRange()
+		.getDisplayValues();
+	let applicant = {}
+	for (let r = dataStartRow-1; r < a.length - t.application.headers; r++) {
+		if (a[r][0]===id) {
+			applicant.id = a[r][0];
+			applicant.firstName = a[r][1];
+			applicant.lastName = a[r][2];
+			applicant.emailAddress = a[r][3];
+			break;
+		}
+	}
+
+	return JSON.stringify(applicant)
+}
+
+function findApplicant(id) {
+	const t = getApplicationTables();
+	const schema = t.application.schema;
+	const applicant = connect(APPLICANTS_ID).getSheetByName(t.application.name);
+	const dataStartRow = t.application.headers + 1
+	const a = applicant
+		.getRange(
+			schema.applicantId + dataStartRow + ":" + schema.applicantId + applicant.getLastRow())
+		.getDisplayValues();
+	const flat = [].concat(...a)
+	return flat.includes(id)
 }
