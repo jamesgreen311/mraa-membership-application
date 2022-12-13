@@ -61,7 +61,7 @@
 							<div class="col-auto col-form-label">
 								<label for="securityToken">Security Token</label>
 							</div>
-							<div class="col-sm-6 col-md-8">
+							<div class="col-sm-6 col-md-9">
 								<input
 									type="text"
 									class="form-control"
@@ -77,12 +77,14 @@
                 </div>
 							</div>
 							<div class="col-auto">
-								<button
-									type="submit"
-									class="btn btn-primary mb-3"
-									id="loginButton">
-									Login
-								</button>
+								<fieldset id="loginButtonFieldset">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mb-3"
+                    id="loginButton">
+                    Login
+                  </button>
+                </fieldset>
 							</div>
 						</div>
 					</div>
@@ -92,7 +94,7 @@
 
 				<div id="fetchingApplicant" class="fetching d-none">
 					<div class="animation line-up">
-						Fetching data, Please Wait ...
+						Fetching application, Please Wait ...
 					</div>
 				</div>
 				<div id="applicantDetail" class="d-none container mt-2 p-2">

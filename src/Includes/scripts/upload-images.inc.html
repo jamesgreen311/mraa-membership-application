@@ -4,7 +4,8 @@
 	// View Methods
 	function showApplicant(a) {
 		const applicant = JSON.parse(a);
-		console.log(applicant);
+		fetchingApplicant(false);
+		//console.log(applicant);
 		if (Object.keys(applicant).length > 0) {
 			loginForm.classList.add("d-none");
 			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`;
@@ -14,15 +15,16 @@
 		} else {
 			login.reset();
 			loginError.innerText =
-				"Security Token not found. Please verify and try again.";
+				"Security Token not found. Please verify and try again. Tokens are case sensitive, it must be entered exactly as it in your confirmation email.";
 			loginError.classList.remove("d-none");
+			loginButtonFieldset.disabled = false;
 		}
-		console.log(applicantData);
+		//console.log(applicantData);
 	}
 
 	// IO Methods
 	function fetchingApplicant(toggle) {
-		const fetchingBlock = document.getElementById("fetching-applicant");
+		const fetchingBlock = document.getElementById("fetchingApplicant");
 		if (toggle) {
 			fetchingBlock.classList.remove("d-none");
 		} else {
@@ -30,16 +32,11 @@
 		}
 	}
 
-	function fetchApplicant(id) {
-		//resetErrorMessages();
-		google.script.run
-			.withSuccessHandler(showApplicant)
-			.getApplicantByEmail(id);
-	}
-
 	function getApplicant(e) {
 		e.preventDefault();
 		const fd = new FormData(this);
+		loginButtonFieldset.disabled = true;
+		fetchingApplicant(true)
 
 		if (this.checkValidity()) {
 			google.script.run
