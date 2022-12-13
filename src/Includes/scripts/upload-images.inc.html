@@ -1,15 +1,23 @@
 <script>
+	let applicantData = {};
+
 	// View Methods
 	function showApplicant(a) {
 		const applicant = JSON.parse(a);
-		loginForm.classList.add("d-none");
-		if (a) {
+		console.log(applicant);
+		if (Object.keys(applicant).length > 0) {
+			loginForm.classList.add("d-none");
 			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`;
 			applicantEmail.innerText = applicant.emailAddress;
 			applicantDetail.classList.remove("d-none");
+			applicantData = applicant;
 		} else {
-
+			login.reset();
+			loginError.innerText =
+				"Security Token not found. Please verify and try again.";
+			loginError.classList.remove("d-none");
 		}
+		console.log(applicantData);
 	}
 
 	// IO Methods
@@ -29,7 +37,7 @@
 			.getApplicantByEmail(id);
 	}
 
-	function findApplicant(e) {
+	function getApplicant(e) {
 		e.preventDefault();
 		const fd = new FormData(this);
 
@@ -41,5 +49,5 @@
 		this.classList.add("was-validated");
 	}
 
-	login.addEventListener("submit", findApplicant);
+	login.addEventListener("submit", getApplicant);
 </script>
