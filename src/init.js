@@ -6,6 +6,7 @@ const APPLICANTS_ID = "1t7KG2DUdTyT8e7tVYLYvsY0Zy1bBShTcJvIg9QoqJGs"
 const JURY_SUBMISSION_FOLDER = "1aST2apdaCEIHL3J2BhCqv1rDKfxpdnr5"
 const JURY_SUBMISSION_ID = "1W4xT_-t8rEBOMIYLKMKQQVFkatS6LXZzZqN6fNJlUZQ"
 const appSettings = JSON.parse(getAppSettings());
+const jurySettings = getJurySettings()
 const testEmail = "jamesgreen.311@gmail.com"
 const releaseMode = "alpha"
 

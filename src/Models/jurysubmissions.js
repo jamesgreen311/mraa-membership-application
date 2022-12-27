@@ -1,5 +1,5 @@
-function testGetSettings() {
-	const s = getSettings()
+function testGetJurySettings() {
+	const s = getJurySettings()
 	console.log(s)
 }
 
@@ -60,7 +60,7 @@ function getJurySubmissionTables() {
 	};
 }
 
-function getSettings() {
+function getJurySettings() {
 	const t = getJurySubmissionTables()
 	const sname = t.settings.name
 	const stable = connect(JURY_SUBMISSION_ID).getSheetByName(sname)

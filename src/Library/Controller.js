@@ -36,6 +36,8 @@ function loadPage(page) {
     }
     if (page!=="upload-images") {
         opt.dues = settings.dues
+    } else {
+        opt.maximagesize = jurySettings.maximagesize
     }
 
     return render("Pages/" + page, opt);
