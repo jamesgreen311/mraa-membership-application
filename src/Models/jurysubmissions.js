@@ -53,8 +53,8 @@ function getJurySubmissionTables() {
 					side : "a",
 					count : "b"
 				},
-            contact : "c",
-            maximagesize : "d",
+            contact : "c2",
+            maximagesize : "d2",
          }
       }
 	};
@@ -67,14 +67,21 @@ function getSettings() {
 	const schema = t.settings.schema
 	const firstrow = t.settings.headers + 1
 	const lastrow = stable.getLastRow()
-	const datarange = `${schema.images.side}${firstrow}:${schema.images.count}${lastrow}`
+	const imgdatarange = `${schema.images.side}${firstrow}:${schema.images.count}${lastrow}`
 	const dimages = stable
-		.getRange(datarange)
+		.getRange(imgdatarange)
 		.getDisplayValues()
-
+	const maximagesize = stable
+		.getRange(
+			schema.maximagesize
+		)
+		.getDisplayValue()
 	const settings = {}
+	const images = {}
 	dimages.forEach(d => {
-		settings[d[0].toLowerCase()] = d[1]
+		images[d[0].toLowerCase()] = d[1]
 	})
+	settings.images = images
+	settings.maximagesize = maximagesize
 	return settings
 }
