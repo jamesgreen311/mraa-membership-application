@@ -6,7 +6,7 @@ function testGetJurySettings() {
 function getJurySubmissionTables() {
 	return {
 		submissions: {
-			name: "Data",
+			name: "Submissions",
 			type: "standard",
 			headers: 1,
 			schema: {
