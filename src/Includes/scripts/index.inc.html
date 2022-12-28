@@ -4,61 +4,61 @@
 			"<h3>Thank you for applying for membership in MRAA</h3>" +
 			"You should hear from our Membership Chairperson shortly.<br>" +
 			"Please continue to pay your dues when you are ready.<br>",
-	};
-	const session = {};
+	}
+	const session = {}
 
 	// Page level begin
 	function getNewApplicantId() {
-		google.script.run.withSuccessHandler(setApplicantId).generateUniqueId();
+		google.script.run.withSuccessHandler(setApplicantId).generateUniqueId()
 	}
 
 	function setApplicantId(resp) {
-		const r = JSON.parse(resp);
-		session.applicantid = r.applicantid;
+		const r = JSON.parse(resp)
+		session.applicantid = r.applicantid
 	}
 
 	function applicantDetailBlock(toggle) {
 		// toggle true is on/show, false is off/hide
-		const applicantDetailBlock = document.getElementById("applicant-detail");
+		const applicantDetailBlock = document.getElementById("applicant-detail")
 		if (toggle) {
-			applicantDetailBlock.classList.remove("d-none");
+			applicantDetailBlock.classList.remove("d-none")
 		} else {
-			applicantDetailBlock.classList.add("d-none");
+			applicantDetailBlock.classList.add("d-none")
 		}
 	}
 
 	function uploadWaiting(toggle) {
-		const uploadWaiting = document.getElementById("uploadWaiting");
+		const uploadWaiting = document.getElementById("uploadWaiting")
 		if (toggle) {
-			uploadWaiting.classList.remove("d-none");
+			uploadWaiting.classList.remove("d-none")
 		} else {
-			uploadWaiting.classList.add("d-none");
+			uploadWaiting.classList.add("d-none")
 		}
 	}
 
 	function resetErrorMessages() {}
 
 	function resetDisplay() {
-		saveButtonFieldset.disabled = false;
-		formApplicant.reset();
+		saveButtonFieldset.disabled = false
+		formApplicant.reset()
 	}
 
 	function displaySupportContact(contact) {
-		const supportcontact = document.getElementById("supportcontact");
-		supportcontact.innerHTML = ` > <a href='mailto:${contact}'>Support Contact</a>`;
+		const supportcontact = document.getElementById("supportcontact")
+		supportcontact.innerHTML = ` > <a href='mailto:${contact}'>Support Contact</a>`
 	}
 
 	function setMembershipTypeMsg(e) {
-		const type = this.value;
-		const associateMsg = document.getElementById("associateMembership");
-		const exhibitingMsg = document.getElementById("exhibitingMembership");
+		const type = this.value
+		const associateMsg = document.getElementById("associateMembership")
+		const exhibitingMsg = document.getElementById("exhibitingMembership")
 
 		if (type === "Associate") {
-			associateMsg.classList.remove("d-none");
-			exhibitingMsg.classList.add("d-none");
+			associateMsg.classList.remove("d-none")
+			exhibitingMsg.classList.add("d-none")
 		} else {
-			associateMsg.classList.add("d-none");
-			exhibitingMsg.classList.remove("d-none");
+			associateMsg.classList.add("d-none")
+			exhibitingMsg.classList.remove("d-none")
 		}
 	}
 	// PAGE LEVEL END
@@ -69,96 +69,96 @@
 
 	// APPLICATION PROCESS
 	function saveApplication(e) {
-		e.preventDefault();
+		e.preventDefault()
 		if (this.checkValidity()) {
-			uploadWaiting(true);
-			saveButtonFieldset.disabled = true;
-			const formdata = new FormData(this);
-			formdata.append("applicantId", session.applicantid);
-			formdata.append("status", "Applicant");
+			uploadWaiting(true)
+			saveButtonFieldset.disabled = true
+			const formdata = new FormData(this)
+			formdata.append("applicantId", session.applicantid)
+			formdata.append("status", "Applicant")
 			formdata.append(
 				"dateSubmitted",
 				moment().format("MM/DD/YYYY h:mm:ss a")
-			);
-			const data = {};
+			)
+			const data = {}
 
 			for (const pair of formdata.entries()) {
-				data[pair[0]] = formdata.getAll(pair[0]).toString();
+				data[pair[0]] = formdata.getAll(pair[0]).toString()
 			}
 
 			google.script.run
 				.withSuccessHandler(saveComplete)
 				.withFailureHandler(showError)
-				.saveApplication(data);
+				.saveApplication(data)
 		}
-		this.classList.add("was-validated");
+		this.classList.add("was-validated")
 	}
 
 	function showError(e) {
-		console.log(e);
+		console.log(e)
 	}
 
 	function saveComplete() {
-		uploadWaiting(false);
-		resetDisplay();
+		uploadWaiting(false)
+		resetDisplay()
 		// hide step 1 elements
-		step1.classList.add("d-none");
-		returning.classList.add("d-none");
-		intro.innerHTML = messagesrepo.step1Complete;
+		step1.classList.add("d-none")
+		returning.classList.add("d-none")
+		intro.innerHTML = messagesrepo.step1Complete
 		intro.classList.add("mb-3")
 	}
 
 	// Start up
 	function loadPageElements() {
 		if (!session.applicantid) {
-			getNewApplicantId();
+			getNewApplicantId()
 		}
 
-		setCopyrightYear();
-		if (releaseMode==="alpha") {
-			setTestValues();
+		setCopyrightYear()
+		if (releaseMode === "alpha") {
+			setTestValues()
 		}
 
 		google.script.run
 			.withSuccessHandler(saveBoardMembershipChair)
-			.getBoardMembershipChair();
+			.getBoardMembershipChair()
 	}
 
 	function saveBoardMembershipChair(m) {
-		session.membershipchair = m;
+		session.membershipchair = m
 	}
 
 	// Testing
 	function setTestValues() {
-		emailAddress.value = "walkingontheedgestudio@gmail.com";
-		contactNumber.value = "555-111-2233";
-		firstName.value = "Jon";
-		lastName.value = "Tester";
-		streetAddress1.value = "123 W Main St";
-		city.value = "Anytown";
-		state.value = "VA";
-		zipCode.value = "55555";
+		emailAddress.value = "walkingontheedgestudio@gmail.com"
+		contactNumber.value = "555-111-2233"
+		firstName.value = "Jon"
+		lastName.value = "Tester"
+		streetAddress1.value = "123 W Main St"
+		city.value = "Anytown"
+		state.value = "VA"
+		zipCode.value = "55555"
 		reasonsForInterest.value =
-			"This is a test of the changes to the confirmation and notification emails.";
+			"This is a test of the changes to the confirmation and notification emails."
 		artEducationBackground.value =
-			"Urna neque viverra justo nec ultrices dui sapien.";
+			"Urna neque viverra justo nec ultrices dui sapien."
 		artAssociatedMemberships.value =
-			"Non quam lacus suspendisse faucibus interdum posuere.";
-		exhibitions.value = "Amet risus nullam eget felis eget.";
-		socialMediaLinks.value = "Mollis nunc sed id semper.";
-		websites.value = "In pellentesque massa placerat duis.";
-		businessName.value = "Tester Fine Art";
-		artistSignature.value = "Jon J Tester";
+			"Non quam lacus suspendisse faucibus interdum posuere."
+		exhibitions.value = "Amet risus nullam eget felis eget."
+		socialMediaLinks.value = "Mollis nunc sed id semper."
+		websites.value = "In pellentesque massa placerat duis."
+		businessName.value = "Tester Fine Art"
+		artistSignature.value = "Jon J Tester"
 	}
 
-	document.addEventListener("DOMContentLoaded", loadPageElements);
+	document.addEventListener("DOMContentLoaded", loadPageElements)
 	document
 		.getElementById("formApplicant")
-		.addEventListener("submit", saveApplication);
+		.addEventListener("submit", saveApplication)
 	document
 		.getElementById("membershipType1")
-		.addEventListener("click", setMembershipTypeMsg);
+		.addEventListener("click", setMembershipTypeMsg)
 	document
 		.getElementById("membershipType2")
-		.addEventListener("click", setMembershipTypeMsg);
+		.addEventListener("click", setMembershipTypeMsg)
 </script>

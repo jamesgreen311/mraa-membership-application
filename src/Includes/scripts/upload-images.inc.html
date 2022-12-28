@@ -1,5 +1,12 @@
 <script>
-	let applicantData = {}
+	const applicantData = {}
+	const session = {
+		membership: "applicant", // login needs membership to know what key to use for login access
+		imagessubmitted : {
+			front : 0,
+			back : 0,
+		}
+	}
 
 	// View Methods
 	function showApplicant(a) {
@@ -57,6 +64,13 @@
 		//console.log(this.id)
 	}
 
+	function loadPageElements() {
+		frontImages.innerText = session.imagessubmitted.front
+		backImages.innerText = session.imagessubmitted.back
+	}
+
+	document.addEventListener("DOMContentLoaded", loadPageElements)
 	login.addEventListener("submit", getApplicant)
 	associateMemberLogin.addEventListener("click", toggleLogin)
+	//console.log(session)
 </script>

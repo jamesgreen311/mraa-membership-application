@@ -44,20 +44,22 @@ function getJurySubmissionTables() {
 				timestamp: "k",
 			},
 		},
-      settings : {
-         name : "Config",
-         type : "standard",
-         headers : 1,
-         schema : {
-				images : { //array
-					side : "a",
-					count : "b"
+		settings: {
+			name: "Config",
+			type: "standard",
+			headers: 1,
+			schema: {
+				images: {
+					//array
+					side: "a",
+					count: "b",
 				},
-            contact : "c2",
-            maximagesize : "d2",
-         }
-      }
-	};
+				contact: "c2",
+				maximagesize: "d2",
+				submissionfolder: "e2",
+			},
+		},
+	}
 }
 
 function getJurySettings() {
@@ -68,20 +70,20 @@ function getJurySettings() {
 	const firstrow = t.settings.headers + 1
 	const lastrow = stable.getLastRow()
 	const imgdatarange = `${schema.images.side}${firstrow}:${schema.images.count}${lastrow}`
-	const dimages = stable
-		.getRange(imgdatarange)
-		.getDisplayValues()
-	const maximagesize = stable
-		.getRange(
-			schema.maximagesize
-		)
-		.getDisplayValue()
+	const dimages = stable.getRange(imgdatarange).getDisplayValues()
+	//const maximagesize =
 	const settings = {}
 	const images = {}
-	dimages.forEach(d => {
+	dimages.forEach((d) => {
 		images[d[0].toLowerCase()] = d[1]
 	})
 	settings.images = images
-	settings.maximagesize = maximagesize
+	settings.maximagesize = stable
+		.getRange(schema.maximagesize)
+		.getDisplayValue()
+	settings.submissionfolder = stable
+		.getRange(schema.submissionfolder)
+		.getDisplayValue()
+
 	return settings
 }

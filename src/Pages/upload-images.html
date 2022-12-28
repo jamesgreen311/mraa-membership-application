@@ -58,7 +58,10 @@
 				<form action="" id="login" class="needs-validation" novalidate>
 					<div id="step3">
 						<div class="row mt-2">
-							<p class="mb-0">Current Associate members rising to exhibitor membership <a href="#" id="associateMemberLogin">Click here</a></p>
+							<p class="mb-0">
+								Current Associate members rising to exhibitor membership
+								<a href="#" id="associateMemberLogin">Click here</a>
+							</p>
 						</div>
 						<div id="emailAddressLogin" class="row g-3 my-2 d-none">
 							<div class="col-auto col-form-label">
@@ -72,7 +75,8 @@
 									name="emailAddress"
 									required />
 								<div id="emailHelp" class="form-text">
-									Email address you registered with MRAA when you joined.
+									Email address you registered with MRAA when you
+									joined.
 								</div>
 								<div
 									id="emailLoginError"
@@ -208,26 +212,37 @@
 							</ul>
 						</div>
 						<div id="entryInfo" class="mb-3">
+							<div>
+								Please provide at least
+								<?= images.front ?>
+								images of the front and
+								<?= images.back ?>
+								images of the back.
+							</div>
+							<div>
+								You have submitted
+								<span id="frontImages" class="fw-bold text-warning"
+									>fetching...</span
+								>
+								front images and
+								<span id="backImages" class="fw-bold text-warning"
+									>fetching...</span
+								>
+								back images. Image size must not exceed
+								<span class="text-warning" id="maxImageSize"
+									><?= maximagesize ?> </span
+								>MB.
+							</div>
 							<div class="banner">
-								<label for="form-file" class="form-label"
-									>You have submitted 
-									<span id="frontImages" class="fw-bold text-warning"
-										>fetching...</span
-									>
-									front images and  
-									<span id="backImages" class="fw-bold text-warning"
-										>fetching...</span
-									>
-									back images. Image size must not exceed
-									<span class="text-warning" id="maxImageSize"><?= maximagesize ?> </span
-									>MB.</label
+								<label for="formFile" class="form-label"
+									>Select Image Files</label
 								>
 								<input
 									class="form-control"
 									type="file"
 									id="formFile"
 									required />
-								<span id="submission-messages"></span>
+								<span id="submissionMessages"></span>
 							</div>
 							<div id="imageDetails">
 								<div class="row mb-3 mt-2">
@@ -285,23 +300,20 @@
 									</div>
 									<div class="col-auto mt-2">
 										<fieldset id="fldsetSubmit">
-										  <button
-											 id="submitWork"
-											 type="submit"
-											 class="btn btn-primary"
-										  >
-											 Submit Image
-										  </button>
+											<button
+												id="submitWork"
+												type="submit"
+												class="btn btn-primary">
+												Submit Image
+											</button>
 										</fieldset>
-									 </div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</form>
 			</div>
-
-
 		</div>
 
 		<?!= include("Includes/scripts/upload-images.inc") ?>
