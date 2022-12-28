@@ -27,7 +27,7 @@ function getJurySubmissionTables() {
 			},
 		},
 		archive: {
-			name: "Archive",
+			name: "History",
 			type: "standard",
 			headers: 1,
 			schema: {
@@ -45,7 +45,7 @@ function getJurySubmissionTables() {
 			},
 		},
 		settings: {
-			name: "Config",
+			name: "Settings",
 			type: "standard",
 			headers: 1,
 			schema: {
