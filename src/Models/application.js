@@ -40,6 +40,7 @@ function getApplicationTables() {
 			},
 		},
 		jurysubmission: {
+			// move to MRAA Membership Jury spreadsheet
 			name: "Jury Submissions",
 			type: "standard",
 			headers: 1,
@@ -57,7 +58,7 @@ function getApplicationTables() {
 				datesubmitted: "k",
 			},
 		},
-	};
+	}
 }
 
 function saveApplication(a) {

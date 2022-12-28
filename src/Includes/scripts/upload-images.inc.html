@@ -1,50 +1,62 @@
 <script>
-	let applicantData = {};
+	let applicantData = {}
 
 	// View Methods
 	function showApplicant(a) {
-		const applicant = JSON.parse(a);
-		fetchingApplicant(false);
+		const applicant = JSON.parse(a)
+		fetchingApplicant(false)
 		//console.log(applicant);
 		if (Object.keys(applicant).length > 0) {
-			loginForm.classList.add("d-none");
-			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`;
-			applicantEmail.innerText = applicant.emailAddress;
-			applicantDetail.classList.remove("d-none");
-			applicantData = applicant;
+			loginForm.classList.add("d-none")
+			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`
+			applicantEmail.innerText = applicant.emailAddress
+			applicantDetail.classList.remove("d-none")
+			applicantData = applicant
 		} else {
-			login.reset();
+			login.reset()
 			loginError.innerText =
-				"Security Token not found. Please verify and try again. Tokens are case sensitive, it must be entered exactly as it in your confirmation email.";
-			loginError.classList.remove("d-none");
-			loginButtonFieldset.disabled = false;
+				"Security Token not found. Please verify and try again. Tokens are case sensitive, it must be entered exactly as it in your confirmation email."
+			loginError.classList.remove("d-none")
+			loginButtonFieldset.disabled = false
 		}
 		//console.log(applicantData);
 	}
 
 	// IO Methods
 	function fetchingApplicant(toggle) {
-		const fetchingBlock = document.getElementById("fetchingApplicant");
+		const fetchingBlock = document.getElementById("fetchingApplicant")
 		if (toggle) {
-			fetchingBlock.classList.remove("d-none");
+			fetchingBlock.classList.remove("d-none")
 		} else {
-			fetchingBlock.classList.add("d-none");
+			fetchingBlock.classList.add("d-none")
 		}
 	}
 
 	function getApplicant(e) {
-		e.preventDefault();
-		const fd = new FormData(this);
-		loginButtonFieldset.disabled = true;
+		e.preventDefault()
+		const fd = new FormData(this)
+		loginButtonFieldset.disabled = true
 		fetchingApplicant(true)
 
 		if (this.checkValidity()) {
 			google.script.run
 				.withSuccessHandler(showApplicant)
-				.getApplicant(fd.get("securityToken"));
+				.getApplicant(fd.get("securityToken"))
 		}
-		this.classList.add("was-validated");
+		this.classList.add("was-validated")
 	}
 
-	login.addEventListener("submit", getApplicant);
+	function toggleLogin(e) {
+		e.preventDefault()
+		if (this.id === "associateMemberLogin") {
+			emailAddressLogin.classList.remove("d-none")
+			document.getElementById(this.id).parentElement.classList.add("d-none")
+			tokenLogin.classList.add("d-none")
+			session.membership = "associate" // login needs this to login with email instead of token
+		}
+		//console.log(this.id)
+	}
+
+	login.addEventListener("submit", getApplicant)
+	associateMemberLogin.addEventListener("click", toggleLogin)
 </script>

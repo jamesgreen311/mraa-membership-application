@@ -57,7 +57,39 @@
 			<div id="loginForm">
 				<form action="" id="login" class="needs-validation" novalidate>
 					<div id="step3">
-						<div class="row g-3 mt-2">
+						<div class="row mt-2">
+							<p class="mb-0">Current Associate members rising to exhibitor membership <a href="#" id="associateMemberLogin">Click here</a></p>
+						</div>
+						<div id="emailAddressLogin" class="row g-3 my-2 d-none">
+							<div class="col-auto col-form-label">
+								<label for="emailAddress">Email Address</label>
+							</div>
+							<div class="col-sm-6 col-md-9">
+								<input
+									type="email"
+									class="form-control"
+									id="emailAddress"
+									name="emailAddress"
+									required />
+								<div id="emailHelp" class="form-text">
+									Email address you registered with MRAA when you joined.
+								</div>
+								<div
+									id="emailLoginError"
+									class="d-none mt-2 invalid-feedback"></div>
+							</div>
+							<div class="col-auto">
+								<fieldset id="emailLoginButtonFieldset">
+									<button
+										type="submit"
+										class="btn btn-primary mb-3"
+										id="emailLoginButton">
+										Login
+									</button>
+								</fieldset>
+							</div>
+						</div>
+						<div id="tokenLogin" class="row g-3 my-2">
 							<div class="col-auto col-form-label">
 								<label for="securityToken">Security Token</label>
 							</div>
@@ -73,15 +105,15 @@
 									email.
 								</div>
 								<div
-									id="loginError"
+									id="tokenLoginError"
 									class="d-none mt-2 invalid-feedback"></div>
 							</div>
 							<div class="col-auto">
-								<fieldset id="loginButtonFieldset">
+								<fieldset id="tokenLoginButtonFieldset">
 									<button
 										type="submit"
 										class="btn btn-primary mb-3"
-										id="loginButton">
+										id="tokenLoginButton">
 										Login
 									</button>
 								</fieldset>

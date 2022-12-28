@@ -9,6 +9,9 @@ const appSettings = JSON.parse(getAppSettings());
 const jurySettings = getJurySettings()
 const testEmail = "jamesgreen.311@gmail.com"
 const releaseMode = "alpha"
+const session = {
+	membership: "applicant", // login needs membership to know what key to use for login access
+}
 
 /**
  * The init file is processed first by Google App script. 
