@@ -1,24 +1,24 @@
 <script>
-	const applicantData = {}
+	let applicantData = {}
 	const session = {
 		membership: "applicant", // login needs membership to know what key to use for login access
-		imagessubmitted : {
-			front : 0,
-			back : 0,
-		}
+		imagessubmitted: {
+			front: 0,
+			back: 0,
+		},
 	}
 
 	// View Methods
 	function showApplicant(a) {
 		const applicant = JSON.parse(a)
 		fetchingApplicant(false)
-		//console.log(applicant);
 		if (Object.keys(applicant).length > 0) {
 			loginForm.classList.add("d-none")
 			applicantName.innerText = `${applicant.firstName} ${applicant.lastName}`
 			applicantEmail.innerText = applicant.emailAddress
 			applicantDetail.classList.remove("d-none")
 			applicantData = applicant
+			document.getElementById("associateMemberLogin").parentElement.innerHTML = ""
 		} else {
 			login.reset()
 			loginError.innerText =
@@ -26,7 +26,12 @@
 			loginError.classList.remove("d-none")
 			loginButtonFieldset.disabled = false
 		}
-		//console.log(applicantData);
+	}
+
+	function showMember(m) {
+		fetchingMember(false)
+		console.log("get member was successful")
+		console.log(m)
 	}
 
 	// IO Methods
@@ -39,17 +44,43 @@
 		}
 	}
 
-	function getApplicant(e) {
-		e.preventDefault()
-		const fd = new FormData(this)
-		loginButtonFieldset.disabled = true
-		fetchingApplicant(true)
-
-		if (this.checkValidity()) {
-			google.script.run
-				.withSuccessHandler(showApplicant)
-				.getApplicant(fd.get("securityToken"))
+	function fetchingMember(toggle) {
+		const fetchingBlock = document.getElementById("fetchingMember")
+		if (toggle) {
+			fetchingBlock.classList.remove("d-none")
+		} else {
+			fetchingBlock.classList.add("d-none")
 		}
+	}
+
+	function validateUser(e) {
+		e.preventDefault()
+		let key = ""
+
+		const fd = new FormData(this)
+		if (session.membership === "applicant") {
+			tokenLoginButtonFieldset.disabled = true
+			fetchingApplicant(true)
+
+			if (this.checkValidity()) {
+				google.script.run
+					.withSuccessHandler(showApplicant)
+					.getApplicant(fd.get("securityToken"))
+			}
+		} else {
+			emailLoginButtonFieldset.disabled = true
+			fetchingMember(true)
+
+			if (this.checkValidity()) {
+				google.script.run
+				.withSuccessHandler(showMember)
+				.getMemberByEmail(fd.get("emailAddress"))
+			}
+		}
+
+		console.log(this.checkValidity())
+		console.log(this)
+		console.log(fd)
 		this.classList.add("was-validated")
 	}
 
@@ -59,9 +90,10 @@
 			emailAddressLogin.classList.remove("d-none")
 			document.getElementById(this.id).parentElement.classList.add("d-none")
 			tokenLogin.classList.add("d-none")
+			securityToken.removeAttribute("required")
+			emailAddress.setAttribute("required", "")
 			session.membership = "associate" // login needs this to login with email instead of token
 		}
-		//console.log(this.id)
 	}
 
 	function loadPageElements() {
@@ -70,7 +102,7 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", loadPageElements)
-	login.addEventListener("submit", getApplicant)
+	login.addEventListener("submit", validateUser)
 	associateMemberLogin.addEventListener("click", toggleLogin)
-	//console.log(session)
+
 </script>

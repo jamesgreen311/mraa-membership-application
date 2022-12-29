@@ -50,78 +50,79 @@
 					</div>
 				</div>
 			</header>
+			<!-- <div id="step3"> -->
+			<div class="row mt-2">
+				<p class="mb-0">
+					If you are currently an Associate member of MRAA jurying to be an
+					exhibitor
+					<a href="#" id="associateMemberLogin">Click here</a>
+				</p>
+			</div>
 			<div class="header">
 				<span class="material-symbols-outlined icon"> file_upload </span>
 				<span class="text">Exhibitors Upload Images</span>
 			</div>
 			<div id="loginForm">
 				<form action="" id="login" class="needs-validation" novalidate>
-					<div id="step3">
-						<div class="row mt-2">
-							<p class="mb-0">
-								Current Associate members rising to exhibitor membership
-								<a href="#" id="associateMemberLogin">Click here</a>
-							</p>
+					<div id="emailAddressLogin" class="row g-3 my-2 d-none">
+						<h2 class="fs-4">MRAA Associate Member</h2>
+						<div class="col-auto col-form-label">
+							<label for="emailAddress">Email Address</label>
 						</div>
-						<div id="emailAddressLogin" class="row g-3 my-2 d-none">
-							<div class="col-auto col-form-label">
-								<label for="emailAddress">Email Address</label>
+						<div class="col-sm-6 col-md-9">
+							<input
+								type="email"
+								class="form-control"
+								id="emailAddress"
+								name="emailAddress"
+								placeholder="Required" />
+							<div id="emailHelp" class="form-text">
+								Email address you registered with MRAA when you joined.
 							</div>
-							<div class="col-sm-6 col-md-9">
-								<input
-									type="email"
-									class="form-control"
-									id="emailAddress"
-									name="emailAddress"
-									required />
-								<div id="emailHelp" class="form-text">
-									Email address you registered with MRAA when you
-									joined.
-								</div>
-								<div
-									id="emailLoginError"
-									class="d-none mt-2 invalid-feedback"></div>
-							</div>
-							<div class="col-auto">
-								<fieldset id="emailLoginButtonFieldset">
-									<button
-										type="submit"
-										class="btn btn-primary mb-3"
-										id="emailLoginButton">
-										Login
-									</button>
-								</fieldset>
-							</div>
+							<div
+								id="emailLoginError"
+								class="d-none mt-2 invalid-feedback"></div>
 						</div>
-						<div id="tokenLogin" class="row g-3 my-2">
-							<div class="col-auto col-form-label">
-								<label for="securityToken">Security Token</label>
+						<div class="col-auto">
+							<fieldset id="emailLoginButtonFieldset">
+								<button
+									type="submit"
+									class="btn btn-primary mb-3"
+									id="emailLoginButton">
+									Login
+								</button>
+							</fieldset>
+						</div>
+					</div>
+					<div id="tokenLogin" class="row g-3 my-2">
+						<div class="col-auto col-form-label">
+							<label for="securityToken">Security Token</label>
+						</div>
+						<div class="col-sm-6 col-md-9">
+							<input
+								type="text"
+								class="form-control"
+								id="securityToken"
+								name="securityToken"
+								placeholder="Required"
+								required />
+							<div id="tokenHelp" class="form-text">
+								You will find the security token in your confirmation
+								email.
 							</div>
-							<div class="col-sm-6 col-md-9">
-								<input
-									type="text"
-									class="form-control"
-									id="securityToken"
-									name="securityToken"
-									required />
-								<div id="tokenHelp" class="form-text">
-									You will find the security token in your confirmation
-									email.
-								</div>
-								<div
-									id="tokenLoginError"
-									class="d-none mt-2 invalid-feedback"></div>
-							</div>
-							<div class="col-auto">
-								<fieldset id="tokenLoginButtonFieldset">
-									<button
-										type="submit"
-										class="btn btn-primary mb-3"
-										id="tokenLoginButton">
-										Login
-									</button>
-								</fieldset>
-							</div>
+							<div
+								id="tokenLoginError"
+								class="d-none mt-2 invalid-feedback"></div>
+						</div>
+						<div class="col-auto">
+							<fieldset id="tokenLoginButtonFieldset">
+								<button
+									type="submit"
+									class="btn btn-primary mb-3"
+									id="tokenLoginButton">
+									Login
+								</button>
+							</fieldset>
 						</div>
 					</div>
 				</form>
@@ -134,11 +135,23 @@
 					</div>
 				</div>
 				<div id="applicantDetail" class="d-none container mt-2 p-2">
-					<div class="row border-bottom">
+					<div class="row">
 						<div class="col-3 col-sm-2 label">Applicant Name</div>
 						<div class="col-12 col-sm-3" id="applicantName"></div>
 						<div class="col-3 col-sm-2 label">Email Address</div>
 						<div class="col-12 col-sm-2" id="applicantEmail"></div>
+					</div>
+				</div>
+
+				<div id="fetchingMember" class="fetching d-none">
+					<div class="animation line-up">
+						Fetching your membership, Please Wait ...
+					</div>
+				</div>
+				<div id="memberDetail" class="d-none container mt-2 p-2">
+					<div class="row border-bottom">
+						<div class="col-3 col-sm-2 label">Welcome</div>
+						<div class="col-12 col-sm-3" id="memberName"></div>
 					</div>
 				</div>
 			</div>
@@ -214,9 +227,9 @@
 						<div id="entryInfo" class="mb-3">
 							<div>
 								Please provide at least
-								<?= images.front ?>
+								<span class="text-primary fw-bold"><?= images.front ?></span>
 								images of the front and
-								<?= images.back ?>
+								<span class="text-primary fw-bold"><?= images.back ?></span>
 								images of the back.
 							</div>
 							<div>
@@ -229,7 +242,7 @@
 									>fetching...</span
 								>
 								back images. Image size must not exceed
-								<span class="text-primary" id="maxImageSize"
+								<span class="text-primary fw-bold" id="maxImageSize"
 									><?= maximagesize ?> </span
 								>MB.
 							</div>
