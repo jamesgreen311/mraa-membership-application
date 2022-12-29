@@ -60,7 +60,7 @@
 			</div>
 			<div class="header">
 				<span class="material-symbols-outlined icon"> file_upload </span>
-				<span class="text">Exhibitors Upload Images</span>
+				<span class="text">Jurying Exhibitors Upload Images</span>
 			</div>
 			<div id="loginForm">
 				<form action="" id="login" class="needs-validation" novalidate>
@@ -79,9 +79,13 @@
 							<div id="emailHelp" class="form-text">
 								Email address you registered with MRAA when you joined.
 							</div>
+
+							<div id="emailLoginError" class="invalid-feedback fs-6">
+								Must enter a valid email address
+							</div>
 							<div
-								id="emailLoginError"
-								class="d-none mt-2 invalid-feedback"></div>
+							id="emailErrorMsg"
+							class="d-none mt-2 invalid-feedback"></div>
 						</div>
 						<div class="col-auto">
 							<fieldset id="emailLoginButtonFieldset">
@@ -110,8 +114,11 @@
 								You will find the security token in your confirmation
 								email.
 							</div>
+							<div id="tokenLoginError" class="invalid-feedback fs-6">
+								Must enter a valid security token
+							</div>
 							<div
-								id="tokenLoginError"
+								id="tokenErrorMsg"
 								class="d-none mt-2 invalid-feedback"></div>
 						</div>
 						<div class="col-auto">
@@ -149,9 +156,10 @@
 					</div>
 				</div>
 				<div id="memberDetail" class="d-none container mt-2 p-2">
-					<div class="row border-bottom">
-						<div class="col-3 col-sm-2 label">Welcome</div>
-						<div class="col-12 col-sm-3" id="memberName"></div>
+					<div class="row">
+						<div class="col-12 label">
+							Welcome <span id="memberName"></span>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -227,9 +235,13 @@
 						<div id="entryInfo" class="mb-3">
 							<div>
 								Please provide at least
-								<span class="text-primary fw-bold"><?= images.front ?></span>
+								<span class="text-primary fw-bold"
+									><?= images.front ?></span
+								>
 								images of the front and
-								<span class="text-primary fw-bold"><?= images.back ?></span>
+								<span class="text-primary fw-bold"
+									><?= images.back ?></span
+								>
 								images of the back.
 							</div>
 							<div>

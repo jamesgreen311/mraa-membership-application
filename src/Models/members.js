@@ -1,3 +1,8 @@
+function testGetMemberByEmail() {
+	const m = getMemberByEmail("jamesgreen.311@gmail.com")
+	console.log(m)
+}
+
 function getMemberTables() {
 	return {
 		directory: {
@@ -52,7 +57,7 @@ function getExhibitingMembers() {
  * Gets six columns from the membership spreadsheet. All columns are combined
  * into one array for each member
  * @param string member email
- * @returns [] array of member first name, last name, status, phone, membership type
+ * @returns object
  */
 function getMemberByEmail(email) {
 	const memberTables = getMemberTables()
@@ -74,7 +79,15 @@ function getMemberByEmail(email) {
 		.getDisplayValues()
 
 	const member = data.filter((m) => m[emailPos] === email)[0]
-	return member ? member : []
+	let m = {}
+	if (member !== undefined) {
+		// Convert member array to member object based on schema
+		Object.entries(memberSchema).forEach(([key, value]) => {
+			m[key] = member[value.colToIndex()]
+		})
+	}
+
+	return m
 }
 
 /**

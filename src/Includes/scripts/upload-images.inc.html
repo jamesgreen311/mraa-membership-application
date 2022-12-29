@@ -18,20 +18,32 @@
 			applicantEmail.innerText = applicant.emailAddress
 			applicantDetail.classList.remove("d-none")
 			applicantData = applicant
-			document.getElementById("associateMemberLogin").parentElement.innerHTML = ""
+			document.getElementById(
+				"associateMemberLogin"
+			).parentElement.innerHTML = ""
 		} else {
 			login.reset()
-			loginError.innerText =
+			tokenErrorMsg.innerText =
 				"Security Token not found. Please verify and try again. Tokens are case sensitive, it must be entered exactly as it in your confirmation email."
-			loginError.classList.remove("d-none")
-			loginButtonFieldset.disabled = false
+			tokenErrorMsg.classList.remove("d-none")
+			tokenLoginButtonFieldset.disabled = false
 		}
 	}
 
 	function showMember(m) {
 		fetchingMember(false)
-		console.log("get member was successful")
-		console.log(m)
+		if (Object.keys(m).length>0) {
+			login.innerHTML = ""
+			memberName.innerText = `${m.firstname} ${m.lastname}`
+			memberDetail.classList.remove("d-none")
+		} else {
+			// member email not found
+			login.reset()
+			emailErrorMsg.innerText =
+				"Email Address not found. Please verify and try again. "
+			emailErrorMsg.classList.remove("d-none")
+			emailLoginButtonFieldset.disabled = false
+		}
 	}
 
 	// IO Methods
@@ -59,22 +71,20 @@
 
 		const fd = new FormData(this)
 		if (session.membership === "applicant") {
-			tokenLoginButtonFieldset.disabled = true
-			fetchingApplicant(true)
-
 			if (this.checkValidity()) {
+				tokenLoginButtonFieldset.disabled = true
+				fetchingApplicant(true)
 				google.script.run
 					.withSuccessHandler(showApplicant)
 					.getApplicant(fd.get("securityToken"))
 			}
 		} else {
-			emailLoginButtonFieldset.disabled = true
-			fetchingMember(true)
-
 			if (this.checkValidity()) {
+				emailLoginButtonFieldset.disabled = true
+				fetchingMember(true)
 				google.script.run
-				.withSuccessHandler(showMember)
-				.getMemberByEmail(fd.get("emailAddress"))
+					.withSuccessHandler(showMember)
+					.getMemberByEmail(fd.get("emailAddress"))
 			}
 		}
 
@@ -104,5 +114,4 @@
 	document.addEventListener("DOMContentLoaded", loadPageElements)
 	login.addEventListener("submit", validateUser)
 	associateMemberLogin.addEventListener("click", toggleLogin)
-
 </script>
