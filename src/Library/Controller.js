@@ -25,20 +25,19 @@ function doGet(e) {
  * @returns {HTMLTemplate}
  */
 function loadPage(page) {
-	const settings = getAppSettings()
-	const treasurer = getBoardTreasurer()
 	const membershipchair = getBoardMembershipChair()
 
 	let opt = {
 		membershipchairemail: membershipchair.email,
-		treasureremail: treasurer.email,
 		releaseMode: releaseMode,
 	}
 	if (page !== "upload-images") {
+		const treasurer = getBoardTreasurer()
+		const settings = getAppSettings()
 		opt.dues = settings.dues
+		opt.treasureremail = treasurer.email
 	} else {
 		const jurySettings = getJurySettings()
-		//const JURY_SUBMISSION_FOLDER = jurySettings.submissionfolder
 		opt.maximagesize = jurySettings.maximagesize
 		opt.submissionfolder = jurySettings.submissionfolder
 		opt.images = jurySettings.images
@@ -52,7 +51,6 @@ function loadPage(page) {
  * @returns {HTMLTemplate} Error page
  */
 function loadError(msg) {
-	const appSettings = JSON.parse(getAppSettings())
 	const opt = { text: msg, support: "tech@metrorichmondart.org" }
 
 	return render("Pages/error", opt)
