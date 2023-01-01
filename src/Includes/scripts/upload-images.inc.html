@@ -21,6 +21,8 @@
 			document.getElementById(
 				"associateMemberLogin"
 			).parentElement.innerHTML = ""
+			addSubmissionsForm.classList.remove("d-none")
+			//uploadGallery.classList.remove("d-none")
 		} else {
 			login.reset()
 			tokenErrorMsg.innerText =
@@ -36,6 +38,8 @@
 			login.innerHTML = ""
 			memberName.innerText = `${m.firstname} ${m.lastname}`
 			memberDetail.classList.remove("d-none")
+			addSubmissionsForm.classList.remove("d-none")
+			//uploadGallery.classList.remove("d-none")
 		} else {
 			// member email not found
 			login.reset()
@@ -45,6 +49,62 @@
 			emailLoginButtonFieldset.disabled = false
 		}
 	}
+
+	function showThumbnail(e) {
+    const file = this.files[0] 
+    const maxImageSize = parseInt(document.getElementById("maxImageSize").innerText())
+    const uploadImageSize = (file.size / (1024 * 1024)).toFixed(1); // convert bytes to mb
+    const imageGallery = document.getElementById("gallery") 
+    const galleryFirstEmpty = imageGallery.getElementsByClassName("empty")[0] 
+    const imageContainer = galleryFirstEmpty.parentElement 
+    const submissionMessages = document.getElementById("submissionMessages") 
+    imageGalleryToggle(true) 
+
+	 console.log(maxImageSize)
+    const maxFileSizeMsg = `<p class="mt-2 mb-0">Your file size is <span class='text-danger'>** ${uploadImageSize} MB **</span> and it exceeds maximum allowed size of <span class="text-warning">${maxImageSize} MB</span>. Please select a smaller image.</p>` 
+
+    // check file size before showing image
+    if (uploadImageSize > maxImageSize) {
+      submissionMessages.innerHTML = maxFileSizeMsg 
+      e.stopImmediatePropagation() 
+      galleryFirstEmpty.innerHTML = "" 
+      submitWork.disabled = true 
+      return false 
+    } else {
+      submissionMessages.innerHTML = "" 
+      galleryFirstEmpty.innerHTML = "<img class='crop' />" 
+      const thumbnail = galleryFirstEmpty.getElementsByTagName("img")[0] 
+      thumbnail.src = URL.createObjectURL(file) 
+      imageContainer.classList.remove("d-none") 
+      submitWork.disabled = false 
+      return true 
+    }
+  }
+  function imageGalleryToggle(toggle) {
+    const imageGallery = document.getElementById("uploadGallery") 
+    if (toggle) {
+      imageGallery.classList.remove("d-none") 
+    } else {
+      imageGallery.classList.add("d-none") 
+    }
+  }
+
+  function addToGallery() {
+    const gallery = document.getElementById("gallery");
+    const galleryItem = document.createElement("li");
+    const gallerySpanSaved = document.createElement("span");
+    const gallerySpanPlaceholder = document.createElement("span");
+
+    galleryItem.classList.add("d-none");
+    gallerySpanSaved.innerText = "Saved";
+    gallerySpanSaved.classList.add("saved", "d-none");
+    gallerySpanPlaceholder.innerText = "Image Placeholder";
+    gallerySpanPlaceholder.classList.add("empty");
+
+    galleryItem.appendChild(gallerySpanSaved);
+    galleryItem.appendChild(gallerySpanPlaceholder);
+    gallery.appendChild(galleryItem);
+  }
 
 	// IO Methods
 	function fetchingApplicant(toggle) {
@@ -88,9 +148,6 @@
 			}
 		}
 
-		console.log(this.checkValidity())
-		console.log(this)
-		console.log(fd)
 		this.classList.add("was-validated")
 	}
 
@@ -111,7 +168,11 @@
 		backImages.innerText = session.imagessubmitted.back
 	}
 
+	// Event listeners
 	document.addEventListener("DOMContentLoaded", loadPageElements)
 	login.addEventListener("submit", validateUser)
 	associateMemberLogin.addEventListener("click", toggleLogin)
+	document
+    .getElementById("formFile")
+    .addEventListener("change", showThumbnail) 
 </script>

@@ -36,7 +36,7 @@
 		<div class="container">
 			<header>
 				<div id="banner" class="banner">
-					<div id="logo fs-2">
+					<div id="logo">
 						<a href="https://www.metrorichmondart.org">MRAA</a>
 						|
 						<a
@@ -59,9 +59,10 @@
 				</p>
 			</div>
 			<div class="header">
-				<span class="material-symbols-outlined icon"> file_upload </span>
-				<span class="text">Jurying Exhibitors Upload Images</span>
+				<span class="material-symbols-outlined icon"> lock </span>
+				<span class="text">Access</span>
 			</div>
+			
 			<div id="loginForm">
 				<form action="" id="login" class="needs-validation" novalidate>
 					<div id="emailAddressLogin" class="row g-3 my-2 d-none">
@@ -84,8 +85,8 @@
 								Must enter a valid email address
 							</div>
 							<div
-							id="emailErrorMsg"
-							class="d-none mt-2 invalid-feedback"></div>
+								id="emailErrorMsg"
+								class="d-none mt-2 invalid-feedback"></div>
 						</div>
 						<div class="col-auto">
 							<fieldset id="emailLoginButtonFieldset">
@@ -99,6 +100,7 @@
 						</div>
 					</div>
 					<div id="tokenLogin" class="row g-3 my-2">
+						<h2 class="fs-5">New Applicants</h2>
 						<div class="col-auto col-form-label">
 							<label for="securityToken">Security Token</label>
 						</div>
@@ -195,7 +197,7 @@
 				</div>
 			</div>
 
-			<div id="addSubmissionsForm">
+			<div id="addSubmissionsForm" class="d-none">
 				<form
 					action="#"
 					id="formUploadImages"
@@ -218,10 +220,24 @@
 						value="" />
 					<div id="uploadImages">
 						<div class="header">
-							<span class="material-symbols-outlined icon">
-								file_upload
-							</span>
-							<span class="text">Images of Your Work for Jury</span>
+							<div class="row">
+								<div class="col-auto">
+									<span class="material-symbols-outlined icon">
+										file_upload
+									</span>
+									<span class="text">Images of Your Work for Jury</span> 
+								</div>									
+								<div class="col-auto">
+									Front images submitted
+									<span id="frontImages" class="fw-bold text-primary"
+										>fetching...</span
+									><br/>
+									Back images submitted
+									<span id="backImages" class="fw-bold text-primary"
+										>fetching...</span
+									>
+								</div>
+							</div>
 						</div>
 						<div id="uploadGallery" class="d-none">
 							<h3 class="fs-6">Upload Gallery</h3>
@@ -244,7 +260,7 @@
 								>
 								images of the back.
 							</div>
-							<div>
+							<!-- 							<div>
 								You have submitted
 								<span id="frontImages" class="fw-bold text-primary"
 									>fetching...</span
@@ -253,11 +269,8 @@
 								<span id="backImages" class="fw-bold text-primary"
 									>fetching...</span
 								>
-								back images. Image size must not exceed
-								<span class="text-primary fw-bold" id="maxImageSize"
-									><?= maximagesize ?> </span
-								>MB.
-							</div>
+								back images.
+							</div> -->
 							<div class="banner">
 								<label for="formFile" class="form-label"
 									>Select Image Files</label
@@ -267,7 +280,14 @@
 									type="file"
 									id="formFile"
 									required />
-								<span id="submissionMessages"></span>
+
+								<p class="my-0 pt-3">
+									Image size must not exceed
+									<span class="bright fw-bold" id="maxImageSize"
+										><?= maximagesize ?> </span
+									>MB.
+								</p>
+								<div id="submissionMessages"></div>
 							</div>
 							<div id="imageDetails">
 								<div class="row mb-3 mt-2">
