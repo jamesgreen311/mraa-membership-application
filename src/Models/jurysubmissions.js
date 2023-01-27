@@ -1,3 +1,7 @@
+/* 
+	Data Source: MRAA Membership Jury
+ */
+
 function testGetJurySettings() {
 	const s = getJurySettings()
 	console.log(s)
@@ -24,6 +28,7 @@ function getJurySubmissionTables() {
 				juryingmember: "l",
 				filesuploaded: "m",
 				applicanttoken: "n",
+				side: "o",
 			},
 		},
 		archive: {

@@ -1,3 +1,7 @@
+/* 
+	Data Source: MRAA Active Members {fiscal years, start and end} MASTER
+ */
+
 function testGetMemberByEmail() {
 	const m = getMemberByEmail("jamesgreen.311@gmail.com")
 	console.log(m)
