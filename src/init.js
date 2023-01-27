@@ -8,7 +8,7 @@ const JURY_SUBMISSION_ID = "1W4xT_-t8rEBOMIYLKMKQQVFkatS6LXZzZqN6fNJlUZQ"
 /* const jurySettings = getJurySettings()
 const JURY_SUBMISSION_FOLDER = jurySettings.submissionfolder */
 const testEmail = "jamesgreen.311@gmail.com"
-const releaseMode = "alpha"
+const releaseMode = "live"
 
 /**
  * The init file is processed first by Google App script. 
