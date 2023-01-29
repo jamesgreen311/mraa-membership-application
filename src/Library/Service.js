@@ -49,6 +49,7 @@ function generateUniqueId() {
 }
 
 function sendConfirmation(applicant) {
+   // TODO create a subfolder for each applicant
    const sendTo = releaseMode === "alpha" ? testEmail : applicant.emailAddress
    const subject = "MRAA Member Application Confirmation"
    const fileId = createConfirmationDoc(applicant)
