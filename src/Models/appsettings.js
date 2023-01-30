@@ -22,6 +22,16 @@ function getSettingsTables() {
             dues: "i2", // TODO move to Membership master spreadsheet
          },
       },
+      deployments: {
+         name: "Deployments",
+         type: "standard",
+         headers: 1,
+         schema: {
+            applicationrelease: "a",
+            deploymentid: "b",
+            url: "f",
+         },
+      },
    }
 }
 
@@ -32,22 +42,25 @@ function getSettingsTables() {
  */
 function getAppSettings() {
    const t = getSettingsTables()
-   const schema = t.appsettings.schema
+   const aSchema = t.appsettings.schema
+   const dSchema = t.deployments.schema
    const settings = connect(APPLICANTS_ID).getSheetByName(t.appsettings.name)
+   const deployment = connect(APPLICANTS_ID).getSheetByName(t.deployments.name)
    const confirmationDocId = settings
-      .getRange(schema.confirmationdocid)
+      .getRange(aSchema.confirmationdocid)
       .getDisplayValue()
    const _distributionList = settings
-      .getRange(schema.distributionlist + settings.getLastRow())
+      .getRange(aSchema.distributionlist + settings.getLastRow())
       .getDisplayValues()
    const destinationFolderId = settings
-      .getRange(schema.destinationfolderid)
+      .getRange(aSchema.destinationfolderid)
       .getDisplayValue()
    const notificationDocId = settings
-      .getRange(schema.notificationdocid)
+      .getRange(aSchema.notificationdocid)
       .getDisplayValue()
+
    // TODO Move dues to Membership master
-   const dues = settings.getRange(schema.dues).getDisplayValue()
+   const dues = settings.getRange(aSchema.dues).getDisplayValue()
    // 1 - spread array to flatten form 2D array to 1
    // 2 - filter out empty arrays
    const distributionList = [].concat(..._distributionList).filter((r) => r)

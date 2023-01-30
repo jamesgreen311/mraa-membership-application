@@ -3,4 +3,8 @@
 		const year = document.getElementById("year")
 		year.innerText = moment().format("YYYY")
 	}
+
+	const params = google.script.url.getLocation( (location) => {
+		appversion.innerText = "version: " + location.parameter.v
+	})
 </script>
