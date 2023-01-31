@@ -5,6 +5,7 @@
 	}
 
 	const params = google.script.url.getLocation( (location) => {
-		appversion.innerText = "version: " + location.parameter.v
+		let v = location.parameter.v !== undefined ? "version: " + location.parameter.v : ""
+		appversion.innerText = v
 	})
 </script>
