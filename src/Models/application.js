@@ -86,6 +86,8 @@ function saveApplication(a) {
 	})
 
 	t.appendRow(newRow)
+      .getRange(t.getLastRow(), t.getLastColumn() - 1)
+      .insertCheckboxes()
 	sendConfirmation(newApplicant)
 	sendNotification(newApplicant)
 

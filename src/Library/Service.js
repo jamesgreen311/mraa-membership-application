@@ -61,6 +61,8 @@ function sendConfirmation(applicant) {
    GmailApp.sendEmail(sendTo, subject, body, {
       attachments: [attachment],
       htmlBody: htmlBody,
+      replyTo: "mraa-membership@metrorichmondart.org",
+      name: "MRAA Membership Chairperson",
    })
 }
 
