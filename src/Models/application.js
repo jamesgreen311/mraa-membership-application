@@ -11,87 +11,90 @@ function testGetApplicant() {
 }
 
 function getApplicationTables() {
-	return {
-		application: {
-			name: "Application Detail",
-			type: "standard",
-			headers: 2,
-			schema: {
-				applicantId: "a",
-				dateSubmitted: "u",
-				emailAddress: "d",
-				firstName: "b",
-				lastName: "c",
-				streetAddress1: "e",
-				streetAddress2: "f",
-				city: "g",
-				state: "h",
-				zipCode: "i",
-				contactNumber: "j",
-				membershipType: "k",
-				mediums: "l",
-				reasonsForInterest: "n",
-				status: "t",
-				artistSignature: "m",
-				businessName: "w",
-				artEducationBackground: "o",
-				artAssociatedMemberships: "p",
-				exhibitions: "q",
-				socialMediaLinks: "s",
-				websites: "r",
-				dateSubmitted: "u",
-				paymentProcessed: "v",
-			},
-		},
-		jurysubmission: {
-			// move to MRAA Membership Jury spreadsheet
-			name: "Jury Submissions",
-			type: "standard",
-			headers: 1,
-			schema: {
-				applicantid: "a",
-				firstname: "b",
-				lastname: "c",
-				worktitle: "d",
-				medium: "e",
-				width: "f",
-				height: "g",
-				side: "h", // front|back
-				filename: "i",
-				fileid: "j",
-				datesubmitted: "k",
-			},
-		},
-	}
+   return {
+      application: {
+         name: "Application Detail",
+         type: "standard",
+         headers: 2,
+         schema: {
+            applicantId: "a",
+            firstName: "b",
+            lastName: "c",
+            emailAddress: "d",
+            streetAddress1: "e",
+            streetAddress2: "f",
+            city: "g",
+            state: "h",
+            zipCode: "i",
+            contactNumber: "j",
+            membershipType: "k",
+            mediums: "l",
+            artistSignature: "m",
+            reasonsForInterest: "n",
+            artEducationBackground: "o",
+            artAssociatedMemberships: "p",
+            exhibitions: "q",
+            websites: "r",
+            socialMediaLinks: "s",
+            status: "t",
+            dateSubmitted: "u",
+            paymentProcessed: "v",
+            businessName: "w",
+            acceptApplication: "x",
+            dateCopied: "y",
+         },
+      },
+      jurysubmission: {
+         // move to MRAA Membership Jury spreadsheet
+         name: "Jury Submissions",
+         type: "standard",
+         headers: 1,
+         schema: {
+            applicantid: "a",
+            firstname: "b",
+            lastname: "c",
+            worktitle: "d",
+            medium: "e",
+            width: "f",
+            height: "g",
+            side: "h", // front|back
+            filename: "i",
+            fileid: "j",
+            datesubmitted: "k",
+         },
+      },
+   }
 }
 
 function saveApplication(a) {
-	const newApplicant = {}
-	const at = getApplicationTables()
-	const t = connect(APPLICANTS_ID).getSheetByName(at.application.name)
-	const schema = at.application.schema
+   const newApplicant = {}
+   const at = getApplicationTables()
+   const t = connect(APPLICANTS_ID).getSheetByName(at.application.name)
+   const schema = at.application.schema
 
-	const newRow = []
-	const keys = Object.keys(a)
+   const newRow = []
+   const keys = Object.keys(a)
 
-	// capitalize state
-	a.state = a.state.toUpperCase()
+   // capitalize state
+   a.state = a.state.toUpperCase()
 
-	keys.forEach((key) => {
-		ndx = schema[key].colToIndex()
-		newRow[ndx] = a[key]
+   keys.forEach((key) => {
+      ndx = schema[key].colToIndex()
+      newRow[ndx] = a[key]
 
-		// store a copy of application data in memory for notification email
-		newApplicant[key] = a[key]
-	})
+      // store a copy of application data in memory for notification email
+      newApplicant[key] = a[key]
+   })
 
-	t.appendRow(newRow)
-      .getRange(t.getLastRow(), t.getLastColumn() - 1)
+   // Save application
+   // Put a check box in the Accept Application column
+   t.appendRow(newRow)
+      .getRange(t.getLastRow(), schema.acceptApplication.colToIndex() + 1)
       .insertCheckboxes()
-	sendConfirmation(newApplicant)
-	sendNotification(newApplicant)
+   sendConfirmation(newApplicant)
+   sendNotification(newApplicant)
 
-	return newRow
+   return newRow
 }
 
 function getApplicant(id) {
