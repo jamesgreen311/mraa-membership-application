@@ -3,41 +3,52 @@
  */
 
 function testGetMemberByEmail() {
-	const m = getMemberByEmail("jamesgreen.311@gmail.com")
-	console.log(m)
+   const m = getMemberByEmail("jamesgreen.311@gmail.com")
+   console.log(m)
 }
 
 function getMemberTables() {
-	return {
-		directory: {
-			name: "Member Directory",
-			type: "standard",
-			headers: 2,
-			schema: {
-				email: "a",
-				firstname: "b",
-				lastname: "c",
-				preferredname: "d",
-				status: "e",
-				streetaddress: "f",
-				streetaddressextended: "g",
-				city: "h",
-				state: "i",
-				zipcode: "j",
-				primarycontactnumber: "k",
-				alternatecontactnumber: "l",
-				membership: "m",
-				jurydate: "n",
-				medium: "o", // not currently used
-				datejoined: "p", // not currently used
-				artistsignature: "q", // not currently used
-				businessname: "r", // not currently used
-				comments: "s",
-			},
-		},
-	}
+   return {
+      directory: {
+         name: "Member Directory",
+         type: "standard",
+         headers: 2,
+         schema: {
+            email: "a",
+            firstname: "b",
+            lastname: "c",
+            preferredname: "d",
+            status: "e",
+            streetaddress: "f",
+            streetaddressextended: "g",
+            city: "h",
+            state: "i",
+            zipcode: "j",
+            primarycontactnumber: "k",
+            alternatecontactnumber: "l",
+            membership: "m",
+            jurydate: "n",
+            medium: "o", // not currently used
+            datejoined: "p", // not currently used
+            artistsignature: "q", // not currently used
+            businessname: "r", // not currently used
+            comments: "s",
+         },
+      },
+      config: {
+         name: "Configuration",
+         type: "standard",
+         headers: 1,
+         schema: {
+            status: "a",
+            membership: "c",
+            paymentmethod: "g",
+            duesamt: "h",
+            paypalfee: "i",
+         },
+      },
+   }
 }
-
 /**
  * @param  none
  * @returns [] array of all exhibiting members information
@@ -51,10 +62,10 @@ function getMemberTables() {
  *  membership type
  */
 function getExhibitingMembers() {
-	let exhibitingMembers = memberInfo.filter(function (e) {
-		return e[5].toLowerCase() === "exhibiting"
-	})
-	return exhibitingMembers
+   let exhibitingMembers = memberInfo.filter(function (e) {
+      return e[5].toLowerCase() === "exhibiting"
+   })
+   return exhibitingMembers
 }
 
 /**
@@ -64,34 +75,34 @@ function getExhibitingMembers() {
  * @returns object
  */
 function getMemberByEmail(email) {
-	const memberTables = getMemberTables()
-	const members = connect(MASTER_ID).getSheetByName(
-		memberTables.directory.name
-	)
-	const memberSchema = memberTables.directory.schema
-	const emailPos = memberSchema.email.colToIndex()
-	const headers = memberTables.directory.headers
-	const startRow = headers + 1
-	const startCol = 1
-	const data = members
-		.getRange(
-			startRow,
-			startCol,
-			members.getLastRow() - headers,
-			members.getLastColumn()
-		)
-		.getDisplayValues()
+   const memberTables = getMemberTables()
+   const members = connect(MASTER_ID).getSheetByName(
+      memberTables.directory.name
+   )
+   const memberSchema = memberTables.directory.schema
+   const emailPos = memberSchema.email.colToIndex()
+   const headers = memberTables.directory.headers
+   const startRow = headers + 1
+   const startCol = 1
+   const data = members
+      .getRange(
+         startRow,
+         startCol,
+         members.getLastRow() - headers,
+         members.getLastColumn()
+      )
+      .getDisplayValues()
 
-	const member = data.filter((m) => m[emailPos] === email)[0]
-	let m = {}
-	if (member !== undefined) {
-		// Convert member array to member object based on schema
-		Object.entries(memberSchema).forEach(([key, value]) => {
-			m[key] = member[value.colToIndex()]
-		})
-	}
+   const member = data.filter((m) => m[emailPos] === email)[0]
+   let m = {}
+   if (member !== undefined) {
+      // Convert member array to member object based on schema
+      Object.entries(memberSchema).forEach(([key, value]) => {
+         m[key] = member[value.colToIndex()]
+      })
+   }
 
-	return m
+   return m
 }
 
 /**
@@ -100,16 +111,16 @@ function getMemberByEmail(email) {
  * @returns {boolean}
  */
 function isMember(email, status, type) {
-	const memberTables = getMemberTables()
-	const memberSchema = memberTables.directory.schema
-	const statusPos = memberSchema.status.colToIndex()
-	const typePos = memberSchema.membership.colToIndex()
-	const memberInfo = getMemberByEmail(email)
-	const memberStatus = memberInfo[statusPos] === status
-	const memberType = memberInfo[typePos] === type
-	const validMember = memberInfo.length > 0
+   const memberTables = getMemberTables()
+   const memberSchema = memberTables.directory.schema
+   const statusPos = memberSchema.status.colToIndex()
+   const typePos = memberSchema.membership.colToIndex()
+   const memberInfo = getMemberByEmail(email)
+   const memberStatus = memberInfo[statusPos] === status
+   const memberType = memberInfo[typePos] === type
+   const validMember = memberInfo.length > 0
 
-	return validMember && memberStatus && memberType
+   return validMember && memberStatus && memberType
 }
 
 /**
@@ -117,13 +128,13 @@ function isMember(email, status, type) {
  * @param {string} email
  * @returns array of member info or empty array
  */
-/* function findMember(email) {
-    let found = activeExhibitingMembers.filter(
-        member => member[0].trim().toLowerCase() === email.trim().toLowerCase()
-      );
-      
-    return found[0];
-} */
+function findMember(email) {
+   let found = activeExhibitingMembers.filter(
+      (member) => member[0].trim().toLowerCase() === email.trim().toLowerCase()
+   )
+
+   return found[0]
+}
 
 /**
  * Gets the members first name from array if found
@@ -131,14 +142,14 @@ function isMember(email, status, type) {
  * @returns string
  */
 function getMemberFirstName(email) {
-	let memberInfo = findMember(email)
-	let firstName = ""
+   let memberInfo = findMember(email)
+   let firstName = ""
 
-	if (memberInfo && memberInfo.length > 0) {
-		firstName = memberInfo[1]
-	}
+   if (memberInfo && memberInfo.length > 0) {
+      firstName = memberInfo[1]
+   }
 
-	return firstName
+   return firstName
 }
 
 /**
@@ -147,14 +158,14 @@ function getMemberFirstName(email) {
  * @returns string
  */
 function getMemberLastName(email) {
-	let memberInfo = findMember(email)
-	let lastName = ""
+   let memberInfo = findMember(email)
+   let lastName = ""
 
-	if (memberInfo && memberInfo.length > 0) {
-		lastName = memberInfo[2]
-	}
+   if (memberInfo && memberInfo.length > 0) {
+      lastName = memberInfo[2]
+   }
 
-	return lastName
+   return lastName
 }
 
 /**
@@ -163,12 +174,23 @@ function getMemberLastName(email) {
  * @returns string
  */
 function getMemberPhone(email) {
-	let memberInfo = findMember(email)
-	let phone = ""
+   let memberInfo = findMember(email)
+   let phone = ""
 
-	if (memberInfo && memberInfo.length > 0) {
-		phone = memberInfo[4]
-	}
+   if (memberInfo && memberInfo.length > 0) {
+      phone = memberInfo[4]
+   }
 
-	return phone
+   return phone
+}
+
+function getDuesAmount() {
+   const t = getMemberTables()
+   const cfgSchema = t.config.schema
+   const cfg = connect(MASTER_ID).getSheetByName(t.config.name)
+   const dues = cfg
+      .getRange(t.config.headers + 1, cfgSchema.duesamt.colToIndex() + 1)
+      .getDisplayValue()
+
+   return dues
 }

@@ -14,6 +14,7 @@ function render(f, opt) {
          templ[k] = opt[k]
       })
    }
+   console.log("evaluate and return template: " + Date.now())
    return templ
       .evaluate()
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.DEFAULT)
@@ -25,6 +26,7 @@ function render(f, opt) {
  * @returns {HTMLTemplate} html fragment
  */
 function include(file) {
+   console.log("get include file: " + Date.now())
    return HtmlService.createHtmlOutputFromFile(file).getContent()
 }
 

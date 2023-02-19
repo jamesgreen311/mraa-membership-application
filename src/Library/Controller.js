@@ -4,20 +4,21 @@
  * @returns
  */
 function doGet(e) {
-	const pages = {
-		ROOT: "index",
-		PAY: "pay-dues",
-		UPLOAD: "upload-images",
-	}
-	let p = e.parameter.p
-	p = p ? p.toUpperCase() : "ROOT" // default to index page
-	const page = Object.keys(pages).includes(p) ? pages[p] : "error" // catch any bad page requests
-
-	if (page === "error") {
-		return loadError("Page Not Found")
-	} else {
-		return loadPage(page)
-	}
+   //console.log("doGet start: " + Date.now())
+   const pages = {
+      ROOT: "index",
+      PAY: "pay-dues",
+      UPLOAD: "upload-images",
+   }
+   let p = e.parameter.p
+   p = p ? p.toUpperCase() : "ROOT" // default to index page
+   const page = Object.keys(pages).includes(p) ? pages[p] : "error" // catch any bad page requests
+   //console.log("doGet next loadPage: " + Date.now())
+   if (page === "error") {
+      return loadError("Page Not Found")
+   } else {
+      return loadPage(page)
+   }
 }
 
 /**
@@ -25,25 +26,18 @@ function doGet(e) {
  * @returns {HTMLTemplate}
  */
 function loadPage(page) {
-	const membershipchair = getBoardMembershipChair()
-
-	let opt = {
-		membershipchairemail: membershipchair.email,
-		releaseMode: releaseMode,
-	}
-	if (page !== "upload-images") {
-		const treasurer = getBoardTreasurer()
-		const settings = getAppSettings()
-		opt.dues = settings.dues
-		opt.treasureremail = treasurer.email
-	} else {
-		const jurySettings = getJurySettings()
-		opt.maximagesize = jurySettings.maximagesize
-		opt.submissionfolder = jurySettings.submissionfolder
-		opt.images = jurySettings.images
-	}
-
-	return render("Pages/" + page, opt)
+   //console.log("loadPage start: " + Date.now())
+   let opt = {
+      releaseMode: releaseMode,
+   }
+   if (page === "upload-images") {
+      const jurySettings = getJurySettings() // TODO: async fetch for performance
+      opt.maximagesize = jurySettings.maximagesize
+      opt.submissionfolder = jurySettings.submissionfolder
+      opt.images = jurySettings.images
+   }
+   console.log("loadPage next render: " + Date.now())
+   return render("Pages/" + page, opt)
 }
 
 /**

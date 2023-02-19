@@ -41,16 +41,14 @@
                   <a href="https://www.metrorichmondart.org">MRAA</a>
                   |
                   <a
-                     href="mailto:<?= membershipchairemail ?>"
+                     href="mailto:jamesgreen.311@gmail.com"
                      id="membershipChairEmail"
                      >Questions?</a
-                  >
+                  > <!-- default email to tech support. should be replace on page load
+                        with membership chairperson email. if not then there's a problem. -->
                </div>
                <div id="title">
                   <span class="fs-3">MRAA New Applicants</span
-                  ><span class="fs-5" id="releaseModeText">
-                     - Release Mode:
-                     <?=releaseMode?></span
                   >
                </div>
             </div>
@@ -63,9 +61,7 @@
             </p>
             <p>
                Exhibiting members work will be juried by the MRAA jury
-               committee. We request at least 5 examples of your work and an
-               additional 2 that show the back of two pieces. It's important to
-               show the framing and hanging of your work. You will receive a
+               committee. We request at least 5 examples of your work. You will receive a
                letter informing you of the juries decision. If your work is not
                accepted at this time, you will automatically become an Associate
                Member until you are ready to re-submit your work. You may
@@ -83,10 +79,12 @@
          <div id="returning">
             <h3>Returning Applicants</h3>
             <p>
-               <span class="highlight-mint">Have you already submitted an application?</span> If so, and you have
-               returned to pay your dues or you have been instructed by the
-               Membership Chairperson to upload images for the jury, click one
-               of the following.
+               <span class="highlight-mint"
+                  >Have you already submitted an application?</span
+               >
+               If so, and you have returned to pay your dues or you have been
+               instructed by the Membership Chairperson to upload images for the
+               jury, click one of the following.
             </p>
          </div>
          <div class="d-sm-flex justify-content-start">
@@ -103,7 +101,9 @@
             </div>
             <div class="d-sm-flex justify-content-start">
                <div class="p-2">
-                  <a id="step3Button" href="https://script.google.com/macros/s/AKfycbzxuzxEZ9bN5UaLyq2hjkRuS9UPjGy1CSN6Lmf2waUPCOdJ587OGhO1pPB-PRTjKBll/exec">
+                  <a
+                     id="step3Button"
+                     href="https://script.google.com/macros/s/AKfycbzxuzxEZ9bN5UaLyq2hjkRuS9UPjGy1CSN6Lmf2waUPCOdJ587OGhO1pPB-PRTjKBll/exec">
                      <div class="step-label">
                         <span class="material-symbols-outlined icon">
                            file_upload
@@ -147,7 +147,7 @@
                            id="membershipType1"
                            value="Associate" />
                         <label class="form-check-label" for="membershipType1">
-                           Associate Membership - $<?=dues?>/year
+                           Associate Membership - $<span class="dues">..</span>/year
                         </label>
                      </div>
                      <div class="form-check">
@@ -159,7 +159,7 @@
                            value="Exhibiting"
                            checked />
                         <label class="form-check-label" for="membershipType2">
-                           Exhibiting Membership - $<?=dues?>/year
+                           Exhibiting Membership - $<span class="dues">..</span>/year
                         </label>
                      </div>
                   </div>
@@ -445,14 +445,6 @@
          </footer>
       </div>
 
-      <script>
-         let releaseMode = "<?= releaseMode ?>"
-         const rmt = document.getElementById("releaseModeText")
-         if (releaseMode === "live") {
-            rmt.innerHTML = " "
-         }
-
-      </script>
       <?!= include("Includes/scripts/global.inc"); ?>
       <?!= include("Includes/scripts/index.inc"); ?>
 
