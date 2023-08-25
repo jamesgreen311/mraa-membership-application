@@ -10,18 +10,18 @@ function testGetMemberByPosition() {
 
 function getBoardMembersTable() {
 	return {
-		boardmembers: {
-			name: "Board Members",
-			type: "standard",
-			headers: 1,
-			schema: {
-				position: "a2:a", // list of board officer titles
-				email: "b", // position will give the row number for officers email, etc
-				firstName: "c",
-				lastName: "d",
-			},
-		},
-	}
+      boardmembers: {
+         name: "Board Members",
+         type: "standard",
+         headers: 1,
+         schema: {
+            position: "a2:a", // list of board officer titles
+            lastName: "b", // position will give the row number for officers email, etc
+            firstName: "c",
+            email: "d",
+         },
+      },
+   }
 }
 
 function getMemberByPosition(position) {
