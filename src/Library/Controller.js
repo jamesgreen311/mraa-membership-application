@@ -32,11 +32,11 @@ function loadPage(page) {
 		releaseMode: releaseMode,
 	}
 	if (page !== "upload-images") {
-		const treasurer = getBoardTreasurer()
-		const settings = getAppSettings()
-		opt.dues = settings.dues
-		opt.treasureremail = treasurer.email
-	} else {
+      const treasurer = getBoardTreasurer()
+      //const settings = getAppSettings()
+      opt.dues = getAnnualMemberDues()
+      opt.treasureremail = treasurer.email
+   } else {
 		const jurySettings = getJurySettings()
 		opt.maximagesize = jurySettings.maximagesize
 		opt.submissionfolder = jurySettings.submissionfolder

@@ -8,34 +8,58 @@ function testGetMemberByEmail() {
 }
 
 function getMemberTables() {
-	return {
-		directory: {
-			name: "Member Directory",
-			type: "standard",
-			headers: 2,
-			schema: {
-				email: "a",
-				firstname: "b",
-				lastname: "c",
-				preferredname: "d",
-				status: "e",
-				streetaddress: "f",
-				streetaddressextended: "g",
-				city: "h",
-				state: "i",
-				zipcode: "j",
-				primarycontactnumber: "k",
-				alternatecontactnumber: "l",
-				membership: "m",
-				jurydate: "n",
-				medium: "o", // not currently used
-				datejoined: "p", // not currently used
-				artistsignature: "q", // not currently used
-				businessname: "r", // not currently used
-				comments: "s",
-			},
-		},
-	}
+   return {
+      directory: {
+         name: "Member Directory",
+         type: "standard",
+         headers: 2,
+         schema: {
+            email: "a",
+            firstname: "b",
+            lastname: "c",
+            preferredname: "d",
+            status: "e",
+            streetaddress: "f",
+            streetaddressextended: "g",
+            city: "h",
+            state: "i",
+            zipcode: "j",
+            primarycontactnumber: "k",
+            alternatecontactnumber: "l",
+            membership: "m",
+            jurydate: "n",
+            medium: "o", // not currently used
+            datejoined: "p", // not currently used
+            artistsignature: "q", // not currently used
+            businessname: "r", // not currently used
+            comments: "s",
+         },
+      },
+      configuration: {
+         name: "Configuration",
+         type: "standard",
+         headers: "1",
+         schema: {
+            dues: "h2",
+         },
+      },
+   }
+}
+
+/**
+ * @param none
+ * @returns string
+ *
+ * Retrieve annual member dues amount
+ */
+function getAnnualMemberDues() {
+   const memberTables = getMemberTables()
+   const config = connect(MASTER_ID).getSheetByName(
+      memberTables.configuration.name
+   )
+   const configSchema = memberTables.configuration.schema
+   const data = config.getRange(configSchema.dues).getDisplayValue()
+   return data
 }
 
 /**
