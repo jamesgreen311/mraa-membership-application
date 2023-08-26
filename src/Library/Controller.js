@@ -33,8 +33,9 @@ function loadPage(page) {
 	}
 	if (page !== "upload-images") {
       const treasurer = getBoardTreasurer()
-      //const settings = getAppSettings()
-      opt.dues = getAnnualMemberDues()
+      const settings = getAnnualMemberDues()
+      opt.dues = settings.dues
+      opt.discount = settings.discount
       opt.treasureremail = treasurer.email
    } else {
 		const jurySettings = getJurySettings()

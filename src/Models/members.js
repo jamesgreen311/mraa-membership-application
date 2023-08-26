@@ -41,6 +41,7 @@ function getMemberTables() {
          headers: "1",
          schema: {
             dues: "h2",
+            discount: "j2",
          },
       },
    }
@@ -58,7 +59,10 @@ function getAnnualMemberDues() {
       memberTables.configuration.name
    )
    const configSchema = memberTables.configuration.schema
-   const data = config.getRange(configSchema.dues).getDisplayValue()
+   const data = {
+      dues: config.getRange(configSchema.dues).getDisplayValue(),
+      discount: config.getRange(configSchema.discount).getDisplayValue(),
+   }
    return data
 }
 
